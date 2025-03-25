@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_structure_reference/features/heart_rate/view/heart_rate_screen.dart';
+// import 'package:mvvm_structure_reference/shared/widgets/ecg_animation_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(child: HeartRateScreen()),
+      ),
     );
   }
 }

@@ -102,14 +102,14 @@ class _HeartRateScreenState extends State<HeartRateScreen> {
             SizedBox(height: 30),
             const DateNavigationWidget(),
 
-            const SizedBox(height: 50),
+            const SizedBox(height: 20),
 
             // Ensure Vo2MaxWidget has a fixed height
             SizedBox(
-              height: 300, // Set height as per your design
-              child: const Vo2MaxWidget(),
+              height: 350, // Set height as per your design
+              child: const HeartRateGraph(),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(

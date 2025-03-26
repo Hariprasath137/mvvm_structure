@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/view/heart_rate_screen.dart';
-// import 'package:mvvm_structure_reference/shared/widgets/ecg_animation_widget.dart';
 
 void main() {
   runApp(const MyApp());

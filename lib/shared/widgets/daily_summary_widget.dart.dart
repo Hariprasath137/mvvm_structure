@@ -1,28 +1,21 @@
 import 'package:flutter/material.dart';
 
-class HorizontalCardWidget extends StatefulWidget {
-  final List<Widget> cards;
-  const HorizontalCardWidget({super.key, required this.cards});
+class DailySummaryWidget extends StatefulWidget {
+  const DailySummaryWidget({super.key});
 
   @override
-  State<HorizontalCardWidget> createState() => _HorizontalCardWidgetState();
+  State<DailySummaryWidget> createState() => _DailySummaryWidgetState();
 }
 
-class _HorizontalCardWidgetState extends State<HorizontalCardWidget> {
+class _DailySummaryWidgetState extends State<DailySummaryWidget> {
   final List<Widget> cards = const [
     InsightCard(
-      imagePath: 'assets/Rectangle.png',
-      text:
-          'Your resting heart rate is 75 bpm, a healthy range indicating good cardiovascular health.',
+      imagePath: 'assets/imgSample.png',
+      text: 'Average HR is 75 bpm.Curious about this meaning?',
     ),
     InsightCard(
-      imagePath: 'assets/Rectangle.png',
-      text:
-          'You slept for 8 hours last night, keeping you refreshed and energized.',
-    ),
-    InsightCard(
-      imagePath: 'assets/Rectangle.png',
-      text: 'You walked 10,000 steps today — great job hitting your goal!',
+      imagePath: 'assets/imgSample.png',
+      text: 'Average HR is 75 bpm.Curious about this meaning?',
     ),
   ];
 
@@ -46,7 +39,7 @@ class _HorizontalCardWidgetState extends State<HorizontalCardWidget> {
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.9,
-          height: 180,
+          height: 130,
           child: PageView.builder(
             controller: _pageController,
             scrollDirection: Axis.horizontal,
@@ -114,8 +107,8 @@ class InsightCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: 60,
-              height: 60,
+              width: 50,
+              height: 50,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(imagePath),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_structure_reference/config/app_constraints.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/view/heart_rate_screen.dart';
 
 void main() {
@@ -13,10 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(child: HeartRateScreen()),
-      ),
+      onGenerateRoute: AppRoutes.generateRoute,
+      initialRoute: AppRoutes.home,
     );
   }
 }

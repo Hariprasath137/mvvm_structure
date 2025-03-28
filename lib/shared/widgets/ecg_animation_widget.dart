@@ -44,7 +44,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
 
   void stopHeartAnimation() {
     _heartController.stop();
-    _heartController.value = 1.0; // Reset heart to normal size
+    _heartController.value = 1.0; 
   }
 
   @override
@@ -54,7 +54,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min, // Center vertically
+          mainAxisSize: MainAxisSize.min, 
           children: [
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -108,7 +108,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 20), // Adjust spacing as needed
+                    const SizedBox(height: 20), 
                     Stack(
                       alignment: Alignment.center,
                       children: [

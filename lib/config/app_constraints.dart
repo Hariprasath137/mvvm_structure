@@ -8,7 +8,7 @@ class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
-        return MaterialPageRoute(builder: (context) => const HomeScreen());
+      // return MaterialPageRoute(builder: (context) => const HomeScreen());
 
       case heartrate:
         return MaterialPageRoute(builder: (context) => HeartRateScreen());

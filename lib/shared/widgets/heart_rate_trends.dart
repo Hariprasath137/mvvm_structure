@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mvvm_structure_reference/shared/widgets/bpm_value_widget.dart';
-import 'package:mvvm_structure_reference/shared/widgets/custom_button.dart';
+import 'package:mvvm_structure_reference/shared/widgets/card/bpm_value_card.dart';
+import 'package:mvvm_structure_reference/shared/widgets/card/characteristics_card.dart';
 
 class HeartRateTrends extends StatefulWidget {
   const HeartRateTrends({super.key});

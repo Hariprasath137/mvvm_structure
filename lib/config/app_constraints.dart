@@ -9,6 +9,7 @@ class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
+
         return MaterialPageRoute(builder: (context) => HomeScreen());
 
       case heartrate:

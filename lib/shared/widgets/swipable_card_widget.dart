@@ -26,7 +26,7 @@ class _SwipeableCardWidgetState extends State<SwipeableCardWidget> {
     ),
   ];
 
-  int currentIndex = 0; // Track the current card index
+  int currentIndex = 0; 
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +99,7 @@ class _SwipeableCardWidgetState extends State<SwipeableCardWidget> {
   }
 }
 
-// Card Design
+
 class InsightCard extends StatelessWidget {
   final String imagePath;
   final String text;

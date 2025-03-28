@@ -22,7 +22,7 @@ class _DailySummaryWidgetState extends State<DailySummaryWidget> {
   double pageOffset = 0.0;
   final PageController _pageController = PageController();
 
-  @override
+  @override   
   void initState() {
     super.initState();
     _pageController.addListener(() {

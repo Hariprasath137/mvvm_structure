@@ -87,6 +87,7 @@ class _HeartRateGraphState extends State<HeartRateGraph> {
                   plotAreaBorderWidth: 0,
                   primaryXAxis: CategoryAxis(
                     majorGridLines: const MajorGridLines(width: 0),
+                    majorTickLines: const MajorTickLines(size: 0),
                     axisLine: const AxisLine(color: Colors.transparent),
                     labelPlacement: LabelPlacement.onTicks,
                     interval: 6,
@@ -111,6 +112,7 @@ class _HeartRateGraphState extends State<HeartRateGraph> {
                       width: 1,
                       dashArray: [4, 4],
                     ),
+                    majorTickLines: const MajorTickLines(size: 0),
                     axisLine: const AxisLine(color: Colors.transparent),
                     plotBands: [
                       PlotBand(
@@ -143,7 +145,6 @@ class _HeartRateGraphState extends State<HeartRateGraph> {
                       markerSettings: const MarkerSettings(isVisible: false),
                     ),
                   ],
-                  // ✅ Annotations for black-filled markers at key points
                   annotations: <CartesianChartAnnotation>[
                     for (int index in _keyPoints)
                       CartesianChartAnnotation(

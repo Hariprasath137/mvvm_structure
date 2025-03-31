@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HorizontalCardWidget extends StatefulWidget {
-  final List<Widget> cards;
-  const HorizontalCardWidget({super.key, required this.cards});
+  const HorizontalCardWidget({super.key});
 
   @override
   State<HorizontalCardWidget> createState() => _HorizontalCardWidgetState();
@@ -27,7 +26,7 @@ class _HorizontalCardWidgetState extends State<HorizontalCardWidget> {
   ];
 
   double pageOffset = 0.0;
-  final PageController _pageController = PageController();
+  final PageController _pageController = PageController(viewportFraction: 0.9);
 
   @override
   void initState() {
@@ -41,12 +40,15 @@ class _HorizontalCardWidgetState extends State<HorizontalCardWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: 180,
+          width: screenWidth * 0.9,
+          height: screenHeight * 0.18, // Responsive height
           child: PageView.builder(
             controller: _pageController,
             scrollDirection: Axis.horizontal,
@@ -62,10 +64,8 @@ class _HorizontalCardWidgetState extends State<HorizontalCardWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.08,
-              ),
-              width: MediaQuery.of(context).size.width * 0.2,
+              margin: EdgeInsets.only(left: screenWidth * 0.08),
+              width: screenWidth * 0.2,
               height: 4,
               decoration: BoxDecoration(
                 color: Colors.grey[300],
@@ -73,8 +73,7 @@ class _HorizontalCardWidgetState extends State<HorizontalCardWidget> {
               ),
               child: Row(
                 children: List.generate(cards.length, (index) {
-                  double segmentWidth =
-                      (MediaQuery.of(context).size.width * 0.2) / cards.length;
+                  double segmentWidth = (screenWidth * 0.2) / cards.length;
                   return Container(
                     width: segmentWidth,
                     height: 6,
@@ -104,18 +103,20 @@ class InsightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       color: const Color(0xFFF5F5F5),
       elevation: 4,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(screenWidth * 0.04), // Responsive padding
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: 60,
-              height: 60,
+              width: screenWidth * 0.15,
+              height: screenWidth * 0.15, // Adjust based on screen width
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(imagePath),
@@ -124,18 +125,22 @@ class InsightCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            const SizedBox(width: 16),
+            SizedBox(width: screenWidth * 0.04),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    text,
-                    style: const TextStyle(
-                      color: Color(0xFF707070),
-                      fontSize: 14,
-                      fontFamily: 'Rubik',
+                  Flexible(
+                    child: Text(
+                      text,
+                      style: TextStyle(
+                        color: const Color(0xFF707070),
+                        fontSize: screenWidth * 0.035, // Responsive text size
+                        fontFamily: 'Rubik',
+                      ),
+                      maxLines: 3, // Limit lines to avoid overflow
+                      overflow: TextOverflow.ellipsis, // Add "..." if too long
                     ),
                   ),
                   const SizedBox(height: 8),

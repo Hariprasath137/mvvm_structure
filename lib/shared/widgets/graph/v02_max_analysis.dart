@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_structure_reference/shared/widgets/card/vo2_card.dart';
+import 'package:mvvm_structure_reference/shared/widgets/v02_curosal_widget.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Vo2MaxAnalysis extends StatefulWidget {
@@ -23,9 +24,12 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey,
-      body: SafeArea(
+    // Get screen width for responsiveness
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return Container(
+      color: Color(0XFFF6F8F9),
+      child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
@@ -40,30 +44,34 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                       Text(
                         "VO2 Max Analysis",
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: screenWidth * 0.06, // Responsive font size
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(width: 6),
-                      Icon(Icons.info_outline, size: 30),
+                      Icon(Icons.info_outline, size: screenWidth * 0.07),
                     ],
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "See More",
-                        style: TextStyle(
-                          color: Color(0XFF193238),
-                          fontSize: 26,
+                  Flexible(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "See More",
+                          style: TextStyle(
+                            color: Color(0XFF193238),
+                            fontSize:
+                                screenWidth * 0.05, // Responsive font size
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 4),
-                      Icon(
-                        Icons.arrow_forward,
-                        color: Color(0XFF121417),
-                        size: 25,
-                      ),
-                    ],
+                        const SizedBox(width: 4),
+                        Icon(
+                          Icons.arrow_forward,
+                          color: Color(0XFF121417),
+                          size: screenWidth * 0.06, // Responsive icon size
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -79,7 +87,7 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                       Text(
                         "Current VO2 max",
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: screenWidth * 0.045, // Responsive font size
                           color: Color(0XFF707070),
                         ),
                       ),
@@ -88,15 +96,17 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                           Text(
                             widget.vo2level,
                             style: TextStyle(
-                              fontSize: 30,
+                              fontSize:
+                                  screenWidth * 0.06, // Responsive font size
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
                             " ml/kg/min",
                             style: TextStyle(
-                              fontSize: 20,
-                              color: Color(0XFFCCCCCC),
+                              fontSize:
+                                  screenWidth * 0.04, // Responsive font size
+                              color: Color(0XFFA9AAAA),
                             ),
                           ),
                         ],
@@ -115,21 +125,16 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                   primaryXAxis: CategoryAxis(
                     majorTickLines: MajorTickLines(
                       size: 8,
-                      color: Colors.black, // Black tick lines
+                      color: Colors.black,
                     ),
-                    labelPlacement:
-                        LabelPlacement.onTicks, // Aligns labels better
-                    edgeLabelPlacement:
-                        EdgeLabelPlacement.none, // Labels placed correctly
+                    labelPlacement: LabelPlacement.onTicks,
+                    edgeLabelPlacement: EdgeLabelPlacement.none,
                     labelRotation: 0,
                     majorGridLines: MajorGridLines(
                       width: 1,
-                      color: Color(0XFFCCCCCC), // Set default grid lines as red
-                    ), // Keeps text straight
-                    axisLine: AxisLine(
-                      color: Colors.black, // Black X-Axis line
-                      width: 1,
+                      color: Color(0XFFCCCCCC),
                     ),
+                    axisLine: AxisLine(color: Colors.black, width: 1),
                   ),
                   primaryYAxis: NumericAxis(
                     minimum: 10,
@@ -137,24 +142,13 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                     interval: 10,
                     majorTickLines: MajorTickLines(
                       size: 8,
-                      color: Colors.black, // Black tick lines
+                      color: Colors.black,
                     ),
                     majorGridLines: MajorGridLines(
                       width: 1,
-                      color: Color(0XFFCCCCCC), // Set default grid lines as red
+                      color: Color(0XFFCCCCCC),
                     ),
-                    axisLine: AxisLine(
-                      color: Colors.black, // Black Y-Axis line
-                      width: 1,
-                    ),
-                    plotBands: <PlotBand>[
-                      PlotBand(
-                        start: 10, // First Y-axis value
-                        end: 10,
-                        borderColor: Colors.black, // First tick line in black
-                        borderWidth: 1,
-                      ),
-                    ],
+                    axisLine: AxisLine(color: Colors.black, width: 1),
                   ),
                   series: <CartesianSeries<dynamic, dynamic>>[
                     SplineSeries<VO2Data, String>(
@@ -162,7 +156,7 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                       xValueMapper: (VO2Data data, _) => data.time,
                       yValueMapper: (VO2Data data, _) => data.value,
                       splineType: SplineType.natural,
-                      color: Color(0XFF3A4750), // Line color
+                      color: Color(0XFF3A4750),
                       markerSettings: MarkerSettings(
                         isVisible: true,
                         width: 8,
@@ -177,10 +171,10 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center, // Centers the card
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 350, // Set a fixed width for the card
+                    width: screenWidth * 0.8, // Responsive width
                     child: Card(
                       color: Color(0XFFCCCCCC),
                       shape: RoundedRectangleBorder(
@@ -190,24 +184,26 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                         padding: EdgeInsets.symmetric(
                           vertical: 10,
                           horizontal: 14,
-                        ), // Reduced padding
+                        ),
                         child: Row(
-                          mainAxisSize: MainAxisSize.min, // Keeps card compact
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Image.asset(
                               'assets/Group.png',
-                              width: 45, // Adjusted image size
-                              height: 45,
+                              width: screenWidth * 0.1, // Responsive image size
+                              height: screenWidth * 0.1,
                             ),
                             SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 "You're VO2 max is 5% increased better than yesterday's.",
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize:
+                                      screenWidth *
+                                      0.04, // Responsive font size
                                   color: Color(0XFF333333),
-                                ), // Adjusted text size
+                                ),
                                 softWrap: true,
                               ),
                             ),
@@ -222,7 +218,10 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                 padding: EdgeInsets.all(24.0),
                 child: Text(
                   "VO2 Max Summary",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: screenWidth * 0.05, // Responsive font size
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Row(
@@ -232,6 +231,12 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                   Vo2Card(stateType: "Average", value: '42'),
                   Vo2Card(stateType: "Maximum", value: '48'),
                 ],
+              ),
+              SizedBox(height: 20),
+              SizedBox(
+                height: 150,
+                width: double.infinity,
+                child: V02CurosalWidget(),
               ),
             ],
           ),

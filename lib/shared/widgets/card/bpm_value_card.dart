@@ -11,34 +11,48 @@ class BPMValue extends StatefulWidget {
 class _BPMValueState extends State<BPMValue> {
   @override
   Widget build(BuildContext context) {
+    // Get screen dimensions
+    final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width;
+
+    // Set the size of the square card as a percentage of the screen width
+    final squareSize = screenWidth * 0.22; // Responsive square size
+
     return SizedBox(
-      height: 91,
-      width: 90,
+      height: squareSize, // Equal height and width
+      width: squareSize, // Equal height and width
       child: Card(
-        color: Color(0XFF767A7B),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        color: const Color(0XFF767A7B),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            screenWidth * 0.05,
+          ), // Responsive radius
+        ),
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.03,
+            vertical: screenWidth * 0.01,
+          ), // Reduced padding for better fit
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment:
+                MainAxisAlignment.center, // Center content vertically
             children: [
-              // SizedBox(height: 10),
               Text(
                 widget.bpm,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 24,
+                  fontSize: screenWidth * 0.05, // Slightly reduced font size
                   fontWeight: FontWeight.bold,
                   fontFamily: "Poppins",
                 ),
               ),
-              // SizedBox(height: 10),
+              SizedBox(height: screenWidth * 0.005), // Minimal spacing
               Text(
                 "bpm",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: screenWidth * 0.03, // Slightly reduced font size
                   fontFamily: "Poppins",
                 ),
               ),

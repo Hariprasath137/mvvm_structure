@@ -13,15 +13,25 @@ class _Vo2CardState extends State<Vo2Card> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color(0XFF767A7B),
+      color: Color(0XFFE5E5E5),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.stateType),
-            Text(widget.value),
-            Text("ml/kg/min", style: TextStyle()),
+            Text(
+              widget.stateType,
+              style: TextStyle(color: Color(0XFF7E8A8C), fontSize: 16),
+            ),
+            Text(
+              widget.value,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "ml/kg/min",
+              style: TextStyle(color: Color(0XFFA9AAAA), fontSize: 16),
+            ),
           ],
         ),
       ),

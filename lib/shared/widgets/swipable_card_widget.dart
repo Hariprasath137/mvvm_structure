@@ -11,22 +11,22 @@ class SwipeableCardWidget extends StatefulWidget {
 class _SwipeableCardWidgetState extends State<SwipeableCardWidget> {
   final List<Widget> cards = const [
     InsightCard(
-      imagePath: 'assets/heart_rate.png',
+      imagePath: 'assets/Rectangle.png',
       text:
           'Your resting heart rate is 75 bpm, a healthy range indicating good cardiovascular health.',
     ),
     InsightCard(
-      imagePath: 'assets/sleep.png',
+      imagePath: 'assets/Rectangle.png',
       text:
           'You slept for 8 hours last night, keeping you refreshed and energized.',
     ),
     InsightCard(
-      imagePath: 'assets/steps.png',
+      imagePath: 'assets/Rectangle.png',
       text: 'You walked 10,000 steps today — great job hitting your goal!',
     ),
   ];
 
-  int currentIndex = 0; 
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +98,6 @@ class _SwipeableCardWidgetState extends State<SwipeableCardWidget> {
     );
   }
 }
-
 
 class InsightCard extends StatelessWidget {
   final String imagePath;

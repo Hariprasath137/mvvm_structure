@@ -52,9 +52,10 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                       Icon(Icons.info_outline, size: screenWidth * 0.07),
                     ],
                   ),
-                  Flexible(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
+                  Expanded(
+                    child: Wrap(
+                      alignment: WrapAlignment.end,
+                      spacing: 4, // Space between text and icon
                       children: [
                         Text(
                           "See More",
@@ -64,7 +65,6 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                                 screenWidth * 0.05, // Responsive font size
                           ),
                         ),
-                        const SizedBox(width: 4),
                         Icon(
                           Icons.arrow_forward,
                           color: Color(0XFF121417),
@@ -227,14 +227,16 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Vo2Card(stateType: "Minimum", value: '35'),
-                  Vo2Card(stateType: "Average", value: '42'),
-                  Vo2Card(stateType: "Maximum", value: '48'),
+                  Expanded(child: Vo2Card(stateType: "Minimum", value: '35')),
+                  const SizedBox(width: 8), // Add spacing between cards
+                  Expanded(child: Vo2Card(stateType: "Average", value: '42')),
+                  const SizedBox(width: 8), // Add spacing between cards
+                  Expanded(child: Vo2Card(stateType: "Maximum", value: '48')),
                 ],
               ),
               SizedBox(height: 20),
               SizedBox(
-                height: 150,
+                height: 200,
                 width: double.infinity,
                 child: V02CurosalWidget(),
               ),

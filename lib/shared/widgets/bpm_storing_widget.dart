@@ -13,32 +13,45 @@ class BPMStoring extends StatefulWidget {
 class _BPMStoringState extends State<BPMStoring> {
   @override
   Widget build(BuildContext context) {
+    // Get the text scaler for dynamic font scaling
+    final TextScaler textScaler = MediaQuery.textScalerOf(context);
+
     return Card(
       color: const Color(0XFF9BA9B3),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24.0), // Keep the original padding
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset('assets/heartIcon.png'),
-            const SizedBox(height: 12),
-            Text(
-              widget.hrState,
-              style: const TextStyle(
-                fontSize: 16,
-                fontFamily: "Poppins",
-                color: Color(0XFF7E8A8C),
+            const SizedBox(height: 12), // Keep the original spacing
+            Flexible(
+              child: Text(
+                widget.hrState,
+                style: TextStyle(
+                  fontSize: textScaler.scale(
+                    16,
+                  ), // Dynamically scale the font size
+                  fontFamily: "Poppins",
+                  color: const Color(0XFF7E8A8C),
+                ),
+                overflow: TextOverflow.ellipsis, // Handle overflow gracefully
               ),
             ),
-            const SizedBox(height: 6),
-            Text(
-              "${widget.bpm} bpm",
-              style: const TextStyle(
-                fontSize: 18,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+            const SizedBox(height: 6), // Keep the original spacing
+            Flexible(
+              child: Text(
+                "${widget.bpm} bpm",
+                style: TextStyle(
+                  fontSize: textScaler.scale(
+                    18,
+                  ), // Dynamically scale the font size
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis, // Handle overflow gracefully
               ),
             ),
           ],

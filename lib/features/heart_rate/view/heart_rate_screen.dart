@@ -75,12 +75,15 @@ class _HeartRateScreenState extends State<HeartRateScreen> {
             const SizedBox(height: 30),
 
             SizedBox(
-              height: 450, // Adjust height as needed
+              height: 500, // Adjust height as needed
               child: ECGMonitor(),
             ),
 
             SizedBox(height: 30),
-            const DateNavigationWidget(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: const DateNavigationWidget(),
+            ),
 
             const SizedBox(height: 20),
 
@@ -104,12 +107,15 @@ class _HeartRateScreenState extends State<HeartRateScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      BPMStoring(hrState: "Resting HR", bpm: "70"),
-                      SizedBox(width: 10),
-                      BPMStoring(hrState: "Peak HR", bpm: "120"),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        BPMStoring(hrState: "Resting HR", bpm: "70"),
+                        const SizedBox(width: 10),
+                        BPMStoring(hrState: "Peak HR", bpm: "120"),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 20),
                   DailySummaryWidget(),

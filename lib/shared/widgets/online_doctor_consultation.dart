@@ -14,11 +14,18 @@ class OnlineDoctorConsultation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen dimensions
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    // Get the text scaler for dynamic font scaling
+    final TextScaler textScaler = MediaQuery.textScalerOf(context);
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       elevation: 4,
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: EdgeInsets.all(textScaler.scale(24.0)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +33,7 @@ class OnlineDoctorConsultation extends StatelessWidget {
             Text(
               "Online Doctor Consultation",
               style: TextStyle(
-                fontSize: 24,
+                fontSize: textScaler.scale(24),
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
@@ -39,33 +46,38 @@ class OnlineDoctorConsultation extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(height: 8),
+                      SizedBox(height: textScaler.scale(8)),
                       Text(
                         "Share your heart report & get expert advice.",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: textScaler.scale(18),
                           fontWeight: FontWeight.bold,
-
                           color: Colors.black87,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      SizedBox(height: textScaler.scale(4)),
                       Text(
                         "Understand your heart data with expert advice.",
-                        style: TextStyle(fontSize: 17, color: Colors.black54),
+                        style: TextStyle(
+                          fontSize: textScaler.scale(17),
+                          color: Colors.black54,
+                        ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: textScaler.scale(12)),
                       ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0XFF637887),
+                          backgroundColor: const Color(0XFF637887),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           "Consult Now",
-                          style: TextStyle(color: Color(0XFFFFFFFF)),
+                          style: TextStyle(
+                            fontSize: textScaler.scale(16),
+                            color: const Color(0XFFFFFFFF),
+                          ),
                         ),
                       ),
                     ],
@@ -79,41 +91,56 @@ class OnlineDoctorConsultation extends StatelessWidget {
                       borderRadius: BorderRadius.circular(2),
                       child: Image.asset(
                         "assets/Video.png", // Change to your image path
-                        height: 200,
-                        width: 130,
+                        height: textScaler.scale(200),
+                        width: textScaler.scale(130),
                         fit: BoxFit.cover,
                       ),
                     ),
                     Positioned(
-                      bottom: 5, // Adjust as needed
+                      bottom: textScaler.scale(5), // Adjust as needed
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
+                        width: textScaler.scale(
+                          120,
+                        ), // Fixed width for the container
+                        padding: EdgeInsets.symmetric(
+                          horizontal: textScaler.scale(10),
+                          vertical: textScaler.scale(6),
                         ),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
                           boxShadow: [
-                            BoxShadow(color: Colors.black12, blurRadius: 5),
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: textScaler.scale(5),
+                            ),
                           ],
                         ),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
                               doctorName,
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: textScaler.scale(13),
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
                               ),
+                              overflow:
+                                  TextOverflow
+                                      .ellipsis, // Handle overflow gracefully
+                              maxLines: 1, // Limit to one line
                             ),
                             Text(
                               doctorField,
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: textScaler.scale(12),
                                 color: Colors.black54,
                               ),
+                              overflow:
+                                  TextOverflow
+                                      .ellipsis, // Handle overflow gracefully
+                              maxLines: 1, // Limit to one line
                             ),
                           ],
                         ),

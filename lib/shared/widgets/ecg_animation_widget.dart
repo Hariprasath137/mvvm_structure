@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -24,7 +26,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
       vsync: this,
       duration: const Duration(milliseconds: 500),
       lowerBound: 1.0,
-      upperBound: 1.3,
+      upperBound: 1.2,
     );
   }
 

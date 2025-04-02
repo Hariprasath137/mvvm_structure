@@ -1,5 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api, depend_on_referenced_packages
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -22,69 +20,123 @@ class _DateNavigationWidgetState extends State<DateNavigationWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen dimensions
+    final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width;
+    final screenHeight = screenSize.height;
+
+    // Get the text scaler for dynamic font scaling
+    final TextScaler textScaler = MediaQuery.textScalerOf(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white,
-            shadowColor: Colors.black,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
+        // Flexible DropdownButton with Rectangle Shape
+        Flexible(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(
+                screenWidth * 0.04,
+              ), // Curved corners
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 5,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
-          ),
-          child: DropdownButton<String>(
-            value: dropdownValue,
-            icon: const Icon(
-              Icons.keyboard_arrow_down_sharp,
-              size: 30,
-              color: Colors.black,
+            padding: EdgeInsets.symmetric(
+              horizontal: screenWidth * 0.04, // Responsive padding
+              vertical: screenHeight * 0.01, // Responsive padding
             ),
-            underline: const SizedBox(),
-            items:
-                ['Daily', 'Weekly', 'Monthly'].map<DropdownMenuItem<String>>((
-                  String value,
-                ) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: const TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0XFF333333),
-                      ),
-                    ),
-                  );
-                }).toList(),
-            onChanged: (String? newValue) {
-              setState(() {
-                dropdownValue = newValue!;
-              });
-            },
-            dropdownColor: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            style: const TextStyle(color: Colors.black, fontSize: 16),
-            elevation: 5,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: DropdownButton<String>(
+                value: dropdownValue,
+                icon: Icon(
+                  Icons.keyboard_arrow_down_sharp,
+                  size: textScaler.scale(
+                    screenWidth * 0.06,
+                  ), // Responsive icon size
+                  color: Colors.black,
+                ),
+                underline: const SizedBox(),
+                items:
+                    [
+                      'Daily',
+                      'Weekly',
+                      'Monthly',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: textScaler.scale(
+                              screenWidth * 0.035,
+                            ), // Responsive font size
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0XFF333333),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
+                },
+                dropdownColor: Colors.white,
+                borderRadius: BorderRadius.circular(
+                  textScaler.scale(screenWidth * 0.02),
+                ), // Responsive radius
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: textScaler.scale(
+                    screenWidth * 0.035,
+                  ), // Responsive font size
+                ),
+                elevation: 5,
+              ),
+            ),
           ),
         ),
-        const SizedBox(width: 20),
+
+        SizedBox(
+          width: textScaler.scale(screenWidth * 0.15),
+        ), // Responsive spacing
 
         IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: textScaler.scale(screenWidth * 0.05), // Responsive icon size
+          ),
           onPressed: () => _changeDate(-1),
         ),
 
-        Text(
-          'Today, ${DateFormat('MMM d').format(currentDate)}',
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        Expanded(
+          child: Text(
+            'Today, ${DateFormat('MMM d').format(currentDate)}',
+            textAlign: TextAlign.center, // Center-align text
+            style: TextStyle(
+              fontSize: textScaler.scale(
+                screenWidth * 0.035,
+              ), // Responsive font size
+              fontWeight: FontWeight.bold,
+            ),
+            overflow: TextOverflow.ellipsis, // Prevent overflow
+            maxLines: 1, // Limit to one line
+          ),
         ),
 
         IconButton(
-          icon: const Icon(Icons.arrow_forward_ios),
+          icon: Icon(
+            Icons.arrow_forward_ios,
+            size: textScaler.scale(screenWidth * 0.05), // Responsive icon size
+          ),
           onPressed:
               currentDate.isBefore(
                     DateTime.now().subtract(const Duration(days: 1)),

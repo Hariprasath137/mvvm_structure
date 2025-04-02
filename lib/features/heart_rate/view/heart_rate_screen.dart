@@ -7,11 +7,15 @@ import 'package:mvvm_structure_reference/shared/widgets/close_slider_item_widget
 import 'package:mvvm_structure_reference/shared/widgets/daily_summary_widget.dart.dart';
 import 'package:mvvm_structure_reference/shared/widgets/date_drop_down_widget.dart';
 import 'package:mvvm_structure_reference/shared/widgets/ecg_animation_widget.dart';
+import 'package:mvvm_structure_reference/shared/widgets/factors_heart_rate.dart';
 import 'package:mvvm_structure_reference/shared/widgets/graph/heart_rate_graph.dart';
+import 'package:mvvm_structure_reference/shared/widgets/graph/v02_max_analysis.dart';
 import 'package:mvvm_structure_reference/shared/widgets/heart_rate_trends.dart';
+import 'package:mvvm_structure_reference/shared/widgets/online_doctor_consultation.dart';
 import 'package:mvvm_structure_reference/shared/widgets/swipable_card_widget.dart';
 import 'package:mvvm_structure_reference/shared/widgets/swipable_card_widget.dart'
     as swipableCard;
+import 'package:mvvm_structure_reference/shared/widgets/talk_to_tvamev.dart';
 
 class HeartRateScreen extends StatefulWidget {
   const HeartRateScreen({super.key});
@@ -64,43 +68,22 @@ class _HeartRateScreenState extends State<HeartRateScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const HorizontalCardWidget(
-                    cards: [
-                      Expanded(
-                        child: swipableCard.InsightCard(
-                          imagePath: 'assets/Rectangle.png',
-                          text:
-                              'Your resting heart rate is 75 bpm, a healthy range indicating good cardiovascular health.',
-                        ),
-                      ),
-                      Expanded(
-                        child: swipableCard.InsightCard(
-                          imagePath: 'assets/Rectangle.png',
-                          text:
-                              'You slept for 8 hours last night, keeping you refreshed and energized.',
-                        ),
-                      ),
-                      Expanded(
-                        child: swipableCard.InsightCard(
-                          imagePath: 'assets/Rectangle.png',
-                          text:
-                              'You walked 10,000 steps today — great job hitting your goal!',
-                        ),
-                      ),
-                    ],
-                  ),
+                  const HorizontalCardWidget(),
                 ],
               ),
             ),
             const SizedBox(height: 30),
 
             SizedBox(
-              height: 450, // Adjust height as needed
+              height: 500, // Adjust height as needed
               child: ECGMonitor(),
             ),
 
             SizedBox(height: 30),
-            const DateNavigationWidget(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: const DateNavigationWidget(),
+            ),
 
             const SizedBox(height: 20),
 
@@ -124,12 +107,15 @@ class _HeartRateScreenState extends State<HeartRateScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      BPMStoring(hrState: "Resting HR", bpm: "70"),
-                      SizedBox(width: 10),
-                      BPMStoring(hrState: "Peak HR", bpm: "120"),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        BPMStoring(hrState: "Resting HR", bpm: "70"),
+                        const SizedBox(width: 10),
+                        BPMStoring(hrState: "Peak HR", bpm: "120"),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 20),
                   DailySummaryWidget(),
@@ -164,6 +150,28 @@ class _HeartRateScreenState extends State<HeartRateScreen> {
                 ],
               ),
             ),
+            const SizedBox(height: 20),
+            Vo2MaxAnalysis(vo2level: "42.5"),
+
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: FactorsHeartRate(),
+            ),
+
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: OnlineDoctorConsultation(
+                doctorName: "Dr.Kawsar Ahamed",
+                doctorField: "Cardiologist",
+                doctorDescription:
+                    "Understand your heart data with expert advice",
+              ),
+            ),
+
+            const SizedBox(height: 20),
+            Padding(padding: const EdgeInsets.all(12.0), child: TalkToTvamev()),
           ],
         ),
       ),

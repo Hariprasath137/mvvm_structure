@@ -38,7 +38,7 @@ dependencies:
   flutter_svg: ^2.0.17
   flutter_card_swiper: ^7.0.2
   syncfusion_flutter_charts: ^28.2.12
-  fl_chart: ^0.70.2
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +71,9 @@ flutter:
     - assets/heartIcon.png
     - assets/imgSample.png
     - assets/Rectangle.png
+    - assets/factors.png
+    - assets/Video.png
+    - assets/tvamev.png
   fonts:
     - family: Poppins
       fonts:
@@ -78,7 +81,6 @@ flutter:
         - asset: assets/fonts/Poppins-SemiBold.ttf
         - asset: assets/fonts/Poppins-Bold.ttf
           weight: 600
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

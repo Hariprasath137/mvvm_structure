@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class DailySummaryWidget extends StatefulWidget {
-  const DailySummaryWidget({super.key});
+class V02CurosalWidget extends StatefulWidget {
+  const V02CurosalWidget({super.key});
 
   @override
-  State<DailySummaryWidget> createState() => _DailySummaryWidgetState();
+  State<V02CurosalWidget> createState() => _V02CurosalWidgetState();
 }
 
-class _DailySummaryWidgetState extends State<DailySummaryWidget> {
+class _V02CurosalWidgetState extends State<V02CurosalWidget> {
   final List<Widget> cards = const [
     InsightCard(
       imagePath: 'assets/imgSample.png',
-      text: 'Average HR is 75 bpm. Curious about its meaning?',
+      text: 'Great job! Your VO2 Max improved by 5% this month.',
     ),
     InsightCard(
       imagePath: 'assets/imgSample.png',
@@ -21,7 +21,7 @@ class _DailySummaryWidgetState extends State<DailySummaryWidget> {
 
   double pageOffset = 0.0;
   final PageController _pageController = PageController(
-    viewportFraction: 0.9,
+    viewportFraction: 0.85,
   ); // Slightly less than 1
 
   @override
@@ -46,7 +46,7 @@ class _DailySummaryWidgetState extends State<DailySummaryWidget> {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          height: 120, // Fixed height for cards
+          height: 130, // Fixed height for cards
           child: PageView.builder(
             controller: _pageController,
             scrollDirection: Axis.horizontal,
@@ -146,55 +146,48 @@ class InsightCard extends StatelessWidget {
 
               // Column for text and button
               Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Text with exactly two lines and ellipsis
-                        SizedBox(
-                          height:
-                              screenWidth * 0.08, // Fixed height for two lines
-                          child: Text(
-                            text,
-                            style: TextStyle(
-                              color: const Color(0xFF707070),
-                              fontSize: screenWidth * 0.035,
-                              fontFamily: 'Rubik',
-                              height: 1.2, // Tighter line height
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis, // Add ellipsis
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Text with flexible height instead of fixed
+                    Text(
+                      text,
+                      style: TextStyle(
+                        color: const Color(0xFF707070),
+                        fontSize: screenWidth * 0.035,
+                        fontFamily: 'Rubik',
+                        height: 1.2, // Tighter line height
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+
+                    const SizedBox(
+                      height: 8,
+                    ), // Add space between text and button
+                    // Button below the text
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: Size(screenWidth * 0.2, 24),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        child: Text(
+                          'Talk to tvamev',
+                          style: TextStyle(
+                            fontSize: screenWidth * 0.03,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0XFF121417),
+                            decoration: TextDecoration.underline,
                           ),
                         ),
-
-                        const Spacer(flex: 1),
-
-                        // Button below the text
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                            onPressed: () {},
-                            style: TextButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              minimumSize: Size(screenWidth * 0.2, 24),
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            ),
-                            child: Text(
-                              'Talk to tvamev',
-                              style: TextStyle(
-                                fontSize: screenWidth * 0.03,
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0XFF121417),
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

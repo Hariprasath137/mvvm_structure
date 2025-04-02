@@ -12,10 +12,20 @@ class HeartRateTrends extends StatefulWidget {
 class _HeartRateTrendsState extends State<HeartRateTrends> {
   @override
   Widget build(BuildContext context) {
+    // Get screen dimensions
+    final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width;
+    final screenHeight = screenSize.height;
+
     return Container(
-      color: Color(0XFFF6F8F9),
+      color: const Color(0XFFF6F8F9),
       child: Padding(
-        padding: const EdgeInsets.only(top: 50, left: 24, right: 24, bottom: 8),
+        padding: EdgeInsets.only(
+          top: screenHeight * 0.05,
+          left: screenWidth * 0.05,
+          right: screenWidth * 0.05,
+          bottom: screenHeight * 0.01,
+        ), // Responsive padding
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -23,137 +33,112 @@ class _HeartRateTrendsState extends State<HeartRateTrends> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Heart Rate Trends",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Poppins",
+                Flexible(
+                  child: Text(
+                    "Heart Rate Trends",
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.06, // Responsive font size
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Poppins",
+                    ),
+                    overflow: TextOverflow.ellipsis, // Prevent overflow
                   ),
                 ),
                 Row(
-                  children: const [
+                  mainAxisSize: MainAxisSize.min, // Reduce unnecessary space
+                  children: [
                     Text(
                       "View all",
                       style: TextStyle(
-                        color: Color(0XFF193238),
+                        color: const Color(0XFF193238),
                         fontWeight: FontWeight.bold,
+                        fontSize: screenWidth * 0.04, // Responsive font size
                       ),
                     ),
-                    Icon(Icons.arrow_forward, color: Color(0XFF193238)),
+                    Icon(
+                      Icons.arrow_forward,
+                      color: const Color(0XFF193238),
+                      size: screenWidth * 0.06, // Responsive icon size
+                    ),
                   ],
                 ),
               ],
             ),
-            const SizedBox(height: 16),
-            // Main Content Row
-            Row(
-              children: [
-                // BPM Widget on the Left
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 4,
-                    bottom: 20,
-                  ), // Shift BPM slightly upwards
-                  child: BPMValue(bpm: "76"),
-                ),
-                const SizedBox(width: 6),
-                // Column for CardButton, Text, and Date
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: const [
-                          CardButton(value: "Normal"),
-                          SizedBox(width: 8),
-                          Text(
-                            "Exercise",
+            SizedBox(height: screenHeight * 0.02), // Responsive spacing
+            // Main Content Rows (Repeating Pattern)
+            ...List.generate(2, (index) {
+              return Row(
+                crossAxisAlignment:
+                    CrossAxisAlignment.start, // Align children to the top
+                children: [
+                  // BPM Widget on the Left
+                  BPMValue(bpm: "76"), // No extra padding or constraints
+                  SizedBox(width: screenWidth * 0.02), // Responsive spacing
+                  // Column for CardButton, Text, and Date
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .center, // Align children vertically
+                          children: [
+                            CardButton(value: "Normal"),
+                            SizedBox(
+                              width: screenWidth * 0.02,
+                            ), // Responsive spacing
+                            Flexible(
+                              child: Text(
+                                "Exercise",
+                                style: TextStyle(
+                                  color: const Color(0XFF193238),
+                                  fontSize:
+                                      screenWidth *
+                                      0.04, // Responsive font size
+                                ),
+                                overflow:
+                                    TextOverflow.ellipsis, // Prevent overflow
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: screenHeight * 0.01,
+                        ), // Responsive spacing
+                        Padding(
+                          padding: EdgeInsets.only(left: screenWidth * 0.02),
+                          child: Text(
+                            "11th Dec 2024, 10:54 AM",
                             style: TextStyle(
-                              color: Color(0XFF193238),
-                              fontSize: 18,
+                              color: const Color(0XFF193238),
+                              fontSize:
+                                  screenWidth * 0.035, // Responsive font size
                             ),
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Text(
-                          "11th Dec 2024, 10:54 AM",
-                          style: TextStyle(
-                            color: Color(0XFF193238),
-                            fontSize: 14,
-                          ),
                         ),
+                        Divider(thickness: 1, color: Colors.grey[300]),
+                      ],
+                    ),
+                  ),
+
+                  // IconButton at the End, Centered Vertically
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: screenHeight * 0.03,
+                    ), // Align vertically
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.arrow_forward_ios,
+                        size: screenWidth * 0.06, // Responsive icon size
+                        color: const Color(0XFF193238),
                       ),
-                      const Divider(thickness: 1),
-                    ],
+                    ),
                   ),
-                ),
-                // IconButton at the End, Centered Vertically
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.arrow_forward_ios),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                // BPM Widget on the Left
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 4,
-                    bottom: 10,
-                  ), // Shift BPM slightly upwards
-                  child: BPMValue(bpm: "76"),
-                ),
-                const SizedBox(width: 6),
-                // Column for CardButton, Text, and Date
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: const [
-                          CardButton(value: "Normal"),
-                          SizedBox(width: 8),
-                          Text(
-                            "Exercise",
-                            style: TextStyle(
-                              color: Color(0XFF193238),
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Text(
-                          "11th Dec 2024, 10:54 AM",
-                          style: TextStyle(
-                            color: Color(0XFF193238),
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // IconButton at the End, Centered Vertically
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.arrow_forward_ios),
-                  ),
-                ),
-              ],
-            ),
+                ],
+              );
+            }),
           ],
         ),
       ),

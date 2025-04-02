@@ -22,12 +22,11 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
       vsync: this,
       duration: const Duration(seconds: 2),
     )..repeat();
-
     _heartController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
       lowerBound: 1.0,
-      upperBound: 1.3,
+      upperBound: 1.2,
     );
   }
 
@@ -44,31 +43,38 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
 
   void stopHeartAnimation() {
     _heartController.stop();
-    _heartController.value = 1.0; 
+    _heartController.value = 1.0;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0XFFCCCCCC),
-      child: Center(
+    final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width;
+    final screenHeight = screenSize.height;
+
+    return Scaffold(
+      backgroundColor: Color(0XFFCCCCCC),
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min, 
+          mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(screenWidth * 0.04), // Responsive padding
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset('assets/Group.png'),
-                  const SizedBox(width: 8),
+                  Image.asset(
+                    'assets/Group.png',
+                    width: screenWidth * 0.1, // Responsive image width
+                  ),
+                  SizedBox(width: screenWidth * 0.02),
                   Expanded(
                     child: Text(
                       "Your average heart rate is 5 bpm better than yesterday's.",
                       style: TextStyle(
                         color: Color(0XFF333333),
-                        fontSize: 16,
+                        fontSize: screenWidth * 0.04, // Responsive font size
                         fontFamily: "Poppins",
                       ),
                     ),
@@ -78,13 +84,17 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                       SvgPicture.asset(
                         'assets/dot.svg',
                         color: Color(0XFF6B6B6B),
-                        width: 30,
+                        width: screenWidth * 0.07, // Responsive SVG width
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 0),
-                        child: const Text(
+                        padding: EdgeInsets.only(left: screenWidth * 0.01),
+                        child: Text(
                           "Good",
-                          style: TextStyle(fontFamily: "Poppins", fontSize: 16),
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize:
+                                screenWidth * 0.04, // Responsive font size
+                          ),
                         ),
                       ),
                     ],
@@ -92,7 +102,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                 ],
               ),
             ),
-            SizedBox(height: 1),
+            SizedBox(height: screenHeight * 0.01), // Responsive spacing
             Stack(
               alignment: Alignment.center,
               children: [
@@ -100,7 +110,10 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                   animation: _controller,
                   builder: (context, child) {
                     return CustomPaint(
-                      size: const Size(400, 100),
+                      size: Size(
+                        screenWidth * 0.9,
+                        screenHeight * 0.15,
+                      ), // Responsive size
                       painter: ECGPainter(_controller.value),
                     );
                   },
@@ -108,7 +121,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 20), 
+                    SizedBox(height: screenHeight * 0.02),
                     Stack(
                       alignment: Alignment.center,
                       children: [
@@ -121,7 +134,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                           child: Icon(
                             Icons.favorite,
                             color: Color(0XFF9BA9B3).withOpacity(0.4),
-                            size: 260,
+                            size: screenWidth * 0.55, // Responsive icon size
                           ),
                         ),
                         Transform(
@@ -133,7 +146,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                           child: Icon(
                             Icons.favorite,
                             color: Color(0XFF7E8A8C).withOpacity(0.6),
-                            size: 230,
+                            size: screenWidth * 0.50, // Responsive icon size
                           ),
                         ),
                         ScaleTransition(
@@ -160,7 +173,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      const SizedBox(height: 4),
+                                      SizedBox(height: screenHeight * 0.005),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -175,7 +188,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          const SizedBox(width: 4),
+                                          SizedBox(width: screenWidth * 0.01),
                                           Text(
                                             'bpm',
                                             style: TextStyle(
@@ -195,7 +208,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 2),
+                    SizedBox(height: screenHeight * 0.01),
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
@@ -208,23 +221,22 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            isTesting
-                                ? Color(0XFF62727C)
-                                : const Color(0XFF62727C),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 100,
-                          vertical: 12,
+                        backgroundColor: Color(0XFF62727C),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: screenWidth * 0.2,
+                          vertical: screenHeight * 0.015,
                         ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(
+                            screenWidth * 0.05,
+                          ),
                         ),
                       ),
                       child: Text(
                         isTesting ? 'Stop Test' : 'Test Now',
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: screenWidth * 0.04, // Responsive font size
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -259,11 +271,9 @@ class ECGPainter extends CustomPainter {
     double speed = width * animationValue;
 
     path.moveTo(-speed, height);
-
     for (double x = -speed; x <= width; x += 5) {
       double position = (x + speed) % 100;
       double y = height;
-
       if (position < 40) {
         y = height;
       } else if (position == 45) {
@@ -277,10 +287,8 @@ class ECGPainter extends CustomPainter {
       } else if (position == 120) {
         y -= 7;
       }
-
       path.lineTo(x, y);
     }
-
     canvas.drawPath(path, paint);
   }
 

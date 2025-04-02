@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class BPMValue extends StatefulWidget {
   final String bpm;
+
   const BPMValue({super.key, required this.bpm});
 
   @override
@@ -11,35 +12,70 @@ class BPMValue extends StatefulWidget {
 class _BPMValueState extends State<BPMValue> {
   @override
   Widget build(BuildContext context) {
+    // Get screen dimensions
+    final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width;
+
+    // Get the text scaler for dynamic font scaling
+    final TextScaler textScaler = MediaQuery.textScalerOf(context);
+
+    // Set the size of the square card as a percentage of the screen width
+    final squareSize = screenWidth * 0.22; // Responsive square size
+
     return SizedBox(
-      height: 91,
-      width: 90,
+      height: squareSize, // Equal height and width
+      width: squareSize, // Equal height and width
       child: Card(
-        color: Color(0XFF767A7B),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        color: const Color(0XFF767A7B),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            screenWidth * 0.05, // Responsive radius
+          ),
+        ),
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.03,
+            vertical: screenWidth * 0.01,
+          ), // Reduced padding for better fit
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment:
+                MainAxisAlignment.center, // Center content vertically
             children: [
-              // SizedBox(height: 10),
-              Text(
-                widget.bpm,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Poppins",
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    widget.bpm,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: textScaler.scale(
+                        screenWidth * 0.05,
+                      ), // Scaled font size
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Poppins",
+                    ),
+                    overflow:
+                        TextOverflow.ellipsis, // Handle overflow gracefully
+                  ),
                 ),
               ),
-              // SizedBox(height: 10),
-              Text(
-                "bpm",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontFamily: "Poppins",
+              SizedBox(height: screenWidth * 0.005), // Minimal spacing
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    "bpm",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: textScaler.scale(
+                        screenWidth * 0.03,
+                      ), // Scaled font size
+                      fontFamily: "Poppins",
+                    ),
+                    overflow:
+                        TextOverflow.ellipsis, // Handle overflow gracefully
+                  ),
                 ),
               ),
             ],

@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 
 class WellnessCarousel extends StatefulWidget {
+  const WellnessCarousel({super.key});
+
   @override
   _WellnessCarouselState createState() => _WellnessCarouselState();
 }
 
 class _WellnessCarouselState extends State<WellnessCarousel> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   int _currentPage = 0;
 
   List<Map<String, String>> data = [

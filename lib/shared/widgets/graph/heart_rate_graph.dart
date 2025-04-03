@@ -76,6 +76,7 @@ class _HeartRateGraphState extends State<HeartRateGraph> {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

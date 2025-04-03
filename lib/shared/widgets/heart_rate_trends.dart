@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_structure_reference/features/heart_rate/view/heart_rate_trends_full.dart';
 import 'package:mvvm_structure_reference/shared/widgets/card/bpm_value_card.dart';
-import 'package:mvvm_structure_reference/shared/widgets/card/characteristics_card.dart';
 
 class HeartRateTrends extends StatefulWidget {
   const HeartRateTrends({super.key});
@@ -10,6 +10,75 @@ class HeartRateTrends extends StatefulWidget {
 }
 
 class _HeartRateTrendsState extends State<HeartRateTrends> {
+  
+  final List<HeartRateEntry> heartRateEntries = [
+    HeartRateEntry(
+      bpm: "76",
+      status: "Normal",
+      activity: "Exercise",
+      timestamp: "11th Dec 2024, 10:54 AM",
+    ),
+    HeartRateEntry(
+      bpm: "98",
+      status: "Normal",
+      activity: "Running",
+      timestamp: "11th Dec 2024, 10:54 AM",
+    ),
+    HeartRateEntry(
+      bpm: "102",
+      status: "Normal",
+      activity: "Standing",
+      timestamp: "11th Dec 2024, 10:54 AM",
+    ),
+    HeartRateEntry(
+      bpm: "76",
+      status: "Normal",
+      activity: "Exercise",
+      timestamp: "11th Dec 2024, 10:54 AM",
+    ),
+    HeartRateEntry(
+      bpm: "98",
+      status: "Normal",
+      activity: "Running",
+      timestamp: "11th Dec 2024, 10:54 AM",
+    ),
+    HeartRateEntry(
+      bpm: "102",
+      status: "Normal",
+      activity: "Standing",
+      timestamp: "11th Dec 2024, 10:54 AM",
+    ),
+    HeartRateEntry(
+      bpm: "76",
+      status: "Normal",
+      activity: "Exercise",
+      timestamp: "11th Dec 2024, 10:54 AM",
+    ),
+    HeartRateEntry(
+      bpm: "98",
+      status: "Normal",
+      activity: "Running",
+      timestamp: "11th Dec 2024, 10:54 AM",
+    ),
+    HeartRateEntry(
+      bpm: "102",
+      status: "Normal",
+      activity: "Standing",
+      timestamp: "11th Dec 2024, 10:54 AM",
+    ),
+   
+  ];
+
+  void _navigateToAllHeartRateTrends() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder:
+            (context) => AllHeartRateTrends(heartRateEntries: heartRateEntries),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Get screen dimensions
@@ -47,18 +116,27 @@ class _HeartRateTrendsState extends State<HeartRateTrends> {
                 Row(
                   mainAxisSize: MainAxisSize.min, // Reduce unnecessary space
                   children: [
-                    Text(
-                      "View all",
-                      style: TextStyle(
-                        color: const Color(0XFF193238),
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidth * 0.04, // Responsive font size
+                    InkWell(
+                      onTap:
+                          _navigateToAllHeartRateTrends, // Navigate to next page
+                      child: Row(
+                        children: [
+                          Text(
+                            "View all",
+                            style: TextStyle(
+                              color: const Color(0XFF193238),
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  screenWidth * 0.04, // Responsive font size
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward,
+                            color: const Color(0XFF193238),
+                            size: screenWidth * 0.06, // Responsive icon size
+                          ),
+                        ],
                       ),
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
-                      color: const Color(0XFF193238),
-                      size: screenWidth * 0.06, // Responsive icon size
                     ),
                   ],
                 ),
@@ -84,7 +162,15 @@ class _HeartRateTrendsState extends State<HeartRateTrends> {
                               CrossAxisAlignment
                                   .center, // Align children vertically
                           children: [
-                            CardButton(value: "Normal"),
+                            Chip(
+                              label: Text(
+                                "Normal",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              backgroundColor: Color(
+                                0XFFA9AAAA,
+                              ), // Customize color based on status
+                            ),
                             SizedBox(
                               width: screenWidth * 0.02,
                             ), // Responsive spacing

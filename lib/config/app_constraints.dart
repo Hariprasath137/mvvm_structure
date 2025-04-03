@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/view/heart_rate_screen.dart';
+import 'package:mvvm_structure_reference/features/heart_rate/view/peak_hr_screen.dart';
+import 'package:mvvm_structure_reference/features/heart_rate/view/resting_hr_screen.dart';
 import 'package:mvvm_structure_reference/features/home_screen/view/home_screen.dart';
 
 class AppRoutes {
   static const String home = '/home_screen';
   static const String heartrate = '/heart_rate_screen';
+  static const String resting = '/resting_hr';
+  static const String peak = '/peak_hr';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
-
         return MaterialPageRoute(builder: (context) => HomeScreen());
 
       case heartrate:
         return MaterialPageRoute(builder: (context) => HeartRateScreen());
+
+      case resting:
+        return MaterialPageRoute(builder: (context) => RestingHr());
+
+      case peak:
+        return MaterialPageRoute(builder: (context) => PeakHr());
 
       default:
         return MaterialPageRoute(

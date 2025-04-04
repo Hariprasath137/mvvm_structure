@@ -46,7 +46,7 @@ class _V02CurosalWidgetState extends State<V02CurosalWidget> {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          height: 130, // Fixed height for cards
+          height: 138, // Fixed height for cards
           child: PageView.builder(
             controller: _pageController,
             scrollDirection: Axis.horizontal,

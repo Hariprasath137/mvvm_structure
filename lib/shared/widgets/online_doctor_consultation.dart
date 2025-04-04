@@ -14,11 +14,6 @@ class OnlineDoctorConsultation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen dimensions
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
-
-    // Get the text scaler for dynamic font scaling
     final TextScaler textScaler = MediaQuery.textScalerOf(context);
 
     return Card(

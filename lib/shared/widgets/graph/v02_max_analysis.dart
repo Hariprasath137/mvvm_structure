@@ -5,7 +5,6 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Vo2MaxAnalysis extends StatefulWidget {
   final String vo2level;
-
   const Vo2MaxAnalysis({super.key, required this.vo2level});
 
   @override
@@ -15,11 +14,11 @@ class Vo2MaxAnalysis extends StatefulWidget {
 class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
   // Updated chart data with meaningful time labels
   final List<VO2Data> chartData = [
-    VO2Data("12\nAM", 25),
-    VO2Data("6\nAM", 27),
-    VO2Data("12\nPM", 30),
-    VO2Data("6\nPM", 33),
-    VO2Data("12\nAM ", 35),
+    VO2Data("12 AM", 25),
+    VO2Data("6 AM", 27),
+    VO2Data("12 PM", 30),
+    VO2Data("6 PM", 33),
+    VO2Data("12 AM ", 35),
   ];
 
   @override
@@ -76,48 +75,38 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                 ],
               ),
               const SizedBox(height: 12),
-
               // Current VO2 Max
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
                       Text(
-                        "Current VO2 max",
+                        widget.vo2level,
                         style: TextStyle(
-                          fontSize: screenWidth * 0.045, // Responsive font size
-                          color: Color(0XFF707070),
+                          fontSize: screenWidth * 0.06, // Responsive font size
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            widget.vo2level,
-                            style: TextStyle(
-                              fontSize:
-                                  screenWidth * 0.06, // Responsive font size
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            " ml/kg/min",
-                            style: TextStyle(
-                              fontSize:
-                                  screenWidth * 0.04, // Responsive font size
-                              color: Color(0XFFA9AAAA),
-                            ),
-                          ),
-                        ],
+                      Text(
+                        " ml/kg/min",
+                        style: TextStyle(
+                          fontSize: screenWidth * 0.04, // Responsive font size
+                          color: Color(0XFFA9AAAA),
+                        ),
                       ),
                     ],
                   ),
+                  // Chip moved to the end of the row
+                  Chip(
+                    label: Text("Good", style: TextStyle(color: Colors.white)),
+                    backgroundColor: Color(
+                      0XFFA9AAAA,
+                    ), // Customize color based on status
+                  ),
                 ],
               ),
-
               const SizedBox(height: 24),
-
               // Chart Section
               SizedBox(
                 height: 250,
@@ -252,6 +241,5 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
 class VO2Data {
   final String time;
   final double value;
-
   VO2Data(this.time, this.value);
 }

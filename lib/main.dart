@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      // onGenerateRoute: AppRoutes.generateRoute,
-      // initialRoute: AppRoutes.hrtrends,
-      home: Scaffold(body: HeartRateTrends()),
+      onGenerateRoute: AppRoutes.generateRoute,
+      initialRoute: AppRoutes.home,
+      // home: Scaffold(body: HeartRateTrends()),
     );
   }
 }

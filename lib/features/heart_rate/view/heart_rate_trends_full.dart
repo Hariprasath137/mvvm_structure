@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'details_screen.dart'; // Import the DetailsScreen
 
 class AllHeartRateTrends extends StatelessWidget {
   final List<HeartRateEntry> heartRateEntries;
@@ -160,7 +161,13 @@ class AllHeartRateTrends extends StatelessWidget {
                       ),
                       trailing: Icon(Icons.arrow_forward_ios),
                       onTap: () {
-                        // Handle item tap if needed
+                        // Navigate to the Details Screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailsScreen(entry: entry),
+                          ),
+                        );
                       },
                     ),
                     // Divider that spans from under the timestamp to the trailing icon

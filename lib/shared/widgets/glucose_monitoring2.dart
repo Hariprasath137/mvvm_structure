@@ -36,7 +36,7 @@ class _GlucoseMonitoringContainerState
       {
         "icon": "image_outlined",
         "text":
-            "Hey, your sleep cycle seems irregular, Try some tips for better rest with tvamev.!",
+        "Hey, your sleep cycle seems irregular, Try some tips for better rest with tvamev.!",
       },
       {
         "icon": "image_outlined",
@@ -49,7 +49,7 @@ class _GlucoseMonitoringContainerState
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: screenWidth * 0.9, // 90%
+            // width: screenWidth * 0.9,
             height: 120,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -100,8 +100,7 @@ class _GlucoseMonitoringContainerState
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder:
-                                            (context) => NotificationPage(),
+                                        builder: (context) => NotificationPage(),
                                       ),
                                     );
                                   },
@@ -143,10 +142,9 @@ class _GlucoseMonitoringContainerState
                     child: Stack(
                       children: List.generate(3, (index) {
                         double widthPerDot = 20;
-                        double offset =
-                            _currentPage == index
-                                ? index * widthPerDot.toDouble()
-                                : 0.0;
+                        double offset = _currentPage == index
+                            ? index * widthPerDot.toDouble()
+                            : 0.0;
 
                         return Positioned(
                           left: offset,
@@ -156,10 +154,9 @@ class _GlucoseMonitoringContainerState
                             height: 8,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4),
-                              color:
-                                  _currentPage == index
-                                      ? Colors.blueGrey
-                                      : Colors.transparent,
+                              color: _currentPage == index
+                                  ? Colors.blueGrey
+                                  : Colors.transparent,
                             ),
                           ),
                         );
@@ -191,5 +188,4 @@ class NotificationPage extends StatelessWidget {
   }
 }
 
-void main() =>
-    runApp(MaterialApp(home: Scaffold(body: GlucoseMonitoringContainer2())));
+void main() => runApp(MaterialApp(home: Scaffold(body: GlucoseMonitoringContainer2())));

@@ -60,13 +60,13 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: EdgeInsets.all(screenWidth * 0.04), // Responsive padding
+              padding: EdgeInsets.all(screenWidth * 0.04), 
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
                     'assets/Group.png',
-                    width: screenWidth * 0.1, // Responsive image width
+                    width: screenWidth * 0.1, 
                   ),
                   SizedBox(width: screenWidth * 0.02),
                   Expanded(
@@ -74,7 +74,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                       "Your average heart rate is 5 bpm better than yesterday's.",
                       style: TextStyle(
                         color: Color(0XFF333333),
-                        fontSize: screenWidth * 0.04, // Responsive font size
+                        fontSize: screenWidth * 0.04, 
                         fontFamily: "Poppins",
                       ),
                     ),
@@ -84,7 +84,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                       SvgPicture.asset(
                         'assets/dot.svg',
                         color: Color(0XFF6B6B6B),
-                        width: screenWidth * 0.07, // Responsive SVG width
+                        width: screenWidth * 0.07,
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: screenWidth * 0.01),
@@ -93,7 +93,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                           style: TextStyle(
                             fontFamily: "Poppins",
                             fontSize:
-                                screenWidth * 0.04, // Responsive font size
+                                screenWidth * 0.04, 
                           ),
                         ),
                       ),
@@ -102,7 +102,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                 ],
               ),
             ),
-            SizedBox(height: screenHeight * 0.01), // Responsive spacing
+            SizedBox(height: screenHeight * 0.01), 
             Stack(
               alignment: Alignment.center,
               children: [
@@ -113,7 +113,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                       size: Size(
                         screenWidth * 0.9,
                         screenHeight * 0.15,
-                      ), // Responsive size
+                      ), 
                       painter: ECGPainter(_controller.value),
                     );
                   },
@@ -134,7 +134,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                           child: Icon(
                             Icons.favorite,
                             color: Color(0XFF9BA9B3).withOpacity(0.4),
-                            size: screenWidth * 0.55, // Responsive icon size
+                            size: screenWidth * 0.55, 
                           ),
                         ),
                         Transform(
@@ -146,7 +146,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                           child: Icon(
                             Icons.favorite,
                             color: Color(0XFF7E8A8C).withOpacity(0.6),
-                            size: screenWidth * 0.50, // Responsive icon size
+                            size: screenWidth * 0.50, 
                           ),
                         ),
                         ScaleTransition(
@@ -236,7 +236,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                         isTesting ? 'Stop Test' : 'Test Now',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: screenWidth * 0.04, // Responsive font size
+                          fontSize: screenWidth * 0.04, 
                           fontWeight: FontWeight.bold,
                         ),
                       ),

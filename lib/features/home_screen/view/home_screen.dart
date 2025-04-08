@@ -3,13 +3,14 @@ import 'package:mvvm_structure_reference/config/app_constraints.dart';
 import 'package:mvvm_structure_reference/shared/widgets/activity_card.dart';
 import 'package:mvvm_structure_reference/shared/widgets/glucose_monitoring1.dart';
 import 'package:mvvm_structure_reference/shared/widgets/glucose_monitoring2.dart';
-import 'package:mvvm_structure_reference/shared/widgets/activity_card.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -32,12 +35,13 @@ class _HomeScreenState extends State<HomeScreen> {
         firstDate: DateTime(2020, 5),
         lastDate: DateTime(2060)
     );
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
       });
+    }
   }
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   int _currentPage = 0;
 
   void _showGratitudeNotification() {

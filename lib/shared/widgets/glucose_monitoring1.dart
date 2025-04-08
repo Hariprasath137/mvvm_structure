@@ -231,13 +231,13 @@ class GlucoseMonitoringContainer1 extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
-              // The red border container for the graph
+             
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    // border: Border.all(color: Colors.red, width: 2),
+                    
                   ),
-                  child: SafeZoneChart(), // Insert the graph here
+                  child: SafeZoneChart(),
                 ),
               ),
             ],

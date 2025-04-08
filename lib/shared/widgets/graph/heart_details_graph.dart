@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class HeartRateGraph extends StatefulWidget {
-  const HeartRateGraph({super.key});
+class HeartDetailsGraph extends StatefulWidget {
+  const HeartDetailsGraph({super.key});
 
   @override
-  State<HeartRateGraph> createState() => _HeartRateGraphState();
+  State<HeartDetailsGraph> createState() => _HeartDetailsGraphState();
 }
 
-class _HeartRateGraphState extends State<HeartRateGraph> {
+class _HeartDetailsGraphState extends State<HeartDetailsGraph> {
   final List<int> _mainData = [
     70,
     72,
@@ -69,7 +69,7 @@ class _HeartRateGraphState extends State<HeartRateGraph> {
     '1\nAM ',
   ];
 
-  final List<int> _keyPoints = [0, 6, 12, 18, 24];
+  final int _highlightedIndex = 11;
 
   @override
   Widget build(BuildContext context) {
@@ -94,15 +94,26 @@ class _HeartRateGraphState extends State<HeartRateGraph> {
                     interval: 6,
                     axisLabelFormatter: (AxisLabelRenderDetails details) {
                       int index = details.value.toInt();
-                      return _keyPoints.contains(index)
-                          ? ChartAxisLabel(
-                            _timeLabels[index],
-                            const TextStyle(
-                              color: Color(0XFFA9AAAA),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                          : ChartAxisLabel('', const TextStyle());
+                      if (_timeLabels[index] ==
+                          _timeLabels[_highlightedIndex]) {
+                        return ChartAxisLabel(
+                          _timeLabels[index],
+                          const TextStyle(
+                            color: Color(0XFF193238),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        );
+                      } else {
+                        return ChartAxisLabel(
+                          _timeLabels[index],
+                          const TextStyle(
+                            color: Color(0XFFA9AAAA),
+                            fontWeight: FontWeight.normal,
+                            fontSize: 12,
+                          ),
+                        );
+                      }
                     },
                   ),
                   primaryYAxis: NumericAxis(
@@ -124,16 +135,12 @@ class _HeartRateGraphState extends State<HeartRateGraph> {
                         borderWidth: 0.5,
                       ),
                     ],
-                   
                     labelStyle: const TextStyle(
-                      color: Color(
-                        0XFFA9AAAA,
-                      ), 
+                      color: Color(0XFFA9AAAA),
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                     ),
                   ),
-
                   series: <LineSeries<int, String>>[
                     LineSeries<int, String>(
                       dataSource: _mainData,
@@ -142,25 +149,23 @@ class _HeartRateGraphState extends State<HeartRateGraph> {
                       yValueMapper: (int value, _) => value,
                       color: const Color(0xFF637887),
                       width: 2,
-                     
                       markerSettings: const MarkerSettings(isVisible: false),
                     ),
                   ],
                   annotations: <CartesianChartAnnotation>[
-                    for (int index in _keyPoints)
-                      CartesianChartAnnotation(
-                        widget: Container(
-                          width: 8,
-                          height: 8,
-                          decoration: const BoxDecoration(
-                            color: Color(0XFF193238),
-                            shape: BoxShape.circle,
-                          ),
+                    CartesianChartAnnotation(
+                      widget: Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const BoxDecoration(
+                          color: Color(0XFF193238),
+                          shape: BoxShape.circle,
                         ),
-                        coordinateUnit: CoordinateUnit.point,
-                        x: _timeLabels[index],
-                        y: _mainData[index],
                       ),
+                      coordinateUnit: CoordinateUnit.point,
+                      x: _timeLabels[_highlightedIndex],
+                      y: _mainData[_highlightedIndex],
+                    ),
                   ],
                 ),
               ),

@@ -12,7 +12,7 @@ class Vo2MaxAnalysis extends StatefulWidget {
 }
 
 class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
-  // Updated chart data with meaningful time labels
+  
   final List<VO2Data> chartData = [
     VO2Data("12 AM", 25),
     VO2Data("6 AM", 27),
@@ -23,7 +23,7 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen width for responsiveness
+    
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
@@ -43,7 +43,7 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                       Text(
                         "VO2 Max Analysis",
                         style: TextStyle(
-                          fontSize: screenWidth * 0.06, // Responsive font size
+                          fontSize: screenWidth * 0.06, 
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -54,20 +54,20 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                   Expanded(
                     child: Wrap(
                       alignment: WrapAlignment.end,
-                      spacing: 4, // Space between text and icon
+                      spacing: 4, 
                       children: [
                         Text(
                           "See More",
                           style: TextStyle(
                             color: Color(0XFF193238),
                             fontSize:
-                                screenWidth * 0.05, // Responsive font size
+                                screenWidth * 0.05, 
                           ),
                         ),
                         Icon(
                           Icons.arrow_forward,
                           color: Color(0XFF121417),
-                          size: screenWidth * 0.06, // Responsive icon size
+                          size: screenWidth * 0.06, 
                         ),
                       ],
                     ),
@@ -75,7 +75,7 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                 ],
               ),
               const SizedBox(height: 12),
-              // Current VO2 Max
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -84,30 +84,30 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                       Text(
                         widget.vo2level,
                         style: TextStyle(
-                          fontSize: screenWidth * 0.06, // Responsive font size
+                          fontSize: screenWidth * 0.06, 
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
                         " ml/kg/min",
                         style: TextStyle(
-                          fontSize: screenWidth * 0.04, // Responsive font size
+                          fontSize: screenWidth * 0.04, 
                           color: Color(0XFFA9AAAA),
                         ),
                       ),
                     ],
                   ),
-                  // Chip moved to the end of the row
+                 
                   Chip(
                     label: Text("Good", style: TextStyle(color: Colors.white)),
                     backgroundColor: Color(
                       0XFFA9AAAA,
-                    ), // Customize color based on status
+                    ), 
                   ),
                 ],
               ),
               const SizedBox(height: 24),
-              // Chart Section
+              
               SizedBox(
                 height: 250,
                 child: SfCartesianChart(
@@ -163,7 +163,7 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: screenWidth * 0.8, // Responsive width
+                    width: screenWidth * 0.8, 
                     child: Card(
                       color: Color(0XFFCCCCCC),
                       shape: RoundedRectangleBorder(
@@ -180,7 +180,7 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                           children: [
                             Image.asset(
                               'assets/Group.png',
-                              width: screenWidth * 0.1, // Responsive image size
+                              width: screenWidth * 0.1, 
                               height: screenWidth * 0.1,
                             ),
                             SizedBox(width: 8),
@@ -190,7 +190,7 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                                 style: TextStyle(
                                   fontSize:
                                       screenWidth *
-                                      0.04, // Responsive font size
+                                      0.04, 
                                   color: Color(0XFF333333),
                                 ),
                                 softWrap: true,
@@ -208,7 +208,7 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                 child: Text(
                   "VO2 Max Summary",
                   style: TextStyle(
-                    fontSize: screenWidth * 0.05, // Responsive font size
+                    fontSize: screenWidth * 0.05, 
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -217,9 +217,9 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(child: Vo2Card(stateType: "Minimum", value: '35')),
-                  const SizedBox(width: 8), // Add spacing between cards
+                  const SizedBox(width: 8), 
                   Expanded(child: Vo2Card(stateType: "Average", value: '42')),
-                  const SizedBox(width: 8), // Add spacing between cards
+                  const SizedBox(width: 8), 
                   Expanded(child: Vo2Card(stateType: "Maximum", value: '48')),
                 ],
               ),
@@ -237,7 +237,7 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
   }
 }
 
-// Data Model for VO2 Max Analysis
+
 class VO2Data {
   final String time;
   final double value;

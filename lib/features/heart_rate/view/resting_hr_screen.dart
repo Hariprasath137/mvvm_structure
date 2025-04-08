@@ -53,18 +53,18 @@ class _RestingHrState extends State<RestingHr> {
             ),
             SizedBox(height: 20),
 
-            /// Wrap the three widgets in a white background container
+           
             Container(
-              color: Colors.white, // Set background color to white
-              padding: EdgeInsets.symmetric(vertical: 20), // Add spacing
+              color: Colors.white, 
+              padding: EdgeInsets.symmetric(vertical: 20), 
               child: Column(
                 children: [
-                  const AvgRestingCard(), // First widget inside white background
+                  const AvgRestingCard(), 
                   const SizedBox(height: 20),
                   SizedBox(
-                    height: 350, // Set height as per your design
+                    height: 350, 
                     child:
-                        const HeartRateGraph(), // Second widget inside white background
+                        const HeartRateGraph(), 
                   ),
                   const SizedBox(height: 20),
                   Padding(
@@ -82,7 +82,7 @@ class _RestingHrState extends State<RestingHr> {
                         ),
                         const SizedBox(height: 20),
                         HorizontalCardWidget(
-                          // Third widget inside white background
+                         
                           cards: [
                             swipableCard.InsightCard(
                               imagePath: 'assets/Rectangle.png',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HeartRateTable extends StatefulWidget {
-  final String title; // Changeable title
+  final String title; 
 
   const HeartRateTable({super.key, required this.title});
 
@@ -30,22 +30,22 @@ class _HeartRateTableState extends State<HeartRateTable> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0), // Reduced padding for responsiveness
+      padding: const EdgeInsets.all(16.0), 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Title with custom color
+          
           Text(
             widget.title,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF191919), // Custom color for the title
+              color: const Color(0xFF191919), 
             ),
           ),
           const SizedBox(height: 10),
           ConstrainedBox(
-            constraints: BoxConstraints(minHeight: 200), // Set a minimum height
+            constraints: BoxConstraints(minHeight: 200), 
             child: SingleChildScrollView(
               child: Container(
                 decoration: BoxDecoration(
@@ -74,10 +74,10 @@ class _HeartRateTableState extends State<HeartRateTable> {
                               })
                               .toList(),
                     ),
-                    const SizedBox(height: 10), // Space before the button
+                    const SizedBox(height: 10), 
                     Align(
                       alignment:
-                          Alignment.centerLeft, // Aligns to "Age group" column
+                          Alignment.centerLeft, 
                       child: _buildSeeMoreLessButton(),
                     ),
                   ],
@@ -94,17 +94,17 @@ class _HeartRateTableState extends State<HeartRateTable> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16),
       decoration: BoxDecoration(
-        color: const Color(0XFFCCCCCC), // Background color for header
+        color: const Color(0XFFCCCCCC), 
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(8),
-        ), // Rounded corners
+        ), 
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Age Group title
+          
           SizedBox(
-            width: 100, // Ensuring proper alignment
+            width: 100, 
             child: Text(
               "Age group",
               textAlign: TextAlign.center,
@@ -114,9 +114,9 @@ class _HeartRateTableState extends State<HeartRateTable> {
               ),
             ),
           ),
-          // Average range (bpm) title in two lines
+          
           SizedBox(
-            width: 100, // Ensuring proper alignment
+            width: 100, 
             child: Column(
               children: const [
                 Text(
@@ -152,33 +152,33 @@ class _HeartRateTableState extends State<HeartRateTable> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                width: 100, // Same width as header
+                width: 100, 
                 child: Text(
                   age,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight:
                         age == "20-39" ? FontWeight.bold : FontWeight.normal,
-                    color: const Color(0XFF767676), // Custom text color
+                    color: const Color(0XFF767676), 
                   ),
                 ),
               ),
               SizedBox(
-                width: 100, // Same width as header
+                width: 100, 
                 child: Text(
                   range,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight:
                         age == "20-39" ? FontWeight.bold : FontWeight.normal,
-                    color: const Color(0XFF767676), // Custom text color
+                    color: const Color(0XFF767676), 
                   ),
                 ),
               ),
             ],
           ),
         ),
-        if (!isLastItem) // ✅ Add divider only if it's NOT the last item
+        if (!isLastItem)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: const Divider(color: Color(0XFF637887), thickness: 0.5),
@@ -191,10 +191,10 @@ class _HeartRateTableState extends State<HeartRateTable> {
     return Padding(
       padding: const EdgeInsets.only(
         left: 36,
-      ), // Aligns button under "Age group"
+      ), 
       child: Align(
         alignment:
-            Alignment.centerLeft, // Ensures button aligns with "Age group"
+            Alignment.centerLeft, 
         child: TextButton(
           onPressed: () {
             setState(() {
@@ -202,17 +202,17 @@ class _HeartRateTableState extends State<HeartRateTable> {
             });
           },
           style: TextButton.styleFrom(
-            padding: EdgeInsets.zero, // Removes extra padding
-            alignment: Alignment.centerLeft, // Aligns text & icon properly
+            padding: EdgeInsets.zero, 
+            alignment: Alignment.centerLeft, 
           ),
           child: Row(
-            mainAxisSize: MainAxisSize.min, // Prevents extra space in Row
+            mainAxisSize: MainAxisSize.min, 
             children: [
               Text(
                 isExpanded ? "See Less" : "See More",
                 style: const TextStyle(fontSize: 16, color: Color(0XFF121417)),
               ),
-              const SizedBox(width: 5), // Adds space between text and icon
+              const SizedBox(width: 5),
               Icon(
                 isExpanded
                     ? Icons.keyboard_arrow_up

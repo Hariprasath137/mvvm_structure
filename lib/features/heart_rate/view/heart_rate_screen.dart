@@ -55,7 +55,7 @@ class _HeartRateScreenState extends State<HeartRateScreen> {
         height: MediaQuery.of(context).size.height,
         child: ListView(
           children: [
-            // Insights Section
+            
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -93,7 +93,7 @@ class _HeartRateScreenState extends State<HeartRateScreen> {
             const SizedBox(height: 30),
 
             SizedBox(
-              height: 550, // Adjust height as needed
+              height: 550, 
               child: ECGMonitor(),
             ),
 
@@ -105,9 +105,9 @@ class _HeartRateScreenState extends State<HeartRateScreen> {
 
             const SizedBox(height: 20),
 
-            // Ensure Vo2MaxWidget has a fixed height
+            
             SizedBox(
-              height: 350, // Set height as per your design
+              height: 350, 
               child: const HeartRateGraph(),
             ),
             SizedBox(height: 10),
@@ -146,7 +146,7 @@ class _HeartRateScreenState extends State<HeartRateScreen> {
 
             const SizedBox(height: 20),
 
-            // Quick Tips Section
+           
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(

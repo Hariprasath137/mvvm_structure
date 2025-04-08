@@ -13,7 +13,7 @@ class Vo2Card extends StatefulWidget {
 class _Vo2CardState extends State<Vo2Card> {
   @override
   Widget build(BuildContext context) {
-    // Get the text scaler from MediaQuery
+    
     final TextScaler textScaler = MediaQuery.textScalerOf(context);
 
     return Card(
@@ -23,7 +23,7 @@ class _Vo2CardState extends State<Vo2Card> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min, // Wrap tightly around children
+          mainAxisSize: MainAxisSize.min, 
           children: [
             Text(
               widget.stateType,
@@ -31,7 +31,7 @@ class _Vo2CardState extends State<Vo2Card> {
                 color: const Color(0XFF7E8A8C),
                 fontSize: textScaler.scale(
                   16,
-                ), // Use TextScaler for dynamic scaling
+                ), 
               ),
               overflow: TextOverflow.ellipsis,
             ),
@@ -40,7 +40,7 @@ class _Vo2CardState extends State<Vo2Card> {
               style: TextStyle(
                 fontSize: textScaler.scale(
                   18,
-                ), // Use TextScaler for dynamic scaling
+                ), 
                 fontWeight: FontWeight.bold,
               ),
               overflow: TextOverflow.ellipsis,
@@ -51,7 +51,7 @@ class _Vo2CardState extends State<Vo2Card> {
                 color: const Color(0XFFA9AAAA),
                 fontSize: textScaler.scale(
                   16,
-                ), // Use TextScaler for dynamic scaling
+                ),
               ),
               overflow: TextOverflow.ellipsis,
             ),

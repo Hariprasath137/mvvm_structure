@@ -74,6 +74,9 @@ flutter:
     - assets/factors.png
     - assets/Video.png
     - assets/tvamev.png
+    - assets/Vector.png
+    - assets/waterdrop.png
+
   fonts:
     - family: Poppins
       fonts:

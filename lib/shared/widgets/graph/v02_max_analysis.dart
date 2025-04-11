@@ -26,11 +26,11 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
 
   Future<void> loadVo2Data() async {
     final String response = await rootBundle.loadString(
-      'assets/json/vo2_data.json',
+      'assets/json/model.json',
     );
     final data = json.decode(response);
     setState(() {
-      vo2Model = VO2Model.fromJson(data);
+      vo2Model = VO2Model.fromJson(data['vo2']);
     });
   }
 

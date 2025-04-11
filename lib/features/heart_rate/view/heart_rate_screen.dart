@@ -41,11 +41,11 @@ class _HeartRateScreenState extends State<HeartRateScreen> {
   }
 
   Future<void> loadSummaryData() async {
-    final jsonString = await rootBundle.loadString(
-      'assets/json/heart_rate_summary.json',
-    );
+    final jsonString = await rootBundle.loadString('assets/json/model.json');
     final data = json.decode(jsonString);
-    final parsed = HeartRateSummary.fromJson(data['heart_rate_summary']);
+    final parsed = HeartRateSummary.fromJson(
+      data['summary']['heart_rate_summary'],
+    );
 
     setState(() {
       summary = parsed;

@@ -76,11 +76,6 @@ flutter:
     - assets/tvamev.png
     - assets/Vector.png
     - assets/waterdrop.png
-    - assets/json/heart_rate_entry_data.json
-    - assets/json/heart_rate_summary.json
-    - assets/json/vo2_data.json
-    - assets/json/heartRates_graph_data.json
-    - assets/json/heart_ecg_data.json
     - assets/json/model.json
 
   fonts:

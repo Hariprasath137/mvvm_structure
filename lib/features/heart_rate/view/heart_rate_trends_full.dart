@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_structure_reference/features/heart_rate/data/model/heart_rate_entry_model.dart';
 import 'details_screen.dart'; 
 
 class AllHeartRateTrends extends StatelessWidget {
@@ -192,16 +193,3 @@ class AllHeartRateTrends extends StatelessWidget {
 }
 
 
-class HeartRateEntry {
-  final String bpm;
-  final String status;
-  final String activity;
-  final String timestamp;
-
-  HeartRateEntry({
-    required this.bpm,
-    required this.status,
-    required this.activity,
-    required this.timestamp,
-  });
-}

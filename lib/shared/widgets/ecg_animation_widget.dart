@@ -1,7 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mvvm_structure_reference/features/heart_rate/data/model/heart_rate_model.dart';
 
 class ECGMonitor extends StatefulWidget {
   const ECGMonitor({super.key});
@@ -14,6 +18,36 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
   late AnimationController _controller;
   late AnimationController _heartController;
   bool isTesting = false;
+  HeartRateEcg? heartRateEcg;
+  int? heartRate;
+  String? statusText;
+  String? messageText;
+
+  Future<void> loadJsonData() async {
+    final String jsonString = await rootBundle.loadString(
+      'assets/json/heart_ecg_data.json',
+    );
+    final jsonData = jsonDecode(jsonString);
+    setState(() {
+      heartRate = jsonData['heartRate'];
+      statusText = jsonData['status'];
+      messageText = jsonData['message'];
+    });
+  }
+
+  Future<void> loadHeartRateData() async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    final json = {
+      "heartRate": 75,
+      "status": "Good",
+      "message": "Your average heart rate is 5 bpm better than yesterday's.",
+    };
+
+    setState(() {
+      heartRateEcg = HeartRateEcg.fromJson(json);
+    });
+  }
 
   @override
   void initState() {
@@ -28,6 +62,17 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
       lowerBound: 1.0,
       upperBound: 1.2,
     );
+    loadJsonData().then((_) {
+      if (heartRate != null && statusText != null && messageText != null) {
+        setState(() {
+          heartRateEcg = HeartRateEcg(
+            heartRate: heartRate!,
+            status: statusText!,
+            message: messageText!,
+          );
+        });
+      }
+    });
   }
 
   @override
@@ -51,6 +96,9 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
     final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
+    if (heartRateEcg == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
     return Scaffold(
       backgroundColor: Color(0XFFCCCCCC),
@@ -60,21 +108,18 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: EdgeInsets.all(screenWidth * 0.04), 
+              padding: EdgeInsets.all(screenWidth * 0.04),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'assets/Group.png',
-                    width: screenWidth * 0.1, 
-                  ),
+                  Image.asset('assets/Group.png', width: screenWidth * 0.1),
                   SizedBox(width: screenWidth * 0.02),
                   Expanded(
                     child: Text(
-                      "Your average heart rate is 5 bpm better than yesterday's.",
+                      heartRateEcg?.message ?? "...",
                       style: TextStyle(
                         color: Color(0XFF333333),
-                        fontSize: screenWidth * 0.04, 
+                        fontSize: screenWidth * 0.04,
                         fontFamily: "Poppins",
                       ),
                     ),
@@ -89,11 +134,10 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                       Padding(
                         padding: EdgeInsets.only(left: screenWidth * 0.01),
                         child: Text(
-                          "Good",
+                          heartRateEcg?.status ?? '...',
                           style: TextStyle(
                             fontFamily: "Poppins",
-                            fontSize:
-                                screenWidth * 0.04, 
+                            fontSize: screenWidth * 0.04,
                           ),
                         ),
                       ),
@@ -102,7 +146,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                 ],
               ),
             ),
-            SizedBox(height: screenHeight * 0.01), 
+            SizedBox(height: screenHeight * 0.01),
             Stack(
               alignment: Alignment.center,
               children: [
@@ -110,10 +154,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                   animation: _controller,
                   builder: (context, child) {
                     return CustomPaint(
-                      size: Size(
-                        screenWidth * 0.9,
-                        screenHeight * 0.15,
-                      ), 
+                      size: Size(screenWidth * 0.9, screenHeight * 0.15),
                       painter: ECGPainter(_controller.value),
                     );
                   },
@@ -134,7 +175,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                           child: Icon(
                             Icons.favorite,
                             color: Color(0XFF9BA9B3).withOpacity(0.4),
-                            size: screenWidth * 0.55, 
+                            size: screenWidth * 0.55,
                           ),
                         ),
                         Transform(
@@ -146,7 +187,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                           child: Icon(
                             Icons.favorite,
                             color: Color(0XFF7E8A8C).withOpacity(0.6),
-                            size: screenWidth * 0.50, 
+                            size: screenWidth * 0.50,
                           ),
                         ),
                         ScaleTransition(
@@ -181,7 +222,10 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            '75',
+                                            // ignore: unnecessary_null_comparison
+                                            HeartRateEcg != null
+                                                ? '${heartRateEcg!.heartRate}'
+                                                : '...',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: fontSize,
@@ -210,16 +254,19 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                     ),
                     SizedBox(height: screenHeight * 0.01),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         setState(() {
                           isTesting = !isTesting;
-                          if (isTesting) {
-                            startHeartAnimation();
-                          } else {
-                            stopHeartAnimation();
-                          }
                         });
+
+                        if (isTesting) {
+                          startHeartAnimation();
+                          await loadJsonData();
+                        } else {
+                          stopHeartAnimation();
+                        }
                       },
+
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0XFF62727C),
                         padding: EdgeInsets.symmetric(
@@ -236,7 +283,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
                         isTesting ? 'Stop Test' : 'Test Now',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: screenWidth * 0.04, 
+                          fontSize: screenWidth * 0.04,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

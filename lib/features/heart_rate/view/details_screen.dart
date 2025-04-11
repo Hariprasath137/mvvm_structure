@@ -1,7 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:mvvm_structure_reference/features/heart_rate/view/heart_rate_trends_full.dart';
+import 'package:mvvm_structure_reference/features/heart_rate/data/model/heart_rate_entry_model.dart';
 import 'package:mvvm_structure_reference/shared/widgets/graph/heart_details_graph.dart';
 
 class DetailsScreen extends StatelessWidget {

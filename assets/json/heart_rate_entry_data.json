@@ -1,0 +1,58 @@
+
+    [
+
+    {
+      "bpm": "76",
+      "status": "Normal",
+      "activity": "Exercise",
+      "timestamp": "11th Dec 2024, 10:54 AM"
+    },
+    {
+      "bpm": "98",
+      "status": "Normal",
+      "activity": "Running",
+      "timestamp": "11th Dec 2024, 10:54 AM"
+    },
+    {
+      "bpm": "102",
+      "status": "Normal",
+      "activity": "Swimming",
+      "timestamp": "11th Dec 2024, 10:54 AM"
+    },
+    {
+        "bpm": "76",
+        "status": "Normal",
+        "activity": "Exercise",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "98",
+        "status": "Normal",
+        "activity": "Running",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "102",
+        "status": "Normal",
+        "activity": "Swimming",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "76",
+        "status": "Normal",
+        "activity": "Exercise",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "98",
+        "status": "Normal",
+        "activity": "Running",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "102",
+        "status": "Normal",
+        "activity": "Swimming",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      }
+  ]

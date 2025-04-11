@@ -35,13 +35,15 @@ class _HeartRateTrendsState extends State<HeartRateTrends> {
 
   Future<void> loadHeartRateData() async {
     final String response = await rootBundle.loadString(
-      'assets/json/heart_rate_entry_data.json',
+      'assets/json/model.json',
     );
-    final List<dynamic> data = json.decode(response);
+    final data = json.decode(response);
+
+    final List<dynamic> entriesList = data['entries'];
 
     setState(() {
       heartRateEntries =
-          data.map((item) => HeartRateEntry.fromJson(item)).toList();
+          entriesList.map((item) => HeartRateEntry.fromJson(item)).toList();
     });
   }
 

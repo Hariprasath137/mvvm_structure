@@ -25,13 +25,13 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
 
   Future<void> loadJsonData() async {
     final String jsonString = await rootBundle.loadString(
-      'assets/json/heart_ecg_data.json',
+      'assets/json/model.json',
     );
     final jsonData = jsonDecode(jsonString);
     setState(() {
-      heartRate = jsonData['heartRate'];
-      statusText = jsonData['status'];
-      messageText = jsonData['message'];
+      heartRate = jsonData['ecg']['heartRate'];
+      statusText = jsonData['ecg']['status'];
+      messageText = jsonData['ecg']['message'];
     });
   }
 

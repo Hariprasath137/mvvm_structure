@@ -255,9 +255,7 @@ import 'package:fl_chart/fl_chart.dart';
 class SafeZoneChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return LineChart(
-      mainData(),
-    );
+    return LineChart(mainData());
   }
 
   LineChartData mainData() {
@@ -272,9 +270,7 @@ class SafeZoneChart extends StatelessWidget {
         rightTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
-        topTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
+        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: false,
@@ -330,13 +326,13 @@ class SafeZoneChart extends StatelessWidget {
           isStrokeCapRound: true,
           dotData: FlDotData(show: false),
           aboveBarData: BarAreaData(show: true, color: Colors.transparent),
-          belowBarData: BarAreaData(show: true, color: Colors.grey.withOpacity(0.3)),
+          belowBarData: BarAreaData(
+            show: true,
+            color: Colors.grey.withOpacity(0.3),
+          ),
         ),
         LineChartBarData(
-          spots: [
-            FlSpot(0, 180),
-            FlSpot(10, 180),
-          ],
+          spots: [FlSpot(0, 180), FlSpot(10, 180)],
           isCurved: false,
           color: Colors.transparent,
           isStrokeCapRound: true,
@@ -345,10 +341,7 @@ class SafeZoneChart extends StatelessWidget {
           belowBarData: BarAreaData(show: false),
         ),
         LineChartBarData(
-          spots: [
-            FlSpot(0, 100),
-            FlSpot(10, 100),
-          ],
+          spots: [FlSpot(0, 100), FlSpot(10, 100)],
           isCurved: false,
           color: Colors.black45,
           isStrokeCapRound: true,
@@ -358,10 +351,7 @@ class SafeZoneChart extends StatelessWidget {
           dashArray: [10, 10],
         ),
         LineChartBarData(
-          spots: [
-            FlSpot(0, 200),
-            FlSpot(10, 200),
-          ],
+          spots: [FlSpot(0, 200), FlSpot(10, 200)],
           isCurved: false,
           color: Colors.black38,
           isStrokeCapRound: true,
@@ -371,10 +361,7 @@ class SafeZoneChart extends StatelessWidget {
           dashArray: [10, 10],
         ),
         LineChartBarData(
-          spots: [
-            FlSpot(0, 220),
-            FlSpot(10, 220),
-          ],
+          spots: [FlSpot(0, 220), FlSpot(10, 220)],
           isCurved: false,
           color: Colors.black26,
           isStrokeCapRound: true,
@@ -388,10 +375,7 @@ class SafeZoneChart extends StatelessWidget {
   }
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 12,
-    );
+    const style = TextStyle(fontWeight: FontWeight.bold, fontSize: 12);
     String text;
     if (value == 50) {
       text = '50';
@@ -429,7 +413,7 @@ class GlucoseMonitoringContainer1 extends StatelessWidget {
         ),
         padding: EdgeInsets.all(paddingFactor), // Applying dynamic padding
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -455,57 +439,25 @@ class GlucoseMonitoringContainer1 extends StatelessWidget {
                     SizedBox(width: 4),
                     Text(
                       'mg/dL',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(fontFamily: 'Poppins', fontSize: 14),
                     ),
                   ],
                 ),
               ],
             ),
             SizedBox(height: 2),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Updated 2 mins ago',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 14,
-                  ),
-
-                ],
-              ),
-              SizedBox(height: 10),
-             
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    
-                  ),
-                  child: SafeZoneChart(),
-
-                ),
-                Text(
-                  'In Range',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 14,
-                  ),
-
-                ),
-              ],
+            Text(
+              'Updated 2 mins ago',
+              style: TextStyle(fontFamily: 'Poppins', fontSize: 14),
             ),
             SizedBox(height: 10),
-            // The container for the graph with padding intact
+            Text(
+              'In Range',
+              style: TextStyle(fontFamily: 'Poppins', fontSize: 14),
+            ),
+            SizedBox(height: 10),
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  // border: Border.all(color: Colors.red, width: 2),
-                ),
-                child: SafeZoneChart(), // Insert the graph here
-              ),
+              child: SafeZoneChart(), // Assuming this is a valid widget
             ),
           ],
         ),
@@ -514,4 +466,5 @@ class GlucoseMonitoringContainer1 extends StatelessWidget {
   }
 }
 
-void main() => runApp(MaterialApp(home: Scaffold(body: GlucoseMonitoringContainer1())));
+void main() =>
+    runApp(MaterialApp(home: Scaffold(body: GlucoseMonitoringContainer1())));

@@ -34,15 +34,15 @@ class _FactorsHeartRateState extends State<FactorsHeartRate> {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen dimensions
+    
     double screenWidth = MediaQuery.of(context).size.width;
 
-    // Get the text scaler for dynamic font scaling
+    
     final TextScaler textScaler = MediaQuery.textScalerOf(context);
 
-    // Use a fixed height that's reasonable for most devices
+   
     final double cardHeight =
-        250.0; // Increased height to accommodate all elements
+        250.0; 
 
     return SizedBox(
       height: cardHeight,
@@ -68,11 +68,11 @@ class _FactorsHeartRateState extends State<FactorsHeartRate> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Title and Description Section
+               
                     Expanded(
                       child: LayoutBuilder(
                         builder: (context, textConstraints) {
-                          // Calculate adaptive font sizes with maximum caps
+                        
                           final double titleSize = textScaler
                               .scale(16.0)
                               .clamp(12.0, 20.0);
@@ -86,7 +86,7 @@ class _FactorsHeartRateState extends State<FactorsHeartRate> {
                           return Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Text section
+                           
                               Expanded(
                                 flex: 2,
                                 child: Column(
@@ -124,7 +124,7 @@ class _FactorsHeartRateState extends State<FactorsHeartRate> {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              // Image section
+                           
                               Expanded(
                                 flex: 1,
                                 child: ClipRRect(
@@ -140,7 +140,7 @@ class _FactorsHeartRateState extends State<FactorsHeartRate> {
                         },
                       ),
                     ),
-                    // View Details Button and Progress Bar
+                    
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -171,11 +171,11 @@ class _FactorsHeartRateState extends State<FactorsHeartRate> {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        // Moving Cursor Indicator (at left corner under "View Details")
+                        
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Container(
-                            width: 40, // Adjust width of indicator bar
+                            width: 40, 
                             height: 4,
                             decoration: BoxDecoration(
                               color: Colors.grey[300],
@@ -189,7 +189,7 @@ class _FactorsHeartRateState extends State<FactorsHeartRate> {
                                       (40 - 10) *
                                       (_currentIndex / (factors.length - 1)),
                                   child: Container(
-                                    width: 10, // Cursor width
+                                    width: 10, 
                                     height: 4,
                                     decoration: BoxDecoration(
                                       color: Colors.black87,

@@ -22,7 +22,7 @@ class _V02CurosalWidgetState extends State<V02CurosalWidget> {
   double pageOffset = 0.0;
   final PageController _pageController = PageController(
     viewportFraction: 0.85,
-  ); // Slightly less than 1
+  ); 
 
   @override
   void initState() {
@@ -46,22 +46,22 @@ class _V02CurosalWidgetState extends State<V02CurosalWidget> {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          height: 138, // Fixed height for cards
+          height: 138, 
           child: PageView.builder(
             controller: _pageController,
             scrollDirection: Axis.horizontal,
             itemCount: cards.length,
             physics: const PageScrollPhysics(),
             itemBuilder: (context, index) {
-              // Wrap the card in a SizedBox to give it a fixed width
+              
               return Transform.scale(
-                scale: 1 - (pageOffset - index).abs() * 0.1, // Scale effect
+                scale: 1 - (pageOffset - index).abs() * 0.1, 
                 child: Opacity(
-                  opacity: 1 - (pageOffset - index).abs() * 0.3, // Fade effect
+                  opacity: 1 - (pageOffset - index).abs() * 0.3, 
                   child: SizedBox(
                     width:
                         MediaQuery.of(context).size.width *
-                        0.85, // Match viewportFraction
+                        0.85, 
                     child: cards[index],
                   ),
                 ),
@@ -130,7 +130,7 @@ class InsightCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Image on the left
+             
               Container(
                 width: screenWidth * 0.12,
                 height: screenWidth * 0.12,
@@ -144,20 +144,20 @@ class InsightCard extends StatelessWidget {
               ),
               SizedBox(width: screenWidth * 0.03),
 
-              // Column for text and button
+              
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Text with flexible height instead of fixed
+                   
                     Text(
                       text,
                       style: TextStyle(
                         color: const Color(0xFF707070),
                         fontSize: screenWidth * 0.035,
                         fontFamily: 'Rubik',
-                        height: 1.2, // Tighter line height
+                        height: 1.2,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -165,8 +165,8 @@ class InsightCard extends StatelessWidget {
 
                     const SizedBox(
                       height: 8,
-                    ), // Add space between text and button
-                    // Button below the text
+                    ), 
+                   
                     Align(
                       alignment: Alignment.centerLeft,
                       child: TextButton(

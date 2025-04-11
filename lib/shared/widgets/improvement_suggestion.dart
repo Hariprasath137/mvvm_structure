@@ -9,8 +9,6 @@ class ImprovementSuggestions extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        // Determine if the screen is narrow (e.g., mobile) or wide (e.g., tablet/desktop)
-
         return Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
@@ -21,8 +19,8 @@ class ImprovementSuggestions extends StatelessWidget {
                 child: Text(
                   "Suggestions for Improvement",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis, // Prevent overflow
-                  maxLines: 2, // Limit to two lines if necessary
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                 ),
               ),
               Container(
@@ -125,8 +123,8 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
             title: Text(
               widget.title,
               style: const TextStyle(fontWeight: FontWeight.bold),
-              overflow: TextOverflow.ellipsis, // Prevent overflow
-              maxLines: 1, // Limit to one line
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
             trailing: Icon(
               _isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
@@ -143,8 +141,8 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
                 child: Text(
                   widget.description,
                   style: const TextStyle(color: Colors.black54),
-                  overflow: TextOverflow.fade, // Fade overflowed text
-                  softWrap: true, // Allow text to wrap
+                  overflow: TextOverflow.fade,
+                  softWrap: true,
                 ),
               ),
             ],

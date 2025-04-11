@@ -474,6 +474,18 @@ class GlucoseMonitoringContainer1 extends StatelessWidget {
                     fontFamily: 'Poppins',
                     fontSize: 14,
                   ),
+
+                ],
+              ),
+              SizedBox(height: 10),
+             
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    
+                  ),
+                  child: SafeZoneChart(),
+
                 ),
                 Text(
                   'In Range',
@@ -481,6 +493,7 @@ class GlucoseMonitoringContainer1 extends StatelessWidget {
                     fontFamily: 'Poppins',
                     fontSize: 14,
                   ),
+
                 ),
               ],
             ),

@@ -8,10 +8,10 @@ class AvgRestingCard extends StatelessWidget {
     final TextScaler textScaler = MediaQuery.textScalerOf(context);
 
     return FractionallySizedBox(
-      widthFactor: 0.75, // Limits width to 40% of the screen width
+      widthFactor: 0.75, 
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxWidth: 200, // Ensures it doesn't stretch too much on large screens
+          maxWidth: 200, 
         ),
         child: Card(
           color: const Color(0XFFEDEDED),
@@ -22,7 +22,7 @@ class AvgRestingCard extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min, // Keeps height compact
+              mainAxisSize: MainAxisSize.min, 
               children: [
                 FittedBox(
                   child: Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'details_screen.dart'; // Import the DetailsScreen
+import 'package:mvvm_structure_reference/features/heart_rate/data/model/heart_rate_entry_model.dart';
+import 'details_screen.dart'; 
 
 class AllHeartRateTrends extends StatelessWidget {
   final List<HeartRateEntry> heartRateEntries;
@@ -8,16 +9,16 @@ class AllHeartRateTrends extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen dimensions
+   
     final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
 
-    // Responsive font sizes
+   
     final bpmFontSize =
-        screenWidth * 0.05; // Responsive font size for BPM value
+        screenWidth * 0.05; 
     final labelFontSize =
-        screenWidth * 0.03; // Responsive font size for "bpm" label
+        screenWidth * 0.03; 
 
     return Scaffold(
       appBar: AppBar(
@@ -30,22 +31,22 @@ class AllHeartRateTrends extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Heading: "Heart Rate History"
+          
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: screenWidth * 0.05,
               vertical: screenHeight * 0.02,
-            ), // Responsive padding
+            ), 
             child: Text(
               "Heart Rate History",
               style: TextStyle(
-                fontSize: screenWidth * 0.06, // Responsive font size
+                fontSize: screenWidth * 0.06, 
                 fontWeight: FontWeight.bold,
-                color: Colors.black, // Customize text color
+                color: Colors.black, 
               ),
             ),
           ),
-          // Expanded ListView for Scrollable Content
+         
           Expanded(
             child: ListView.builder(
               itemCount: heartRateEntries.length,
@@ -55,28 +56,28 @@ class AllHeartRateTrends extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListTile(
-                      // Leading Widget: Square with Rounded Corners
+                      
                       leading: SizedBox(
                         width:
                             screenWidth *
-                            0.15, // Responsive width (15% of screen width)
+                            0.15, 
                         height:
                             screenWidth *
-                            0.15, // Responsive height (15% of screen width)
+                            0.15, 
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0XFF747A7B), // Background color
+                            color: Color(0XFF747A7B), 
                             borderRadius: BorderRadius.circular(
                               12,
-                            ), // Rounded corners
+                            ),
                           ),
-                          alignment: Alignment.center, // Center content
+                          alignment: Alignment.center,
                           child: Column(
                             mainAxisAlignment:
                                 MainAxisAlignment
-                                    .center, // Center content vertically
+                                    .center,
                             children: [
-                              // BPM Value at the Top
+                             
                               Flexible(
                                 child: Text(
                                   entry.bpm,
@@ -84,24 +85,24 @@ class AllHeartRateTrends extends StatelessWidget {
                                     color: Color(0XFFFFFFFF),
                                     fontWeight: FontWeight.bold,
                                     fontSize:
-                                        bpmFontSize, // Responsive font size
+                                        bpmFontSize, 
                                   ),
                                   overflow:
-                                      TextOverflow.ellipsis, // Prevent overflow
-                                  maxLines: 1, // Ensure single line
+                                      TextOverflow.ellipsis, 
+                                  maxLines: 1, 
                                 ),
                               ),
                               SizedBox(
                                 height: screenHeight * 0.005,
-                              ), // Responsive spacing
-                              // "bpm" Text Below
+                              ), 
+                             
                               Flexible(
                                 child: Text(
                                   "bpm",
                                   style: TextStyle(
                                     color: Color(0XFFFFFFFF),
                                     fontSize:
-                                        labelFontSize, // Responsive font size
+                                        labelFontSize, 
                                   ),
                                 ),
                               ),
@@ -113,12 +114,12 @@ class AllHeartRateTrends extends StatelessWidget {
                         builder: (context, constraints) {
                           return Row(
                             children: [
-                              // Status Chip
+                             
                               ConstrainedBox(
                                 constraints: BoxConstraints(
                                   maxWidth:
                                       constraints.maxWidth *
-                                      0.3, // Limit chip width
+                                      0.3,
                                 ),
                                 child: Chip(
                                   label: Text(
@@ -126,25 +127,25 @@ class AllHeartRateTrends extends StatelessWidget {
                                     style: TextStyle(color: Colors.white),
                                     overflow:
                                         TextOverflow
-                                            .ellipsis, // Prevent overflow
-                                    maxLines: 1, // Ensure single line
+                                            .ellipsis,
+                                    maxLines: 1, 
                                   ),
                                   backgroundColor: Color(
                                     0XFFA9AAAA,
-                                  ), // Customize color based on status
+                                  ), 
                                 ),
                               ),
                               SizedBox(
                                 width: screenWidth * 0.02,
-                              ), // Responsive spacing
-                              // Activity Text
+                              ), 
+                              
                               Expanded(
                                 child: Text(
                                   entry.activity,
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                   overflow:
-                                      TextOverflow.ellipsis, // Prevent overflow
-                                  maxLines: 1, // Ensure single line
+                                      TextOverflow.ellipsis, 
+                                  maxLines: 1, 
                                 ),
                               ),
                             ],
@@ -155,13 +156,13 @@ class AllHeartRateTrends extends StatelessWidget {
                         entry.timestamp,
                         style: TextStyle(
                           fontSize: screenWidth * 0.035,
-                        ), // Responsive font size
-                        overflow: TextOverflow.ellipsis, // Prevent overflow
-                        maxLines: 1, // Ensure single line
+                        ), 
+                        overflow: TextOverflow.ellipsis, 
+                        maxLines: 1, 
                       ),
                       trailing: Icon(Icons.arrow_forward_ios),
                       onTap: () {
-                        // Navigate to the Details Screen
+                        
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -170,14 +171,14 @@ class AllHeartRateTrends extends StatelessWidget {
                         );
                       },
                     ),
-                    // Divider that spans from under the timestamp to the trailing icon
+                   
                     Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: screenWidth * 0.05,
                       ),
                       child: Divider(
-                        thickness: 1, // Thickness of the divider
-                        color: Colors.grey[300], // Color of the divider
+                        thickness: 1, 
+                        color: Colors.grey[300], 
                       ),
                     ),
                   ],
@@ -191,17 +192,4 @@ class AllHeartRateTrends extends StatelessWidget {
   }
 }
 
-// Model for heart rate entries
-class HeartRateEntry {
-  final String bpm;
-  final String status;
-  final String activity;
-  final String timestamp;
 
-  HeartRateEntry({
-    required this.bpm,
-    required this.status,
-    required this.activity,
-    required this.timestamp,
-  });
-}

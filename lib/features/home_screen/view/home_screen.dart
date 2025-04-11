@@ -21,11 +21,14 @@ import 'package:mvvm_structure_reference/shared/widgets/talk_to_tvamev.dart';
 import 'package:mvvm_structure_reference/shared/widgets/online_doctor_consultation.dart';
 import 'package:mvvm_structure_reference/shared/widgets/swipable_card_widget.dart';
 
+
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(home: HomeScreen());
@@ -33,11 +36,39 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+<<<<
+  <<< hari
+  DateTime selectedDate = DateTime.now();
+  Future<Null> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2020, 5),
+        lastDate: DateTime(2060)
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+
+  void _showGratitudeNotification() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Clicked from Wellness Widget Card ;)')),
+    );
+  }
+
+
 
   @override
   void dispose() {

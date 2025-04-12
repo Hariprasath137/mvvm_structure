@@ -154,9 +154,9 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
                     axisLine: AxisLine(color: Colors.black, width: 1),
                   ),
                   series: <CartesianSeries>[
-                    SplineSeries<VO2Data, DateTime>(
+                    SplineSeries<VO2Data, dynamic>(
                       dataSource: vo2Model!.chartData,
-                      xValueMapper: (VO2Data data, _) => data.time,
+                      xValueMapper: (VO2Data data, _) => data.timeLabels,
                       yValueMapper: (VO2Data data, _) => data.value,
                       splineType: SplineType.natural,
                       color: Color(0XFF3A4750),

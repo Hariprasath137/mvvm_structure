@@ -53,14 +53,14 @@ class Doctor {
 }
 
 class VO2Data {
-  final DateTime time;
+  final String timeLabels;
   final double value;
 
-  VO2Data({required this.time, required this.value});
+  VO2Data({required this.timeLabels, required this.value});
 
   factory VO2Data.fromJson(Map<String, dynamic> json) {
     return VO2Data(
-      time: DateTime.parse(json['time']),
+      timeLabels: (json['timeLabels']).toString(),
       value: (json['value'] as num).toDouble(),
     );
   }

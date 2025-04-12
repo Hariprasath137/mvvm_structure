@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 
 class HeartRateCard extends StatelessWidget {
@@ -7,7 +9,8 @@ class HeartRateCard extends StatelessWidget {
   final String normalRangeText;
 
   // Constructor to accept parameters
-  HeartRateCard({
+  const HeartRateCard({
+    super.key,
     required this.normalHeartRate,
     required this.restingHeartRate,
     required this.peakHeartRate,
@@ -25,10 +28,7 @@ class HeartRateCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: Color.fromRGBO(245, 245, 245, 1),
-        border: Border.all(
-          color: Color.fromRGBO(204, 204, 204, 1),
-          width: 1,
-        ),
+        border: Border.all(color: Color.fromRGBO(204, 204, 204, 1), width: 1),
       ),
       padding: EdgeInsets.all(20),
       child: Column(
@@ -166,7 +166,7 @@ class HeartRateCard extends StatelessWidget {
                                       flex: 1,
                                       child: Column(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                            MainAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             flex: 1,
@@ -193,13 +193,14 @@ class HeartRateCard extends StatelessWidget {
                                       flex: 8,
                                       child: Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             flex: 1,
                                             child: Padding(
                                               padding: EdgeInsets.only(
-                                                  left: 16.0),
+                                                left: 16.0,
+                                              ),
                                               child: Align(
                                                 alignment: Alignment.centerLeft,
                                                 child: Text(
@@ -217,17 +218,20 @@ class HeartRateCard extends StatelessWidget {
                                             flex: 1,
                                             child: Padding(
                                               padding: EdgeInsets.only(
-                                                  left: 16.0),
+                                                left: 16.0,
+                                              ),
                                               child: Align(
                                                 alignment: Alignment.centerLeft,
                                                 child: RichText(
                                                   text: TextSpan(
                                                     children: [
                                                       TextSpan(
-                                                        text: '$restingHeartRate',
+                                                        text:
+                                                            '$restingHeartRate',
                                                         style: TextStyle(
                                                           fontSize: 18,
-                                                          fontWeight: FontWeight.bold,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                           color: Colors.black,
                                                         ),
                                                       ),
@@ -235,7 +239,8 @@ class HeartRateCard extends StatelessWidget {
                                                         text: ' bpm',
                                                         style: TextStyle(
                                                           fontSize: 16,
-                                                          fontWeight: FontWeight.w700,
+                                                          fontWeight:
+                                                              FontWeight.w700,
                                                           color: Colors.grey,
                                                         ),
                                                       ),
@@ -269,7 +274,8 @@ class HeartRateCard extends StatelessWidget {
                                     Expanded(
                                       flex: 1,
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             flex: 1,
@@ -296,13 +302,14 @@ class HeartRateCard extends StatelessWidget {
                                       flex: 8,
                                       child: Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             flex: 1,
                                             child: Padding(
                                               padding: EdgeInsets.only(
-                                                  left: 16.0),
+                                                left: 16.0,
+                                              ),
                                               child: Align(
                                                 alignment: Alignment.centerLeft,
                                                 child: Text(
@@ -320,7 +327,8 @@ class HeartRateCard extends StatelessWidget {
                                             flex: 1,
                                             child: Padding(
                                               padding: EdgeInsets.only(
-                                                  left: 16.0),
+                                                left: 16.0,
+                                              ),
                                               child: Align(
                                                 alignment: Alignment.centerLeft,
                                                 child: RichText(
@@ -330,7 +338,8 @@ class HeartRateCard extends StatelessWidget {
                                                         text: '$peakHeartRate',
                                                         style: TextStyle(
                                                           fontSize: 18,
-                                                          fontWeight: FontWeight.bold,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                           color: Colors.black,
                                                         ),
                                                       ),
@@ -338,7 +347,8 @@ class HeartRateCard extends StatelessWidget {
                                                         text: ' bpm',
                                                         style: TextStyle(
                                                           fontSize: 16,
-                                                          fontWeight: FontWeight.w700,
+                                                          fontWeight:
+                                                              FontWeight.w700,
                                                           color: Colors.grey,
                                                         ),
                                                       ),

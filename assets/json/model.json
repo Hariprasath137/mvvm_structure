@@ -59,7 +59,7 @@
         "activity": "Swimming",
         "timestamp": "11th Dec 2024, 10:54 AM"
       }
-    ],
+    ],                                              
     "summary": {
       
       "heart_rate_summary": {
@@ -72,7 +72,7 @@
             "imagePath": "assets/Rectangle.png",
             "text": "You slept for 7.5 hours last night. Keep it up!"
           },
-          {
+          {  
             "imagePath": "assets/Rectangle.png",
             "text": "You walked 8,500 steps today. Keep moving!"
           }
@@ -104,11 +104,11 @@
       "max": "48",
       "category": "Good",
       "chartData": [
-        {"time": "2023-01-01T00:00:00", "value": 25},
-        {"time": "2023-01-01T06:00:00", "value": 27},
-        {"time": "2023-01-01T12:00:00", "value": 30},
-        {"time": "2023-01-01T18:00:00", "value": 33},
-        {"time": "2023-01-02T00:00:00", "value": 35}
+        {"timeLabels": "12\nam", "value": 25},
+        {"timeLabels": "6\nam", "value": 27},
+        {"timeLabels": "12\npm", "value": 30},
+        {"timeLabels": "6\npm", "value": 33},
+        {"timeLabels": "12\nam ", "value": 35}
       ]
     }
   }

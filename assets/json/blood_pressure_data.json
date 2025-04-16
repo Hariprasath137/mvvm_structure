@@ -13,6 +13,32 @@
             "imagePath": "assets/Rectangle.png",
             "text": "You walked 8,500 steps today. Keep moving!"
           }
+        ],
+        "resting_bpmBp": 70,
+        "peak_bpm": 12,
+        "vo2_max": 42.5,
+        "doctor": {
+          "name": "Dr.Kawsar Ahamed",
+          "field": "Cardiologist",
+          "description": "Understand your heart data with expert advice"
+        }
+    },
+    "card" : 
+      {
+        "last_measured": "9:15 AM",
+        "blood_pressure": "120/73",
+        "heart_rate": "75",
+        "status": "Normal"
+      },
+    "bp" :
+      {
+        "chartData" : [
+          {"timeLabels": "12\nam", "value": 63, "value2": 105},
+          {"timeLabels": "6\nam", "value": 68, "value2": 112},
+          {"timeLabels": "12\npm", "value": 75, "value2": 118},
+          {"timeLabels": "6\npm", "value": 77, "value2": 120},
+          {"timeLabels": "12\nam ", "value": 79, "value2": 123}
         ]
-    }
+      }
+    
 }

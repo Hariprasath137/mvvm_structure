@@ -79,7 +79,6 @@
         ],
         "resting_bpm": 70,
         "peak_bpm": 120,
-        "vo2_max": 42.5,
         "doctor": {
           "name": "Dr.Kawsar Ahamed",
           "field": "Cardiologist",
@@ -98,7 +97,7 @@
       "keyPoints": [0, 6, 12, 18, 24]
     },
     "vo2": {
-      "vo2level": "42",
+      "vo2level": "42.5",
       "min": "35",
       "avg": "42",
       "max": "48",

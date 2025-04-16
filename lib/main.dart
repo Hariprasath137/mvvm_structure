@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_structure_reference/config/app_constraints.dart';
+import 'package:mvvm_structure_reference/shared/widgets/graph/bp_chart.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,8 +15,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       onGenerateRoute: AppRoutes.generateRoute,
-      initialRoute: AppRoutes.home,
-      // home: Scaffold(body: HeartRateTrends()),
+      initialRoute: AppRoutes.heartrate,
+      
     );
   }
 }

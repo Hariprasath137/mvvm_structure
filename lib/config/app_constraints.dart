@@ -5,6 +5,9 @@ import 'package:mvvm_structure_reference/features/heart_rate/view/peak_hr_screen
 import 'package:mvvm_structure_reference/features/heart_rate/view/resting_hr_screen.dart';
 import 'package:mvvm_structure_reference/features/home_screen/view/home_screen.dart';
 import 'package:mvvm_structure_reference/shared/widgets/heart_rate_trends.dart';
+import 'package:mvvm_structure_reference/features/home_screen/view/ring_detected_screen.dart';
+import 'package:mvvm_structure_reference/features/home_screen/view/log_activity_screen.dart';
+import 'package:mvvm_structure_reference/features/home_screen/view/first_time_user_screen.dart';
 
 class AppRoutes {
   static const String home = '/home_screen';
@@ -12,7 +15,11 @@ class AppRoutes {
   static const String resting = '/resting_hr';
   static const String peak = '/peak_hr';
   static const String hrtrends = '/heart_trends';
+  static const String firstTimeUser = '/firstTimeUser';
+  static const String logActivity = '/logActivity';
+  static const String ringDetected = '/ringDetected';
   static const String bp = '/blood_pressure';
+
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -31,6 +38,17 @@ class AppRoutes {
       case hrtrends:
         return MaterialPageRoute(builder: (context) => HeartRateTrends());
 
+      case firstTimeUser:
+        return MaterialPageRoute(builder: (context) => FirstTimeUser());
+
+      case logActivity:
+        return MaterialPageRoute(builder: (context) => LogActivity());
+
+      case ringDetected:
+        return MaterialPageRoute(
+          builder: (context) => RingDetectedScreen(),
+        );
+
       case bp:
         return MaterialPageRoute(builder: (context) => BloodPressureScreen());
 
@@ -43,3 +61,9 @@ class AppRoutes {
     }
   }
 }
+//
+// routes: {
+// '/ringDetected': (context) => RingDetectedScreen(),
+// '/firstTimeUser': (context) => FirstTimeUserScreen(),
+// '/logActivity': (context) => LogActivityScreen(),
+// },

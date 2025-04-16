@@ -15,8 +15,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       onGenerateRoute: AppRoutes.generateRoute,
+
       initialRoute: AppRoutes.heartrate,
       
+
+      initialRoute: AppRoutes.home,
+
+      // home: Scaffold(body: HeartRateTrends()),
+ main
     );
   }
 }

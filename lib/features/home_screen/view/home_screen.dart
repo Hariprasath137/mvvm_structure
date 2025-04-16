@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:mvvm_structure_reference/config/app_constraints.dart';
 import 'package:mvvm_structure_reference/shared/widgets/greetings_card.dart';
 import 'package:mvvm_structure_reference/shared/widgets/date_column.dart';
@@ -20,7 +21,8 @@ import 'package:mvvm_structure_reference/shared/widgets/achievements_widget.dart
 import 'package:mvvm_structure_reference/shared/widgets/talk_to_tvamev.dart';
 import 'package:mvvm_structure_reference/shared/widgets/online_doctor_consultation.dart';
 import 'package:mvvm_structure_reference/shared/widgets/swipable_card_widget.dart';
-
+import 'package:mvvm_structure_reference/features/home_screen/data/home_screen_model.dart';
+import 'package:mvvm_structure_reference/features/home_screen/viewmodel/home_screen_viewmodel.dart';
 
 void main() {
   runApp(MyApp());
@@ -43,14 +45,55 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late Future<Greeting> _greetingFuture;
+  late Future<List<String>> _wellnessTipsFuture;
+  late Future<List<String>> _glucoseTipsFuture;
+  late Future<List<ActivityItem>> _activityListFuture;
+  late Future<HeartRateData> _heartRateFuture;
+  late Future<ECGData> _ecgFuture;
+  late Future<StressData> _stressFuture;
+  late Future<BpHrvData> _bpDataFuture;
+  late Future<BpHrvData> _hrvDataFuture;
+  late Future<SleepData> _sleepFuture;
+  late Future<List<SimpleMetric>> _simpleMetricsFuture;
+  late Future<FallDetectionData> _fallDetectionFuture;
+  late Future<AfibData> _afibFuture;
+  late Future<HydrationData> _hydrationFuture;
+  late Future<MedicationData> _medicationFuture;
+  late Future<List<ProgressDataModel>> _goalsFuture;
+  late Future<List<AchievementModel>> _achievementsFuture;
+  late Future<DoctorData> _doctorDataFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _greetingFuture = loadGreeting();
+    _wellnessTipsFuture = loadWellnessTips();
+    _glucoseTipsFuture = loadGlucoseTips();
+    _activityListFuture = loadActivityCarousel();
+    _heartRateFuture = loadHeartRateData();
+    _ecgFuture = loadECGData();
+    _stressFuture = loadStressData();
+    _bpDataFuture = loadBPData();
+    _hrvDataFuture = loadHRVData();
+    _sleepFuture = loadSleepData();
+    _simpleMetricsFuture = loadSimpleMetrics();
+    _fallDetectionFuture = loadFallDetectionData();
+    _afibFuture = loadAfibData();
+    _hydrationFuture = loadHydrationData();
+    _medicationFuture = loadMedicationData();
+    _goalsFuture = loadDailyGoals();
+    _achievementsFuture = loadAchievements();
+    _doctorDataFuture = loadDoctorData();
+  }
 
   DateTime selectedDate = DateTime.now();
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2020, 5),
-        lastDate: DateTime(2060)
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2020, 5),
+      lastDate: DateTime(2060),
     );
     if (picked != null && picked != selectedDate) {
       setState(() {
@@ -58,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
   }
+
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -66,8 +110,6 @@ class _HomeScreenState extends State<HomeScreen> {
       SnackBar(content: Text('Clicked from Wellness Widget Card ;)')),
     );
   }
-
-
 
   @override
   void dispose() {
@@ -138,11 +180,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     // Greetings Card - Widget
-                    GreetingInfoWidget(
-                      greetingMessage: 'Good Morning, Hareesh',
-                      batteryPercentage: '80%',
-                      date: 'Monday, Feb 12',
-                      connectionStatus: 'Connected',
+                    FutureBuilder<Greeting>(
+                      future: _greetingFuture,
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) return SizedBox();
+                        final greeting = snapshot.data!;
+                        return GreetingInfoWidget(
+                          greetingMessage: greeting.greetingMessage,
+                          batteryPercentage: greeting.batteryPercentage,
+                          date: greeting.date,
+                          connectionStatus: greeting.connectionStatus,
+                        );
+                      },
                     ),
                     SizedBox(height: spacing),
 
@@ -151,13 +200,27 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(height: spacing),
 
                     // Wellness Carousel - Widget
-                    WellnessCarousel(),
+                    FutureBuilder<List<String>>(
+                      future: _wellnessTipsFuture,
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) return SizedBox();
+                        return WellnessCarousel(titles: snapshot.data!);
+                      },
+                    ),
                     SizedBox(height: spacing),
 
                     // Glucose Monitoring Card - 2 Widget's
                     GlucoseMonitoringContainer1(),
                     SizedBox(height: spacing),
-                    GlucoseMonitoringContainer2(), // PADDING FIX TO BE DONE FROM HERE
+                    FutureBuilder<List<String>>(
+                      future: _glucoseTipsFuture,
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) return SizedBox();
+                        return GlucoseMonitoringContainer2(
+                          titles: snapshot.data!,
+                        );
+                      },
+                    ), // PADDING FIX TO BE DONE FROM HERE
                     SizedBox(height: spacing),
 
                     // Today's Activity - Title and Widget
@@ -196,11 +259,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     SizedBox(height: spacing),
-                    CarouselWidget(
-                      activities: ["Walking", "Running", "Swimming"],
-                      steps: [2500, 3, 500],
-                      units: ["steps", "km", "m"],
-                      goals: [5000, 5, 1000],
+                    FutureBuilder<List<ActivityItem>>(
+                      future: _activityListFuture,
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) return SizedBox();
+                        final items = snapshot.data!;
+                        return CarouselWidget(
+                          activities: items.map((e) => e.activity).toList(),
+                          steps: items.map((e) => e.steps).toList(),
+                          units: items.map((e) => e.unit).toList(),
+                          goals: items.map((e) => e.goal).toList(),
+                        );
+                      },
                     ),
 
                     // Health Metrics - Section and Widgets
@@ -221,171 +291,249 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           // Heart Rate Card - Widget
                           SizedBox(height: spacing),
-                          HeartRateCard(
-                            normalHeartRate: 88,
-                            restingHeartRate: 79,
-                            peakHeartRate: 135,
-                            normalRangeText: 'Normal',
+                          FutureBuilder<HeartRateData>(
+                            future: _heartRateFuture,
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) return SizedBox();
+                              final data = snapshot.data!;
+                              return HeartRateCard(
+                                normalHeartRate: data.normal,
+                                restingHeartRate: data.resting,
+                                peakHeartRate: data.peak,
+                                normalRangeText: data.status,
+                              );
+                            },
                           ),
 
                           // ECG Card - Widget
                           SizedBox(height: spacing),
-                          ECGCard(
-                            lastTracked: 'Sat 18 Oct, 7:35 pm',
-                            heartRate: 80,
-                            pulseTransitTime: 31,
+                          FutureBuilder<ECGData>(
+                            future: _ecgFuture,
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) return SizedBox();
+                              final ecg = snapshot.data!;
+                              return ECGCard(
+                                lastTracked: ecg.lastTracked,
+                                heartRate: ecg.heartRate,
+                                pulseTransitTime: ecg.pulseTransitTime,
+                              );
+                            },
                           ),
 
                           SizedBox(height: spacing),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              // Stress Card - Widget
-                              Flexible(
-                                flex: 1,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue,
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: StressCard(
-                                    levelValue: 'High',
-                                    peakValue: '3/5',
-                                    tipText: 'Take a deep breath!',
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: spacing),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  // Blood Pressure - Widget
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    child: BpHrvCard(
-                                      label: 'Blood Pressure',
-                                      currentBPValue: '120/73',
-                                      mmHg: 'mmHg',
-                                      normalRange: '60 - 100',
-                                    ),
-                                  ),
+                          FutureBuilder<StressData>(
+                            future: _stressFuture,
+                            builder: (context, stressSnapshot) {
+                              if (!stressSnapshot.hasData) return SizedBox();
+                              final stress = stressSnapshot.data!;
 
-                                  // HRV Card - Widget
-                                  SizedBox(height: spacing),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.orange,
-                                      borderRadius: BorderRadius.circular(16),
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  // Stress Card
+                                  Flexible(
+                                    flex: 1,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      child: StressCard(
+                                        levelValue: stress.level,
+                                        peakValue: stress.peak,
+                                        tipText: stress.tip,
+                                      ),
                                     ),
-                                    child: BpHrvCard(
-                                      label: 'HRV',
-                                      currentBPValue: '85',
-                                      mmHg: 'ms',
-                                      normalRange: '80 - 100',
-                                    ),
+                                  ),
+                                  SizedBox(width: spacing),
+
+                                  // BP & HRV Column
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // Blood Pressure
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius: BorderRadius.circular(
+                                            16,
+                                          ),
+                                        ),
+                                        child: FutureBuilder<BpHrvData>(
+                                          future: _bpDataFuture,
+                                          builder: (context, bpSnapshot) {
+                                            if (!bpSnapshot.hasData)
+                                              return SizedBox();
+                                            final bp = bpSnapshot.data!;
+                                            return BpHrvCard(
+                                              label: bp.label,
+                                              currentBPValue: bp.value,
+                                              mmHg: bp.unit,
+                                              normalRange: bp.range,
+                                            );
+                                          },
+                                        ),
+                                      ),
+
+                                      SizedBox(height: spacing),
+
+                                      // HRV
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.orange,
+                                          borderRadius: BorderRadius.circular(
+                                            16,
+                                          ),
+                                        ),
+                                        child: FutureBuilder<BpHrvData>(
+                                          future: _hrvDataFuture,
+                                          builder: (context, hrvSnapshot) {
+                                            if (!hrvSnapshot.hasData)
+                                              return SizedBox();
+                                            final hrv = hrvSnapshot.data!;
+                                            return BpHrvCard(
+                                              label: hrv.label,
+                                              currentBPValue: hrv.value,
+                                              mmHg: hrv.unit,
+                                              normalRange: hrv.range,
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
-                              ),
-                            ],
+                              );
+                            },
                           ),
 
                           // Sleep Card - Widget
                           SizedBox(height: spacing),
-                          SleepCard(
-                            sleepQuality: 84,
-                            sleepStages: [
-                              {'stage': 'Deep', 'time': '4h 20m'},
-                              {'stage': 'Light', 'time': '2h 20m'},
-                              {'stage': 'Awake', 'time': '1h 20m'},
-                              {'stage': 'REM', 'time': '30m'},
-                            ],
+                          FutureBuilder<SleepData>(
+                            future: _sleepFuture,
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) return SizedBox();
+                              final sleep = snapshot.data!;
+                              return SleepCard(
+                                sleepQuality: sleep.quality,
+                                sleepStages: sleep.stages,
+                              );
+                            },
                           ),
-                          SizedBox(height: spacing),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              // Temperature - Widget
-                              Expanded(
-                                child: TempeatureSpo2Card(
-                                  label: "Temperature",
-                                  value: 32,
-                                  metric: "°F",
-                                  range: "32–34",
-                                ),
-                              ),
 
-                              // Blood Oxygen - Widget
-                              SizedBox(width: spacing),
-                              Expanded(
-                                child: TempeatureSpo2Card(
-                                  label: "Blood Oxygen",
-                                  value: 97,
-                                  metric: "%",
-                                  range: "97–99",
-                                ),
-                              ),
-                            ],
+                          SizedBox(height: spacing),
+                          FutureBuilder<List<SimpleMetric>>(
+                            future: _simpleMetricsFuture,
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) return SizedBox();
+                              final metrics = snapshot.data!;
+
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: TempeatureSpo2Card(
+                                      label: metrics[0].label,
+                                      value: metrics[0].value,
+                                      metric: metrics[0].metric,
+                                      range: metrics[0].range,
+                                    ),
+                                  ),
+                                  SizedBox(width: spacing),
+                                  Expanded(
+                                    child: TempeatureSpo2Card(
+                                      label: metrics[1].label,
+                                      value: metrics[1].value,
+                                      metric: metrics[1].metric,
+                                      range: metrics[1].range,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
+
+                          SizedBox(height: spacing),
 
                           // Fall Detection - Widget
-                          SizedBox(height: spacing),
-                          FallandAFib(
-                            titleText: "Fall Detection",
-                            statusText:
-                            "No Falls Detected",
-                            contactName: "Suraj Nath",
-                            contactPhoneNumber:
-                            "0987654321",
+                          FutureBuilder<FallDetectionData>(
+                            future: _fallDetectionFuture,
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) return SizedBox();
+                              final fallData = snapshot.data!;
+                              return FallandAFib(
+                                titleText: fallData.title,
+                                statusText: fallData.status,
+                                contactName: fallData.contactName,
+                                contactPhoneNumber: fallData.contactPhone,
+                              );
+                            },
                           ),
 
                           // AFib Monitoring - Widget
                           SizedBox(height: spacing),
-                          FallandAFib(
-                            titleText: "AFib Monitoring",
-                            statusText: "Normal Rhythm",
-                            // contactName: ,
-                            // contactPhoneNumber: ,
+                          FutureBuilder<AfibData>(
+                            future: _afibFuture,
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) return SizedBox();
+                              final afibData = snapshot.data!;
+                              return FallandAFib(
+                                titleText: afibData.title,
+                                statusText: afibData.status,
+                              );
+                            },
                           ),
 
                           // VO2 & Respiratory Rate Card - Widget
                           SizedBox(height: spacing),
-                          Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment
-                                .spaceBetween,
-                            children: [
-                              Expanded(
-                                child: TempeatureSpo2Card(
-                                  label: "VO2",
-                                  value: 0,
-                                  metric: "ml/kg",
-                                  range: "35-40",
-                                ),
-                              ),
-                              SizedBox(
-                                width: spacing,
-                              ),
-                              Expanded(
-                                child: TempeatureSpo2Card(
-                                  label: "Respiratory Rate",
-                                  value: 18,
-                                  metric: "bpm",
-                                  range: "12-20",
-                                ),
-                              ),
-                            ],
+                          FutureBuilder<List<SimpleMetric>>(
+                            future: _simpleMetricsFuture,
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) return SizedBox();
+                              final metrics = snapshot.data!;
+
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: TempeatureSpo2Card(
+                                      label: metrics[2].label,
+                                      value: metrics[2].value,
+                                      metric: metrics[2].metric,
+                                      range: metrics[2].range,
+                                    ),
+                                  ),
+                                  SizedBox(width: spacing),
+                                  Expanded(
+                                    child: TempeatureSpo2Card(
+                                      label: metrics[3].label,
+                                      value: metrics[3].value,
+                                      metric: metrics[3].metric,
+                                      range: metrics[3].range,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
 
                           // Hydration Card - Widget
                           SizedBox(height: spacing),
-                          HydrationCard(
-                            dailyGoal: "2L",
-                            hydrationStatus: "65%",
-                            consumed: "1300ml",
-                            remaining: "700ml",
+                          FutureBuilder<HydrationData>(
+                            future: _hydrationFuture,
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) return SizedBox();
+                              final hydration = snapshot.data!;
+                              return HydrationCard(
+                                dailyGoal: hydration.dailyGoal,
+                                hydrationStatus: hydration.status,
+                                consumed: hydration.consumed,
+                                remaining: hydration.remaining,
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -393,31 +541,37 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     // Medication Card - Section - Widget
                     SizedBox(height: spacing),
-                    Container(
-                      width: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Medication',
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
+                    FutureBuilder<MedicationData>(
+                      future: _medicationFuture,
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) return SizedBox();
+                        final medications = snapshot.data!;
+                        return Container(
+                          width: double.infinity,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Medication',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                ),
+                              ),
+                              SizedBox(height: spacing),
+                              MedicationCard(
+                                time: medications.time,
+                                medicationName: medications.name,
+                                dosage: medications.dosage,
+                                pillCount: medications.pillCount,
+                                isPassed: medications.isPassed,
+                              ),
+                            ],
                           ),
-                          SizedBox(height: spacing),
-                          MedicationCard(
-                            time: '09:00 AM',
-                            medicationName: 'Amoxicillin',
-                            dosage: '500mg',
-                            pillCount: '1 Pill',
-                            isPassed: true,
-                          ),
-                        ],
-                      ),
+                        );
+                      },
                     ),
-
                     // Daily Goals Section
                     SizedBox(height: spacing),
                     Row(
@@ -453,33 +607,37 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     SizedBox(height: spacing),
-                    GoalProgressCard(
-                      progressList: [
-                        ProgressData(
-                          icon: Icons.directions_walk,
-                          title: 'Steps',
-                          progress: 2000 / 5000,
-                          progressText: '2000/5000',
-                          progressColor: Colors.red,
-                        ),
-                        ProgressData(
-                          icon: Icons.fitness_center,
-                          title: 'Workout Progress',
-                          progress: 2500 / 5000,
-                          progressText: '2500/5000',
-                          progressColor: Colors.brown,
-                        ),
-                        ProgressData(
-                          icon: Icons.water_rounded,
-                          title: 'Swimming Progress',
-                          progress: 800 / 1000,
-                          progressText: '800/1000',
-                          progressColor: Colors.blue,
-                        ),
-                      ],
+
+                    FutureBuilder<List<ProgressDataModel>>(
+                      future: _goalsFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator(); // or shimmer/loading UI
+                        } else if (snapshot.hasError) {
+                          return Text("Error loading daily goals");
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.isEmpty) {
+                          return Text("No daily goals data available");
+                        }
+
+                        final metrics = snapshot.data!;
+
+                        return GoalProgressCard(
+                          progressList:
+                              metrics.map((metric) {
+                                return ProgressData(
+                                  title: metric.title,
+                                  progress: metric.progress / metric.goal,
+                                  progressText:
+                                      '${metric.progress.toInt()}/${metric.goal.toInt()}',
+                                  progressColor: Colors.blue,
+                                );
+                              }).toList(),
+                        );
+                      },
                     ),
 
-                    // Achievements Card - Widget
                     SizedBox(height: spacing),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -516,12 +674,29 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    Achievements_Widget(
-                      activities: ["5K Steps", "Perfect Sleep", "Heart Health"],
-                      days: ["Today", "Yesterday", "Normal"],
+                    FutureBuilder<List<AchievementModel>>(
+                      future: _achievementsFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text("Error loading achievements");
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.isEmpty) {
+                          return Text("No recent achievements available");
+                        }
+
+                        final achievements = snapshot.data!;
+
+                        return Achievements_Widget(
+                          activities:
+                              achievements.map((a) => a.activity).toList(),
+                          days: achievements.map((a) => a.day).toList(),
+                        );
+                      },
                     ),
 
-                    // Quick Tips - Widget
                     SizedBox(height: spacing),
                     Container(
                       width: double.infinity,
@@ -536,22 +711,31 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontSize: 24,
                             ),
                           ),
-                          SizedBox(height: spacing),
                         ],
                       ),
                     ),
                     SwipeableCardWidget(),
-
-                    // Doctor Card - Widget
                     SizedBox(height: spacing),
-                    OnlineDoctorConsultation(
-                      doctorName: "Dr.Kawsar Ahamed",
-                      doctorField: "Cardiologist",
-                      doctorDescription:
-                      "Understand your heart data with expert advice",
+
+                    FutureBuilder<DoctorData?>(
+                      future: _doctorDataFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        } else if (snapshot.hasError || snapshot.data == null) {
+                          return SizedBox();
+                        } else {
+                          final data = snapshot.data!;
+                          return OnlineDoctorConsultation(
+                            doctorName: data.name,
+                            doctorField: data.field,
+                            doctorDescription: data.description,
+                          );
+                        }
+                      },
                     ),
 
-                    // Talk to Tvamev card - Widget
                     SizedBox(height: spacing),
                     TalkToTvamev(),
                     SizedBox(height: spacing),
@@ -563,11 +747,47 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.swap_horiz),
-        backgroundColor: Colors.blueGrey,
-        foregroundColor: Colors.white,
-        onPressed: () => Navigator.pushNamed(context, AppRoutes.heartrate),
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        backgroundColor: Colors.lightBlue,
+        overlayColor: Colors.black,
+        overlayOpacity: 0.5,
+        spacing: 10,
+        spaceBetweenChildren: 8,
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.wifi_tethering_outlined),
+            label: 'Ring Detected Screen',
+            onTap: () {
+              print('Moved to Ring Detected Screen');
+              Navigator.pushNamed(context, '/ringDetected');
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.start),
+            label: 'First Time User Screen',
+            onTap: () {
+              print('Moved to First Time User Screen');
+              Navigator.pushNamed(context, '/firstTimeUser');
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.note_alt_outlined),
+            label: 'Log Activity Screen',
+            onTap: () {
+              print('Moved to Log Activity Screen');
+              Navigator.pushNamed(context, '/logActivity');
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.monitor_heart_outlined),
+            label: 'Heart Rate Screen',
+            onTap: () {
+              print('Moved to Heart Rate Screen');
+              Navigator.pushNamed(context, '/heart_rate_screen');
+            },
+          ),
+        ],
       ),
     );
   }

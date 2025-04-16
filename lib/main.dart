@@ -16,13 +16,10 @@ class MyApp extends StatelessWidget {
 
       onGenerateRoute: AppRoutes.generateRoute,
 
-      initialRoute: AppRoutes.heartrate,
-      
-
+      // initialRoute: AppRoutes.heartrate,
       initialRoute: AppRoutes.home,
 
       // home: Scaffold(body: HeartRateTrends()),
- main
     );
   }
 }

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class WellnessCarousel extends StatefulWidget {
+  final List<String> titles;
+
+  // Constructor to accept a list of titles
+  WellnessCarousel({required this.titles});
+
   @override
   _WellnessCarouselState createState() => _WellnessCarouselState();
 }
@@ -9,20 +14,6 @@ class _WellnessCarouselState extends State<WellnessCarousel> {
   PageController _pageController = PageController();
   int _currentPage = 0;
 
-  // List of dynamic data for each page
-  List<Map<String, String>> data = [
-    {
-      'title': 'Your step count is 20% higher than last week! Keep going.',
-    },
-    {
-      'title': 'You slept 2 hours more last night, great progress!',
-    },
-    {
-      'title': 'Your hydration is on track today, keep it up!',
-    },
-  ];
-
-  // Method to show the notification when the 'Talk to tvamev' is clicked
   void _showGratitudeNotification() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Clicked from Wellness Widget Card ;)')),
@@ -31,15 +22,13 @@ class _WellnessCarouselState extends State<WellnessCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen size and calculate padding dynamically based on width
     double screenWidth = MediaQuery.of(context).size.width;
-    double paddingFactor = screenWidth * 0.04; // 4% of screen width for padding
+    double paddingFactor = screenWidth * 0.04;
 
     return Container(
       width: double.infinity,
       child: Column(
         children: [
-          // Using LayoutBuilder to make it dependent on the outer container's size
           LayoutBuilder(
             builder: (context, constraints) {
               double containerWidth = constraints.maxWidth;
@@ -51,7 +40,7 @@ class _WellnessCarouselState extends State<WellnessCarousel> {
                   color: Colors.grey[100],
                   borderRadius: BorderRadius.circular(16),
                 ),
-                padding: EdgeInsets.all(paddingFactor), // Dynamic padding
+                padding: EdgeInsets.all(paddingFactor),
                 child: PageView.builder(
                   controller: _pageController,
                   onPageChanged: (page) {
@@ -59,18 +48,17 @@ class _WellnessCarouselState extends State<WellnessCarousel> {
                       _currentPage = page;
                     });
                   },
-                  itemCount: data.length,
+                  itemCount: widget.titles.length,
                   itemBuilder: (context, index) {
                     return Row(
                       children: [
-                        // Adjusting width based on the outer container (LayoutBuilder)
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.grey[300],
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          width: containerWidth * 0.2, // 20% of the outer container's width
-                          margin: EdgeInsets.only(right: paddingFactor * 0.5), // Dynamic margin
+                          width: containerWidth * 0.2,
+                          margin: EdgeInsets.only(right: paddingFactor * 0.5),
                           child: Center(
                             child: Text(
                               "Wellness Score",
@@ -84,7 +72,6 @@ class _WellnessCarouselState extends State<WellnessCarousel> {
                             ),
                           ),
                         ),
-                        // The remaining space will be occupied by the next container
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
@@ -92,14 +79,13 @@ class _WellnessCarouselState extends State<WellnessCarousel> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(paddingFactor), // Dynamic padding
+                              padding: EdgeInsets.all(paddingFactor),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  // Main text from the data list
                                   Text(
-                                    data[index]['title']!,
+                                    widget.titles[index],
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontFamily: 'Poppins',
@@ -107,8 +93,7 @@ class _WellnessCarouselState extends State<WellnessCarousel> {
                                       color: Colors.black,
                                     ),
                                   ),
-                                  SizedBox(height: paddingFactor), // Dynamic space
-                                  // Constant "Talk to tvamev" with InkWell
+                                  SizedBox(height: paddingFactor),
                                   InkWell(
                                     onTap: _showGratitudeNotification,
                                     child: Text(
@@ -134,23 +119,20 @@ class _WellnessCarouselState extends State<WellnessCarousel> {
             },
           ),
 
-          // Adding the carousel indicator directly below the second inner container
-          SizedBox(height: paddingFactor), // Dynamic spacing
+          SizedBox(height: paddingFactor),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 60, // Adjust this to match the total width of all the dots
+                width: 60,
                 height: 8,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  color: Colors.grey, // Background color for inactive dots
+                  color: Colors.grey,
                 ),
                 child: Stack(
-                  children: List.generate(3, (index) {
-                    double widthPerDot = 20; // Width of each individual dot
-
-                    // The offset that shifts the active dot to the correct position
+                  children: List.generate(widget.titles.length, (index) {
+                    double widthPerDot = 20;
                     double offset = _currentPage == index ? index * widthPerDot.toDouble() : 0.0;
 
                     return Positioned(

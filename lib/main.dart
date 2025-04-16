@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
 
       onGenerateRoute: AppRoutes.generateRoute,
       initialRoute: AppRoutes.home,
+
       // home: Scaffold(body: HeartRateTrends()),
     );
   }

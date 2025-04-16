@@ -1,0 +1,173 @@
+{
+  "greeting": {
+    "greetingMessage": "Good Morning, Hareesh",
+    "batteryPercentage": "80%",
+    "date": "Monday, Feb 12",
+    "connectionStatus": "Connected"
+  },
+  "healthInfo": [
+    {
+      "title": "Understanding Heart Rate",
+      "subtitle": "5 min read"
+    },
+    {
+      "title": "Sleep Quality Checks",
+      "subtitle": "5 min read"
+    },
+    {
+      "title": "Nutrition and Wellness",
+      "subtitle": "7 min read"
+    },
+    {
+      "title": "Exercise Tracker",
+      "subtitle": "10 min read"
+    }
+  ],
+  "wellnessTips": [
+    "Your step count is 20% higher than last week! Keep going.",
+    "You slept 2 hours more last night, great progress!",
+    "Your hydration is on track today, keep it up!"
+  ],
+  "glucoseTips": [
+    "Your glucose level is high, know more with tvamev.",
+    "Your sleep cycle seems irregular, try some tips for better rest!",
+    "Feeling too stressed? Try some relaxing methods from tvamev!"
+  ],
+  "activityCarousel": [
+    { "activity": "Walking", "step": 2500, "unit": "steps", "goal": 5000 },
+    { "activity": "Running", "step": 3, "unit": "km", "goal": 5 },
+    { "activity": "Swimming", "step": 500, "unit": "m", "goal": 1000 }
+  ],
+  "heartRate": {
+    "normal": 88,
+    "resting": 79,
+    "peak": 135,
+    "status": "Normal"
+  },
+  "ecg": {
+    "lastTracked": "Sat 18 Oct, 7:35 pm",
+    "heartRate": 80,
+    "pulseTransitTime": 31
+  },
+  "stress": {
+    "level": "High",
+    "peak": "3/5",
+    "tip": "Take a deep breath!"
+  },
+  "bp": {
+    "label": "Blood Pressure",
+    "value": "120/73",
+    "unit": "mmHg",
+    "range": "60 - 100"
+  },
+  "hrv": {
+    "label": "HRV",
+    "value": "85",
+    "unit": "ms",
+    "range": "80 - 100"
+  },
+  "sleep": {
+    "quality": 84,
+    "stages": [
+      { "stage": "Deep", "time": "4h 20m" },
+      { "stage": "Light", "time": "2h 20m" },
+      { "stage": "Awake", "time": "1h 20m" },
+      { "stage": "REM", "time": "30m" }
+    ]
+  },
+  "simpleMetrics": [
+    {
+      "label": "Temperature",
+      "value": 32,
+      "metric": "°F",
+      "range": "32–34"
+    },
+    {
+      "label": "Blood Oxygen",
+      "value": 97,
+      "metric": "%",
+      "range": "97–99"
+    },
+    {
+      "label": "VO2",
+      "value": 0,
+      "metric": "ml/kg",
+      "range": "35-40"
+    },
+    {
+      "label": "Respiratory Rate",
+      "value": 18,
+      "metric": "bpm",
+      "range": "12-20"
+    }
+  ],
+  "fallDetection": {
+    "title": "Fall Detection",
+    "status": "No Falls Detected",
+    "contactName": "Suraj Nath",
+    "contactPhone": "0987654321"
+  },
+  "afibMonitoring": {
+    "title": "AFib Monitoring",
+    "status": "Normal Rhythm"
+  },
+  "hydration": {
+    "dailyGoal": "2L",
+    "hydrationStatus": "65%",
+    "consumed": "1300ml",
+    "remaining": "700ml"
+  },
+  "medication": {
+    "time": "09:00 AM",
+    "name": "Amoxicillin",
+    "dosage": "500mg",
+    "pillCount": "1 Pill",
+    "isPassed": true
+  },
+  "dailyGoals": [
+    {
+      "icon": "directions_walk",
+      "title": "Steps",
+      "progress": 2000,
+      "goal": 5000,
+      "color": "red"
+    },
+    {
+      "icon": "fitness_center",
+      "title": "Workout Progress",
+      "progress": 2500,
+      "goal": 5000,
+      "color": "brown"
+    },
+    {
+      "icon": "water_rounded",
+      "title": "Swimming Progress",
+      "progress": 800,
+      "goal": 1000,
+      "color": "blue"
+    }
+  ],
+  "achievements": [
+    { "activity": "5K Steps", "day": "Today" },
+    { "activity": "Perfect Sleep", "day": "Yesterday" },
+    { "activity": "Heart Health", "day": "Normal" }
+  ],
+  "doctor": {
+    "name": "Dr.Kawsar Ahamed",
+    "field": "Cardiologist",
+    "description": "Understand your heart data with expert advice"
+  },
+  "activityLog": [
+    "We noticed movement at 10:30 AM",
+    "Your heart rate was 95 BPM"
+  ],
+  "ringDetection": {
+    "time": "10:30 AM",
+    "activity": "Walking",
+    "iconsAndText": [
+      { "icon": "insert_emoticon", "text": "95 BPM" },
+      { "icon": "directions_walk", "text": "120 steps" },
+      { "icon": "access_time", "text": "15 mins" }
+    ]
+  }
+}

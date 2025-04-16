@@ -2,14 +2,12 @@ class HeartRateSummary {
   final List<Insight> insights;
   final int restingBpm;
   final int peakBpm;
-  final double vo2Max;
   final Doctor doctor;
 
   HeartRateSummary({
     required this.insights,
     required this.restingBpm,
     required this.peakBpm,
-    required this.vo2Max,
     required this.doctor,
   });
 
@@ -19,7 +17,6 @@ class HeartRateSummary {
           (json['insights'] as List).map((e) => Insight.fromJson(e)).toList(),
       restingBpm: json['resting_bpm'],
       peakBpm: json['peak_bpm'],
-      vo2Max: (json['vo2_max'] as num).toDouble(),
       doctor: Doctor.fromJson(json['doctor']),
     );
   }

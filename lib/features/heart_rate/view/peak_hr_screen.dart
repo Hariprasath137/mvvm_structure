@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/data/model/heart_rate_model.dart';
-import 'package:mvvm_structure_reference/features/heart_rate/viewmodel/heart_rate_viewmodel.dart';
+import 'package:mvvm_structure_reference/features/heart_rate/data/repository/heart_rate_repository.dart';
 import 'package:mvvm_structure_reference/shared/widgets/card/avg_resting_card.dart';
 import 'package:mvvm_structure_reference/shared/widgets/close_slider_item_widget.dart'
     as swipableCard;
@@ -22,7 +22,7 @@ class _PeakHrState extends State<PeakHr> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<HeartRateData>(
-      future: loadHeartRateData(),
+      future: HeartRateRepository.loadHeartRateData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());

@@ -24,8 +24,6 @@ import 'package:mvvm_structure_reference/shared/widgets/swipable_card_widget.dar
 import 'package:mvvm_structure_reference/features/home_screen/data/home_screen_model.dart';
 import 'package:mvvm_structure_reference/features/home_screen/viewmodel/home_screen_viewmodel.dart';
 
-
-
 void main() {
   runApp(MyApp());
 }
@@ -47,7 +45,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   late Future<Greeting> _greetingFuture;
   late Future<List<String>> _wellnessTipsFuture;
   late Future<List<String>> _glucoseTipsFuture;
@@ -93,10 +90,10 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime selectedDate = DateTime.now();
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2020, 5),
-        lastDate: DateTime(2060)
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2020, 5),
+      lastDate: DateTime(2060),
     );
     if (picked != null && picked != selectedDate) {
       setState(() {
@@ -104,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
   }
+
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -112,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
       SnackBar(content: Text('Clicked from Wellness Widget Card ;)')),
     );
   }
-  
+
   @override
   void dispose() {
     super.dispose();
@@ -218,7 +216,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       future: _glucoseTipsFuture,
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) return SizedBox();
-                        return GlucoseMonitoringContainer2(titles: snapshot.data!);
+                        return GlucoseMonitoringContainer2(
+                          titles: snapshot.data!,
+                        );
                       },
                     ), // PADDING FIX TO BE DONE FROM HERE
                     SizedBox(height: spacing),
@@ -304,7 +304,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                           ),
-                          
+
                           // ECG Card - Widget
                           SizedBox(height: spacing),
                           FutureBuilder<ECGData>(
@@ -349,18 +349,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                   // BP & HRV Column
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       // Blood Pressure
                                       Container(
                                         decoration: BoxDecoration(
                                           color: Colors.green,
-                                          borderRadius: BorderRadius.circular(16),
+                                          borderRadius: BorderRadius.circular(
+                                            16,
+                                          ),
                                         ),
                                         child: FutureBuilder<BpHrvData>(
                                           future: _bpDataFuture,
                                           builder: (context, bpSnapshot) {
-                                            if (!bpSnapshot.hasData) return SizedBox();
+                                            if (!bpSnapshot.hasData)
+                                              return SizedBox();
                                             final bp = bpSnapshot.data!;
                                             return BpHrvCard(
                                               label: bp.label,
@@ -378,12 +382,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Container(
                                         decoration: BoxDecoration(
                                           color: Colors.orange,
-                                          borderRadius: BorderRadius.circular(16),
+                                          borderRadius: BorderRadius.circular(
+                                            16,
+                                          ),
                                         ),
                                         child: FutureBuilder<BpHrvData>(
                                           future: _hrvDataFuture,
                                           builder: (context, hrvSnapshot) {
-                                            if (!hrvSnapshot.hasData) return SizedBox();
+                                            if (!hrvSnapshot.hasData)
+                                              return SizedBox();
                                             final hrv = hrvSnapshot.data!;
                                             return BpHrvCard(
                                               label: hrv.label,
@@ -400,7 +407,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                           ),
-                          
+
                           // Sleep Card - Widget
                           SizedBox(height: spacing),
                           FutureBuilder<SleepData>(
@@ -414,7 +421,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                           ),
-                          
+
                           SizedBox(height: spacing),
                           FutureBuilder<List<SimpleMetric>>(
                             future: _simpleMetricsFuture,
@@ -423,7 +430,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               final metrics = snapshot.data!;
 
                               return Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: TempeatureSpo2Card(
@@ -447,9 +455,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                           ),
 
-
                           SizedBox(height: spacing),
-                          
+
                           // Fall Detection - Widget
                           FutureBuilder<FallDetectionData>(
                             future: _fallDetectionFuture,
@@ -465,7 +472,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                           ),
 
-// AFib Monitoring - Widget
+                          // AFib Monitoring - Widget
                           SizedBox(height: spacing),
                           FutureBuilder<AfibData>(
                             future: _afibFuture,
@@ -479,7 +486,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                           ),
 
-// VO2 & Respiratory Rate Card - Widget
+                          // VO2 & Respiratory Rate Card - Widget
                           SizedBox(height: spacing),
                           FutureBuilder<List<SimpleMetric>>(
                             future: _simpleMetricsFuture,
@@ -488,7 +495,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               final metrics = snapshot.data!;
 
                               return Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: TempeatureSpo2Card(
@@ -512,7 +520,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                           ),
 
-// Hydration Card - Widget
+                          // Hydration Card - Widget
                           SizedBox(height: spacing),
                           FutureBuilder<HydrationData>(
                             future: _hydrationFuture,
@@ -527,11 +535,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                           ),
-
                         ],
                       ),
                     ),
-                    
+
                     // Medication Card - Section - Widget
                     SizedBox(height: spacing),
                     FutureBuilder<MedicationData>(
@@ -553,13 +560,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               SizedBox(height: spacing),
-                                MedicationCard(
-                                  time: medications.time,
-                                  medicationName: medications.name,
-                                  dosage: medications.dosage,
-                                  pillCount: medications.pillCount,
-                                  isPassed: medications.isPassed,
-                                ),
+                              MedicationCard(
+                                time: medications.time,
+                                medicationName: medications.name,
+                                dosage: medications.dosage,
+                                pillCount: medications.pillCount,
+                                isPassed: medications.isPassed,
+                              ),
                             ],
                           ),
                         );
@@ -604,25 +611,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     FutureBuilder<List<ProgressDataModel>>(
                       future: _goalsFuture,
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
                           return CircularProgressIndicator(); // or shimmer/loading UI
                         } else if (snapshot.hasError) {
                           return Text("Error loading daily goals");
-                        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.isEmpty) {
                           return Text("No daily goals data available");
                         }
 
                         final metrics = snapshot.data!;
 
                         return GoalProgressCard(
-                          progressList: metrics.map((metric) {
-                            return ProgressData(
-                              title: metric.title,
-                              progress: metric.progress / metric.goal,
-                              progressText: '${metric.progress.toInt()}/${metric.goal.toInt()}',
-                              progressColor: Colors.blue,
-                            );
-                          }).toList(),
+                          progressList:
+                              metrics.map((metric) {
+                                return ProgressData(
+                                  title: metric.title,
+                                  progress: metric.progress / metric.goal,
+                                  progressText:
+                                      '${metric.progress.toInt()}/${metric.goal.toInt()}',
+                                  progressColor: Colors.blue,
+                                );
+                              }).toList(),
                         );
                       },
                     ),
@@ -666,18 +677,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     FutureBuilder<List<AchievementModel>>(
                       future: _achievementsFuture,
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
                           return CircularProgressIndicator();
                         } else if (snapshot.hasError) {
                           return Text("Error loading achievements");
-                        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.isEmpty) {
                           return Text("No recent achievements available");
                         }
 
                         final achievements = snapshot.data!;
 
                         return Achievements_Widget(
-                          activities: achievements.map((a) => a.activity).toList(),
+                          activities:
+                              achievements.map((a) => a.activity).toList(),
                           days: achievements.map((a) => a.day).toList(),
                         );
                       },
@@ -706,7 +720,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     FutureBuilder<DoctorData?>(
                       future: _doctorDataFuture,
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator());
                         } else if (snapshot.hasError || snapshot.data == null) {
                           return SizedBox();
@@ -734,7 +749,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: SpeedDial(
         animatedIcon: AnimatedIcons.menu_close,
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.lightBlue,
         overlayColor: Colors.black,
         overlayOpacity: 0.5,
         spacing: 10,
@@ -764,9 +779,16 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.pushNamed(context, '/logActivity');
             },
           ),
+          SpeedDialChild(
+            child: Icon(Icons.monitor_heart_outlined),
+            label: 'Heart Rate Screen',
+            onTap: () {
+              print('Moved to Heart Rate Screen');
+              Navigator.pushNamed(context, '/heart_rate_screen');
+            },
+          ),
         ],
       ),
-
     );
   }
 }

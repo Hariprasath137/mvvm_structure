@@ -32,7 +32,7 @@ class _HorizontalCardWidgetState extends State<HorizontalCardWidget> {
       children: [
         SizedBox(
           width: screenWidth * 0.9,
-          height: screenHeight * 0.18, // Responsive height
+          height: screenHeight * 0.18, 
           child: PageView.builder(
             controller: _pageController,
             scrollDirection: Axis.horizontal,

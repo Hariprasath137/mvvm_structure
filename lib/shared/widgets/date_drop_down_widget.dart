@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -20,25 +22,25 @@ class _DateNavigationWidgetState extends State<DateNavigationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen dimensions
+    
     final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
 
-    // Get the text scaler for dynamic font scaling
+   
     final TextScaler textScaler = MediaQuery.textScalerOf(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Flexible DropdownButton with Rectangle Shape
+       
         Flexible(
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(
                 screenWidth * 0.04,
-              ), // Curved corners
+              ), 
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
@@ -48,8 +50,8 @@ class _DateNavigationWidgetState extends State<DateNavigationWidget> {
               ],
             ),
             padding: EdgeInsets.symmetric(
-              horizontal: screenWidth * 0.04, // Responsive padding
-              vertical: screenHeight * 0.01, // Responsive padding
+              horizontal: screenWidth * 0.04,
+              vertical: screenHeight * 0.01, 
             ),
             child: FittedBox(
               fit: BoxFit.scaleDown,
@@ -59,7 +61,7 @@ class _DateNavigationWidgetState extends State<DateNavigationWidget> {
                   Icons.keyboard_arrow_down_sharp,
                   size: textScaler.scale(
                     screenWidth * 0.06,
-                  ), // Responsive icon size
+                  ), 
                   color: Colors.black,
                 ),
                 underline: const SizedBox(),
@@ -77,7 +79,7 @@ class _DateNavigationWidgetState extends State<DateNavigationWidget> {
                             fontFamily: "Poppins",
                             fontSize: textScaler.scale(
                               screenWidth * 0.035,
-                            ), // Responsive font size
+                            ), 
                             fontWeight: FontWeight.w500,
                             color: const Color(0XFF333333),
                           ),
@@ -92,12 +94,12 @@ class _DateNavigationWidgetState extends State<DateNavigationWidget> {
                 dropdownColor: Colors.white,
                 borderRadius: BorderRadius.circular(
                   textScaler.scale(screenWidth * 0.02),
-                ), // Responsive radius
+                ), 
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: textScaler.scale(
                     screenWidth * 0.035,
-                  ), // Responsive font size
+                  ),
                 ),
                 elevation: 5,
               ),
@@ -107,12 +109,11 @@ class _DateNavigationWidgetState extends State<DateNavigationWidget> {
 
         SizedBox(
           width: textScaler.scale(screenWidth * 0.15),
-        ), // Responsive spacing
-
+        ), 
         IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            size: textScaler.scale(screenWidth * 0.05), // Responsive icon size
+            size: textScaler.scale(screenWidth * 0.05), 
           ),
           onPressed: () => _changeDate(-1),
         ),
@@ -120,22 +121,22 @@ class _DateNavigationWidgetState extends State<DateNavigationWidget> {
         Expanded(
           child: Text(
             'Today, ${DateFormat('MMM d').format(currentDate)}',
-            textAlign: TextAlign.center, // Center-align text
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: textScaler.scale(
                 screenWidth * 0.035,
-              ), // Responsive font size
+              ), 
               fontWeight: FontWeight.bold,
             ),
-            overflow: TextOverflow.ellipsis, // Prevent overflow
-            maxLines: 1, // Limit to one line
+            overflow: TextOverflow.ellipsis, 
+            maxLines: 1, 
           ),
         ),
 
         IconButton(
           icon: Icon(
             Icons.arrow_forward_ios,
-            size: textScaler.scale(screenWidth * 0.05), // Responsive icon size
+            size: textScaler.scale(screenWidth * 0.05), 
           ),
           onPressed:
               currentDate.isBefore(

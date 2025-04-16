@@ -22,7 +22,7 @@ class _DailySummaryWidgetState extends State<DailySummaryWidget> {
   double pageOffset = 0.0;
   final PageController _pageController = PageController(
     viewportFraction: 0.9,
-  ); // Slightly less than 1
+  );
 
   @override
   void initState() {
@@ -46,22 +46,22 @@ class _DailySummaryWidgetState extends State<DailySummaryWidget> {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          height: 120, // Fixed height for cards
+          height: 120, 
           child: PageView.builder(
             controller: _pageController,
             scrollDirection: Axis.horizontal,
             itemCount: cards.length,
             physics: const PageScrollPhysics(),
             itemBuilder: (context, index) {
-              // Wrap the card in a SizedBox to give it a fixed width
+              
               return Transform.scale(
-                scale: 1 - (pageOffset - index).abs() * 0.1, // Scale effect
+                scale: 1 - (pageOffset - index).abs() * 0.1, 
                 child: Opacity(
-                  opacity: 1 - (pageOffset - index).abs() * 0.3, // Fade effect
+                  opacity: 1 - (pageOffset - index).abs() * 0.3, 
                   child: SizedBox(
                     width:
                         MediaQuery.of(context).size.width *
-                        0.85, // Match viewportFraction
+                        0.85, 
                     child: cards[index],
                   ),
                 ),
@@ -116,7 +116,7 @@ class InsightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen dimensions
+    
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Card(
@@ -130,7 +130,7 @@ class InsightCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Image on the left
+              
               Container(
                 width: screenWidth * 0.12,
                 height: screenWidth * 0.12,
@@ -144,7 +144,7 @@ class InsightCard extends StatelessWidget {
               ),
               SizedBox(width: screenWidth * 0.03),
 
-              // Column for text and button
+              
               Expanded(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
@@ -152,26 +152,26 @@ class InsightCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        // Text with exactly two lines and ellipsis
+                        
                         SizedBox(
                           height:
-                              screenWidth * 0.08, // Fixed height for two lines
+                              screenWidth * 0.08, 
                           child: Text(
                             text,
                             style: TextStyle(
                               color: const Color(0xFF707070),
                               fontSize: screenWidth * 0.035,
                               fontFamily: 'Rubik',
-                              height: 1.2, // Tighter line height
+                              height: 1.2, 
                             ),
                             maxLines: 2,
-                            overflow: TextOverflow.ellipsis, // Add ellipsis
+                            overflow: TextOverflow.ellipsis, 
                           ),
                         ),
 
                         const Spacer(flex: 1),
 
-                        // Button below the text
+                        
                         Align(
                           alignment: Alignment.centerLeft,
                           child: TextButton(

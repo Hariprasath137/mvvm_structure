@@ -25,11 +25,14 @@ import 'package:mvvm_structure_reference/features/home_screen/data/home_screen_m
 import 'package:mvvm_structure_reference/features/home_screen/viewmodel/home_screen_viewmodel.dart';
 
 
+
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(home: HomeScreen());
@@ -37,6 +40,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -85,6 +90,29 @@ class _HomeScreenState extends State<HomeScreen> {
     _doctorDataFuture = loadDoctorData();
   }
 
+  DateTime selectedDate = DateTime.now();
+  Future<Null> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2020, 5),
+        lastDate: DateTime(2060)
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+
+  void _showGratitudeNotification() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Clicked from Wellness Widget Card ;)')),
+    );
+  }
+  
   @override
   void dispose() {
     super.dispose();
@@ -167,12 +195,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       },
                     ),
-                    // GreetingInfoWidget(
-                    //   greetingMessage: 'Good Morning, Hareesh',
-                    //   batteryPercentage: '80%',
-                    //   date: 'Monday, Feb 12',
-                    //   connectionStatus: 'Connected',
-                    // ),
                     SizedBox(height: spacing),
 
                     // Date Picker - Widget
@@ -187,13 +209,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         return WellnessCarousel(titles: snapshot.data!);
                       },
                     ),
-                    // WellnessCarousel(
-                    //   titles: [
-                    //     'Your step count is 20% higher than last week! Keep going.',
-                    //     'You slept 2 hours more last night, great progress!',
-                    //     'Your hydration is on track today, keep it up!',
-                    //   ],
-                    // ),
                     SizedBox(height: spacing),
 
                     // Glucose Monitoring Card - 2 Widget's
@@ -205,14 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         if (!snapshot.hasData) return SizedBox();
                         return GlucoseMonitoringContainer2(titles: snapshot.data!);
                       },
-                    ),
-                    // GlucoseMonitoringContainer2(
-                    //   titles: [
-                    //     "Your glucose level is high, know more with tvamev.",
-                    //     "Your sleep cycle seems irregular, try some tips for better rest!",
-                    //     "Feeling too stressed? Try some relaxing methods from tvamev!",
-                    //   ],
-                    // ), // PADDING FIX TO BE DONE FROM HERE
+                    ), // PADDING FIX TO BE DONE FROM HERE
                     SizedBox(height: spacing),
 
                     // Today's Activity - Title and Widget
@@ -264,12 +272,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       },
                     ),
-                    // CarouselWidget(
-                    //   activities: ["Walking", "Running", "Swimming"],
-                    //   steps: [2500, 3, 500],
-                    //   units: ["steps", "km", "m"],
-                    //   goals: [5000, 5, 1000],
-                    // ),
 
                     // Health Metrics - Section and Widgets
                     SizedBox(height: spacing),
@@ -302,16 +304,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                           ),
-
-                          // HeartRateCard(
-                          //   normalHeartRate: 88,
-                          //   restingHeartRate: 79,
-                          //   peakHeartRate: 135,
-                          //   normalRangeText: 'Normal',
-                          // ),
-
+                          
                           // ECG Card - Widget
-
                           SizedBox(height: spacing),
                           FutureBuilder<ECGData>(
                             future: _ecgFuture,
@@ -325,11 +319,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                           ),
-                          // ECGCard(
-                          //   lastTracked: 'Sat 18 Oct, 7:35 pm',
-                          //   heartRate: 80,
-                          //   pulseTransitTime: 31,
-                          // ),
 
                           SizedBox(height: spacing),
                           FutureBuilder<StressData>(
@@ -411,103 +400,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                           ),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.start,
-                          //   children: [
-                          //     // Stress Card - Widget
-                          //     Flexible(
-                          //       flex: 1,
-                          //       child: Container(
-                          //         decoration: BoxDecoration(
-                          //           color: Colors.blue,
-                          //           borderRadius: BorderRadius.circular(16),
-                          //         ),
-                          //         child: StressCard(
-                          //           levelValue: 'High',
-                          //           peakValue: '3/5',
-                          //           tipText: 'Take a deep breath!',
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     SizedBox(width: spacing),
-                          //     Column(
-                          //       crossAxisAlignment: CrossAxisAlignment.start,
-                          //       children: [
-                          //         // Blood Pressure - Widget
-                          //         Container(
-                          //           decoration: BoxDecoration(
-                          //             color: Colors.green,
-                          //             borderRadius: BorderRadius.circular(16),
-                          //           ),
-                          //           child: BpHrvCard(
-                          //             label: 'Blood Pressure',
-                          //             currentBPValue: '120/73',
-                          //             mmHg: 'mmHg',
-                          //             normalRange: '60 - 100',
-                          //           ),
-                          //         ),
-                          //
-                          //         // HRV Card - Widget
-                          //         SizedBox(height: spacing),
-                          //         Container(
-                          //           decoration: BoxDecoration(
-                          //             color: Colors.orange,
-                          //             borderRadius: BorderRadius.circular(16),
-                          //           ),
-                          //           child: BpHrvCard(
-                          //             label: 'HRV',
-                          //             currentBPValue: '85',
-                          //             mmHg: 'ms',
-                          //             normalRange: '80 - 100',
-                          //           ),
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ],
-                          // ),
-
+                          
                           // Sleep Card - Widget
-
                           SizedBox(height: spacing),
-                          // SleepCard(
-                          //   sleepQuality: 84,
-                          //   sleepStages: [
-                          //     {'stage': 'Deep', 'time': '4h 20m'},
-                          //     {'stage': 'Light', 'time': '2h 20m'},
-                          //     {'stage': 'Awake', 'time': '1h 20m'},
-                          //     {'stage': 'REM', 'time': '30m'},
-                          //   ],
-                          // ),
-                          // SizedBox(height: spacing),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //   children: [
-                          //     // Temperature - Widget
-                          //     Expanded(
-                          //       child: TempeatureSpo2Card(
-                          //         label: "Temperature",
-                          //         value: 32,
-                          //         metric: "°F",
-                          //         range: "32–34",
-                          //       ),
-                          //     ),
-                          //
-                          //     // Blood Oxygen - Widget
-                          //     SizedBox(width: spacing),
-                          //     Expanded(
-                          //       child: TempeatureSpo2Card(
-                          //         label: "Blood Oxygen",
-                          //         value: 97,
-                          //         metric: "%",
-                          //         range: "97–99",
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-
-                          // Fall Detection - Widget
-                          // Sleep Card
-                          // SizedBox(height: spacing),
                           FutureBuilder<SleepData>(
                             future: _sleepFuture,
                             builder: (context, snapshot) {
@@ -519,8 +414,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                           ),
-
-// Temperature & Blood Oxygen
+                          
                           SizedBox(height: spacing),
                           FutureBuilder<List<SimpleMetric>>(
                             future: _simpleMetricsFuture,
@@ -528,7 +422,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               if (!snapshot.hasData) return SizedBox();
                               final metrics = snapshot.data!;
 
-                              // Assuming first = temp, second = SpO2
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -556,61 +449,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
                           SizedBox(height: spacing),
-                          // FallandAFib(
-                          //   titleText: "Fall Detection",
-                          //   statusText:
-                          //   "No Falls Detected",
-                          //   contactName: "Suraj Nath",
-                          //   contactPhoneNumber:
-                          //   "0987654321",
-                          // ),
-                          //
-                          // // AFib Monitoring - Widget
-                          // SizedBox(height: spacing),
-                          // FallandAFib(
-                          //   titleText: "AFib Monitoring",
-                          //   statusText: "Normal Rhythm",
-                          //   // contactName: ,
-                          //   // contactPhoneNumber: ,
-                          // ),
-                          //
-                          // // VO2 & Respiratory Rate Card - Widget
-                          // SizedBox(height: spacing),
-                          // Row(
-                          //   mainAxisAlignment:
-                          //   MainAxisAlignment
-                          //       .spaceBetween,
-                          //   children: [
-                          //     Expanded(
-                          //       child: TempeatureSpo2Card(
-                          //         label: "VO2",
-                          //         value: 0,
-                          //         metric: "ml/kg",
-                          //         range: "35-40",
-                          //       ),
-                          //     ),
-                          //     SizedBox(
-                          //       width: spacing,
-                          //     ),
-                          //     Expanded(
-                          //       child: TempeatureSpo2Card(
-                          //         label: "Respiratory Rate",
-                          //         value: 18,
-                          //         metric: "bpm",
-                          //         range: "12-20",
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                          //
-                          // // Hydration Card - Widget
-                          // SizedBox(height: spacing),
-                          // HydrationCard(
-                          //   dailyGoal: "2L",
-                          //   hydrationStatus: "65%",
-                          //   consumed: "1300ml",
-                          //   remaining: "700ml",
-                          // ),
+                          
                           // Fall Detection - Widget
                           FutureBuilder<FallDetectionData>(
                             future: _fallDetectionFuture,
@@ -648,7 +487,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               if (!snapshot.hasData) return SizedBox();
                               final metrics = snapshot.data!;
 
-                              // Assuming first = VO2, second = Respiratory Rate
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -693,171 +531,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-
-                    // Medication Card - Section - Widget
-                    // Container(
-                    //   width: double.infinity,
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: [
-                    //       Text(
-                    //         'Medication',
-                    //         style: TextStyle(
-                    //           fontFamily: 'Poppins',
-                    //           fontWeight: FontWeight.bold,
-                    //           fontSize: 24,
-                    //         ),
-                    //       ),
-                    //       SizedBox(height: spacing),
-                    //       MedicationCard(
-                    //         time: '09:00 AM',
-                    //         medicationName: 'Amoxicillin',
-                    //         dosage: '500mg',
-                    //         pillCount: '1 Pill',
-                    //         isPassed: true,
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    //
-                    // // Daily Goals Section
-                    // SizedBox(height: spacing),
-                    // Row(
-                    //   children: [
-                    //     Text(
-                    //       'Daily Goals',
-                    //       style: TextStyle(
-                    //         fontWeight: FontWeight.bold,
-                    //         fontSize: 24,
-                    //       ),
-                    //     ),
-                    //     Spacer(),
-                    //     InkWell(
-                    //       onTap: () {},
-                    //       child: Row(
-                    //         children: [
-                    //           Text(
-                    //             'Edit Goals',
-                    //             style: TextStyle(
-                    //               fontSize: 16,
-                    //               color: Colors.black,
-                    //             ),
-                    //           ),
-                    //           SizedBox(width: 6),
-                    //           Icon(
-                    //             Icons.border_color_rounded,
-                    //             color: Colors.black,
-                    //             size: 16,
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(height: spacing),
-                    // GoalProgressCard(
-                    //   progressList: [
-                    //     ProgressData(
-                    //       icon: Icons.directions_walk,
-                    //       title: 'Steps',
-                    //       progress: 2000 / 5000,
-                    //       progressText: '2000/5000',
-                    //       progressColor: Colors.red,
-                    //     ),
-                    //     ProgressData(
-                    //       icon: Icons.fitness_center,
-                    //       title: 'Workout Progress',
-                    //       progress: 2500 / 5000,
-                    //       progressText: '2500/5000',
-                    //       progressColor: Colors.brown,
-                    //     ),
-                    //     ProgressData(
-                    //       icon: Icons.water_rounded,
-                    //       title: 'Swimming Progress',
-                    //       progress: 800 / 1000,
-                    //       progressText: '800/1000',
-                    //       progressColor: Colors.blue,
-                    //     ),
-                    //   ],
-                    // ),
-                    //
-                    // // Achievements Card - Widget
-                    // SizedBox(height: spacing),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     Text(
-                    //       'Recent Achievements',
-                    //       style: TextStyle(
-                    //         fontFamily: 'Poppins',
-                    //         fontWeight: FontWeight.bold,
-                    //         fontSize: screenHeight * 0.025,
-                    //         color: Colors.black,
-                    //       ),
-                    //     ),
-                    //     TextButton(
-                    //       onPressed: () {},
-                    //       child: Row(
-                    //         children: [
-                    //           Text(
-                    //             'View All ',
-                    //             style: TextStyle(
-                    //               fontFamily: 'Poppins',
-                    //               fontWeight: FontWeight.normal,
-                    //               fontSize: screenHeight * 0.02,
-                    //               color: Colors.black,
-                    //             ),
-                    //           ),
-                    //           Icon(
-                    //             Icons.arrow_forward,
-                    //             size: screenHeight * 0.02,
-                    //             color: const Color(0xff4b5563),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // Achievements_Widget(
-                    //   activities: ["5K Steps", "Perfect Sleep", "Heart Health"],
-                    //   days: ["Today", "Yesterday", "Normal"],
-                    // ),
-                    //
-                    // // Quick Tips - Widget
-                    // SizedBox(height: spacing),
-                    // Container(
-                    //   width: double.infinity,
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: [
-                    //       Text(
-                    //         'Quick Tips',
-                    //         style: TextStyle(
-                    //           fontFamily: 'Poppins',
-                    //           fontWeight: FontWeight.bold,
-                    //           fontSize: 24,
-                    //         ),
-                    //       ),
-                    //       SizedBox(height: spacing),
-                    //     ],
-                    //   ),
-                    // ),
-                    // SwipeableCardWidget(),
-                    //
-                    // // Doctor Card - Widget
-                    // SizedBox(height: spacing),
-                    // OnlineDoctorConsultation(
-                    //   doctorName: "Dr.Kawsar Ahamed",
-                    //   doctorField: "Cardiologist",
-                    //   doctorDescription:
-                    //   "Understand your heart data with expert advice",
-                    // ),
-
-                    // Talk to Tvamev card - Widget
+                    
                     // Medication Card - Section - Widget
                     SizedBox(height: spacing),
                     FutureBuilder<MedicationData>(
-                      future: _medicationFuture, // Future to fetch medication data
+                      future: _medicationFuture,
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) return SizedBox();
                         final medications = snapshot.data!;
@@ -875,8 +553,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               SizedBox(height: spacing),
-                              // Dynamically create MedicationCard for each item in medications list
-                              // for (var medication in medications)
                                 MedicationCard(
                                   time: medications.time,
                                   medicationName: medications.name,
@@ -925,7 +601,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(height: spacing),
 
-                    // Replace the hardcoded GoalProgressCard with this:
                     FutureBuilder<List<ProgressDataModel>>(
                       future: _goalsFuture,
                       builder: (context, snapshot) {
@@ -945,7 +620,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               title: metric.title,
                               progress: metric.progress / metric.goal,
                               progressText: '${metric.progress.toInt()}/${metric.goal.toInt()}',
-                              progressColor: Colors.blue, // Optional: change based on metric.title if you want
+                              progressColor: Colors.blue,
                             );
                           }).toList(),
                         );
@@ -992,7 +667,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       future: _achievementsFuture,
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.waiting) {
-                          return CircularProgressIndicator(); // or shimmer
+                          return CircularProgressIndicator();
                         } else if (snapshot.hasError) {
                           return Text("Error loading achievements");
                         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -1022,7 +697,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontSize: 24,
                             ),
                           ),
-                          // SizedBox(height: spacing),
                         ],
                       ),
                     ),
@@ -1035,7 +709,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         if (snapshot.connectionState == ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator());
                         } else if (snapshot.hasError || snapshot.data == null) {
-                          return SizedBox(); // or show an error widget
+                          return SizedBox();
                         } else {
                           final data = snapshot.data!;
                           return OnlineDoctorConsultation(

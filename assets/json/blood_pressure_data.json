@@ -1,0 +1,18 @@
+{
+    "blood_pressure": {
+        "insights": [
+          {
+            "imagePath": "assets/Rectangle.png",
+            "text": "Your average blood pressure is within the normal range. Keep monitoring regularly to maintain heart health."
+          },
+          {
+            "imagePath": "assets/Rectangle.png",
+            "text": "You slept for 7.5 hours last night. Keep it up!"
+          },
+          {  
+            "imagePath": "assets/Rectangle.png",
+            "text": "You walked 8,500 steps today. Keep moving!"
+          }
+        ]
+    }
+}

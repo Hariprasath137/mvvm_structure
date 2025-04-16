@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_structure_reference/features/blood_pressure/view/blood_pressure_screen.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/view/heart_rate_screen.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/view/peak_hr_screen.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/view/resting_hr_screen.dart';
@@ -17,6 +18,8 @@ class AppRoutes {
   static const String firstTimeUser = '/firstTimeUser';
   static const String logActivity = '/logActivity';
   static const String ringDetected = '/ringDetected';
+  static const String bp = '/blood_pressure';
+
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -45,6 +48,9 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => RingDetectedScreen(),
         );
+
+      case bp:
+        return MaterialPageRoute(builder: (context) => BloodPressureScreen());
 
       default:
         return MaterialPageRoute(

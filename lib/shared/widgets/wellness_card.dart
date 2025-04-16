@@ -1,4 +1,4 @@
-// error getting overflown by 18 horizontally and 27 vertivcally. need to check
+
 import 'package:flutter/material.dart';
 
 class WellnessCarousel extends StatefulWidget {
@@ -45,7 +45,7 @@ class _WellnessCarouselState extends State<WellnessCarousel> {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            // PageView builder
+            
             Container(
               height: 120,
               child: PageView.builder(
@@ -79,7 +79,7 @@ class _WellnessCarouselState extends State<WellnessCarousel> {
                           ),
                         ),
                       ),
-                      // Text Container
+                      
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.grey[300],

@@ -35,7 +35,7 @@ class OnlineDoctorConsultation extends StatelessWidget {
             ),
             Row(
               children: [
-                // Left-side Text Content
+               
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,25 +78,25 @@ class OnlineDoctorConsultation extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Right-side Doctor's Image and Name
+                
                 Stack(
                   alignment: Alignment.bottomCenter,
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(2),
                       child: Image.asset(
-                        "assets/Video.png", // Change to your image path
+                        "assets/Video.png", 
                         height: textScaler.scale(200),
                         width: textScaler.scale(130),
                         fit: BoxFit.cover,
                       ),
                     ),
                     Positioned(
-                      bottom: textScaler.scale(5), // Adjust as needed
+                      bottom: textScaler.scale(5), 
                       child: Container(
                         width: textScaler.scale(
                           120,
-                        ), // Fixed width for the container
+                        ), 
                         padding: EdgeInsets.symmetric(
                           horizontal: textScaler.scale(10),
                           vertical: textScaler.scale(6),
@@ -123,8 +123,8 @@ class OnlineDoctorConsultation extends StatelessWidget {
                               ),
                               overflow:
                                   TextOverflow
-                                      .ellipsis, // Handle overflow gracefully
-                              maxLines: 1, // Limit to one line
+                                      .ellipsis, 
+                              maxLines: 1, 
                             ),
                             Text(
                               doctorField,
@@ -134,8 +134,8 @@ class OnlineDoctorConsultation extends StatelessWidget {
                               ),
                               overflow:
                                   TextOverflow
-                                      .ellipsis, // Handle overflow gracefully
-                              maxLines: 1, // Limit to one line
+                                      .ellipsis,
+                              maxLines: 1, 
                             ),
                           ],
                         ),

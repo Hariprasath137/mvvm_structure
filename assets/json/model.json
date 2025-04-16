@@ -1,0 +1,115 @@
+{
+    "ecg": {
+      "heartRate": 75,
+      "status": "Good",
+      "message": "Your average heart rate is 5 bpm better than yesterday's."
+    },
+    "entries": [
+      {
+        "bpm": "76",
+        "status": "Normal",
+        "activity": "Exercise",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "98",
+        "status": "Normal",
+        "activity": "Running",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "102",
+        "status": "Normal",
+        "activity": "Swimming",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "76",
+        "status": "Normal",
+        "activity": "Exercise",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "98",
+        "status": "Normal",
+        "activity": "Running",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "102",
+        "status": "Normal",
+        "activity": "Swimming",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "76",
+        "status": "Normal",
+        "activity": "Exercise",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "98",
+        "status": "Normal",
+        "activity": "Running",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "102",
+        "status": "Normal",
+        "activity": "Swimming",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      }
+    ],                                              
+    "summary": {
+      
+      "heart_rate_summary": {
+        "insights": [
+          {
+            "imagePath": "assets/Rectangle.png",
+            "text": "Your resting heart rate is 75 bpm, a healthy range indicating good cardiovascular health."
+          },
+          {
+            "imagePath": "assets/Rectangle.png",
+            "text": "You slept for 7.5 hours last night. Keep it up!"
+          },
+          {  
+            "imagePath": "assets/Rectangle.png",
+            "text": "You walked 8,500 steps today. Keep moving!"
+          }
+        ],
+        "resting_bpm": 70,
+        "peak_bpm": 120,
+        "vo2_max": 42.5,
+        "doctor": {
+          "name": "Dr.Kawsar Ahamed",
+          "field": "Cardiologist",
+          "description": "Understand your heart data with expert advice"
+        }
+      }
+    },
+    "graph": {
+      "heartRates": [70, 72, 68, 72, 75, 83, 115, 70, 75, 79, 80, 90, 70, 77, 88, 78, 110, 80, 100, 90, 62, 72, 70, 70, 79, 79],
+      "timeLabels": [
+        "12\nAM", "1\nAM", "2\nAM", "3\nAM", "4\nAM", "5\nAM", "6\nAM",
+        "7\nAM", "8\nAM", "9\nAM", "10\nAM", "11\nAM", "12\nPM", "1\nPM",
+        "2\nPM", "3\nPM", "4\nPM", "5\nPM", "6\nPM", "7\nPM", "8\nPM",
+        "9\nPM", "10\nPM", "11\nPM", "12\nAM ", "1\nAM "
+      ],
+      "keyPoints": [0, 6, 12, 18, 24]
+    },
+    "vo2": {
+      "vo2level": "42",
+      "min": "35",
+      "avg": "42",
+      "max": "48",
+      "category": "Good",
+      "chartData": [
+        {"timeLabels": "12\nam", "value": 25},
+        {"timeLabels": "6\nam", "value": 27},
+        {"timeLabels": "12\npm", "value": 30},
+        {"timeLabels": "6\npm", "value": 33},
+        {"timeLabels": "12\nam ", "value": 35}
+      ]
+    }
+  }
+  

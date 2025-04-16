@@ -275,10 +275,11 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:mvvm_structure_reference/features/home_screen/data/home_screen_model.dart';
 
 class SleepCard extends StatelessWidget {
-  final double sleepQuality; // Input: Sleep Quality (e.g., 84)
-  final List<Map<String, String>> sleepStages; // Input: List of sleep stages with time
+  final int sleepQuality; // Input: Sleep Quality (e.g., 84)
+  final List<SleepStage> sleepStages; // Input: List of sleep stages with time
 
   // Constructor to accept data when widget is called
   SleepCard({required this.sleepQuality, required this.sleepStages});
@@ -421,9 +422,9 @@ class SleepCard extends StatelessWidget {
   }
 
   // Helper method to build each sleep stage block
-  Widget _buildSleepStageBlock(Map<String, String> stageData) {
+  Widget _buildSleepStageBlock(SleepStage stageData) {
     Color color;
-    switch (stageData['stage']) {
+    switch (stageData.stage) {
       case 'Deep':
         color = Colors.red;
         break;
@@ -461,12 +462,12 @@ class SleepCard extends StatelessWidget {
             ),
             SizedBox(height: 5), // Space between the dot and text
             Text(
-              stageData['stage']!, // Main text (Deep, Light, Awake, REM)
+              stageData.stage, // Main text (Deep, Light, Awake, REM)
               style: TextStyle(color: Colors.black),
             ),
             SizedBox(height: 5), // Space between the text and time
             Text(
-              stageData['time']!, // Time below the main text
+              stageData.time, // Time below the main text
               style: TextStyle(color: Colors.black, fontSize: 12),
             ),
           ],
@@ -474,4 +475,5 @@ class SleepCard extends StatelessWidget {
       ),
     );
   }
+
 }

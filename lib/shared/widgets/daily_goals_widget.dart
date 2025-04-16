@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ProgressData {
-  final IconData icon;
+  // final IconData icon;
   final String title;
   final double progress;
   final String progressText;
   final Color progressColor;
 
   ProgressData({
-    required this.icon,
+    // required this.icon,
     required this.title,
     required this.progress,
     required this.progressText,
@@ -44,7 +44,7 @@ class GoalProgressCard extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Icon(data.icon, size: 24, color: data.progressColor),
+              child: Icon(Icons.directions_walk, size: 24, color: data.progressColor),
             ),
             SizedBox(width: 16),
             Expanded(

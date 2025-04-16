@@ -1,29 +1,13 @@
 import 'package:flutter/material.dart';
 
-class GlucoseMonitoringContainer2 extends StatefulWidget {
-  final List<String> titles;
-
-  GlucoseMonitoringContainer2({required this.titles});
-
+class FirstTimeCarousel extends StatefulWidget {
   @override
-  _GlucoseMonitoringContainer2State createState() =>
-      _GlucoseMonitoringContainer2State();
+  _FirstTimeCarousel createState() =>
+      _FirstTimeCarousel();
 }
 
-class _GlucoseMonitoringContainer2State
-    extends State<GlucoseMonitoringContainer2> {
-  final PageController _pageController = PageController();
-  int _currentPage = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController.addListener(() {
-      setState(() {
-        _currentPage = _pageController.page!.round();
-      });
-    });
-  }
+class _FirstTimeCarousel
+    extends State<FirstTimeCarousel> {
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +16,24 @@ class _GlucoseMonitoringContainer2State
     double spacing = 8.0;
     double dynamicSizedBoxWidth = iconSize + (spacing * 3);
 
+    final List<Map<String, String>> cardData = [
+      {
+        "icon": "trending_down",
+        "head": "Real-time Monitoring",
+        "body": "Get insights to improve fitness and well-being",
+      },
+      {
+        "icon": "monitor_heart_outlined",
+        "head": "Health Insights",
+        "body": "Monitor heart, stress, and activity in real time",
+      },
+      {
+        "icon": "image_outlined",
+        "head": "Health Insights",
+        "body": "Monitor heart, stress, and activity in real time",
+      },
+    ];
+
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -39,37 +41,38 @@ class _GlucoseMonitoringContainer2State
           Container(
             height: 120,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.white, // EBEBEB
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
               children: [
                 Expanded(
                   child: PageView.builder(
-                    controller: _pageController,
-                    itemCount: widget.titles.length,
+                    // controller: _pageController,
+                    itemCount: cardData.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Row(
                               children: [
                                 IconButton(
-                                  icon: Icon(Icons.image_outlined),
+                                  icon: Icon(Icons.monitor_heart_outlined),
                                   onPressed: null,
                                   iconSize: iconSize,
-                                  color: Colors.grey,
+                                  color: Colors.yellow,
                                 ),
                                 SizedBox(width: spacing),
                                 Expanded(
                                   child: Text(
-                                    widget.titles[index],
+                                    cardData[index]["head"]!,
                                     style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.normal,
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                     ),
                                     overflow: TextOverflow.ellipsis,
@@ -91,12 +94,11 @@ class _GlucoseMonitoringContainer2State
                                     );
                                   },
                                   child: Text(
-                                    "Talk to tvamev",
+                                    cardData[index]["body"]!,
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.bold,
-                                      decoration: TextDecoration.underline,
+                                      fontWeight: FontWeight.normal,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -107,45 +109,6 @@ class _GlucoseMonitoringContainer2State
                         ),
                       );
                     },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 8),
-          Container(
-            width: screenWidth * 0.9,
-            child: Row(
-              children: [
-                Container(
-                  width: 60,
-                  height: 8,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    color: Colors.grey,
-                  ),
-                  child: Stack(
-                    children: List.generate(widget.titles.length, (index) {
-                      double widthPerDot = 20;
-                      double offset = _currentPage == index
-                          ? index * widthPerDot.toDouble()
-                          : 0.0;
-
-                      return Positioned(
-                        left: offset,
-                        child: AnimatedContainer(
-                          duration: Duration(milliseconds: 200),
-                          width: widthPerDot,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: _currentPage == index
-                                ? Colors.blueGrey
-                                : Colors.transparent,
-                          ),
-                        ),
-                      );
-                    }),
                   ),
                 ),
               ],
@@ -171,3 +134,5 @@ class NotificationPage extends StatelessWidget {
     );
   }
 }
+
+void main() => runApp(MaterialApp(home: Scaffold(body: FirstTimeCarousel())));

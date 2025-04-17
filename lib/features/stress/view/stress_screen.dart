@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mvvm_structure_reference/features/stress/view/about_stress_screen.dart';
 import 'package:mvvm_structure_reference/features/stress/view/exhaustion_stage_screen.dart';
 import 'package:mvvm_structure_reference/features/stress/view/resistance_stage_screen.dart';
 import 'package:mvvm_structure_reference/features/stress/view/wakeup_phase_screen.dart';
@@ -253,6 +254,26 @@ class StressScreen extends StatelessWidget {
                       },
 
                       child: Text('Exhaustion stage'),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Color(0xffa9aaaa),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 60),
+                    height: 30,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AboutStressScreen(),
+                          ),
+                        );
+                      },
+
+                      child: Text('About Stress Screen'),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Color(0xffa9aaaa),

@@ -4,6 +4,7 @@ import 'package:mvvm_structure_reference/features/heart_rate/view/heart_rate_scr
 import 'package:mvvm_structure_reference/features/heart_rate/view/peak_hr_screen.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/view/resting_hr_screen.dart';
 import 'package:mvvm_structure_reference/features/home_screen/view/home_screen.dart';
+import 'package:mvvm_structure_reference/features/stress/view/stress_screen.dart';
 import 'package:mvvm_structure_reference/shared/widgets/heart_rate_trends.dart';
 import 'package:mvvm_structure_reference/features/home_screen/view/ring_detected_screen.dart';
 import 'package:mvvm_structure_reference/features/home_screen/view/log_activity_screen.dart';
@@ -19,7 +20,7 @@ class AppRoutes {
   static const String logActivity = '/logActivity';
   static const String ringDetected = '/ringDetected';
   static const String bp = '/blood_pressure';
-
+  static const String stress = '/stress_screen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -45,12 +46,12 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => LogActivity());
 
       case ringDetected:
-        return MaterialPageRoute(
-          builder: (context) => RingDetectedScreen(),
-        );
+        return MaterialPageRoute(builder: (context) => RingDetectedScreen());
 
       case bp:
         return MaterialPageRoute(builder: (context) => BloodPressureScreen());
+      case stress:
+        return MaterialPageRoute(builder: (context) => StressScreen());
 
       default:
         return MaterialPageRoute(

@@ -787,6 +787,14 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.pushNamed(context, '/heart_rate_screen');
             },
           ),
+          SpeedDialChild(
+            child: Icon(Icons.sentiment_very_dissatisfied_rounded),
+            label: 'Stress Screen',
+            onTap: () {
+              print('Moved to Stress Screen');
+              Navigator.pushNamed(context, '/stress_screen');
+            },
+          ),
         ],
       ),
     );

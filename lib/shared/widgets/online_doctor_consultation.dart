@@ -17,10 +17,11 @@ class OnlineDoctorConsultation extends StatelessWidget {
     final TextScaler textScaler = MediaQuery.textScalerOf(context);
 
     return Card(
+      color: Color(0xfff1f1f1),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-      elevation: 4,
+      elevation: 1,
       child: Padding(
-        padding: EdgeInsets.all(textScaler.scale(24.0)),
+        padding: EdgeInsets.all(textScaler.scale(16.0)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,14 +29,13 @@ class OnlineDoctorConsultation extends StatelessWidget {
             Text(
               "Online Doctor Consultation",
               style: TextStyle(
-                fontSize: textScaler.scale(24),
+                fontSize: textScaler.scale(16),
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
             Row(
               children: [
-               
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,8 +45,8 @@ class OnlineDoctorConsultation extends StatelessWidget {
                       Text(
                         "Share your heart report & get expert advice.",
                         style: TextStyle(
-                          fontSize: textScaler.scale(18),
-                          fontWeight: FontWeight.bold,
+                          fontSize: textScaler.scale(12),
+                          fontWeight: FontWeight.w700,
                           color: Colors.black87,
                         ),
                       ),
@@ -54,13 +54,15 @@ class OnlineDoctorConsultation extends StatelessWidget {
                       Text(
                         "Understand your heart data with expert advice.",
                         style: TextStyle(
-                          fontSize: textScaler.scale(17),
+                          fontSize: textScaler.scale(12),
+                          fontWeight: FontWeight.w400,
                           color: Colors.black54,
                         ),
                       ),
                       SizedBox(height: textScaler.scale(12)),
                       ElevatedButton(
                         onPressed: () {},
+
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0XFF637887),
                           shape: RoundedRectangleBorder(
@@ -70,7 +72,7 @@ class OnlineDoctorConsultation extends StatelessWidget {
                         child: Text(
                           "Consult Now",
                           style: TextStyle(
-                            fontSize: textScaler.scale(16),
+                            fontSize: textScaler.scale(12),
                             color: const Color(0XFFFFFFFF),
                           ),
                         ),
@@ -78,25 +80,23 @@ class OnlineDoctorConsultation extends StatelessWidget {
                     ],
                   ),
                 ),
-                
+
                 Stack(
                   alignment: Alignment.bottomCenter,
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(2),
                       child: Image.asset(
-                        "assets/Video.png", 
+                        "assets/Video.png",
                         height: textScaler.scale(200),
                         width: textScaler.scale(130),
                         fit: BoxFit.cover,
                       ),
                     ),
                     Positioned(
-                      bottom: textScaler.scale(5), 
+                      bottom: textScaler.scale(5),
                       child: Container(
-                        width: textScaler.scale(
-                          120,
-                        ), 
+                        width: textScaler.scale(120),
                         padding: EdgeInsets.symmetric(
                           horizontal: textScaler.scale(10),
                           vertical: textScaler.scale(6),
@@ -121,10 +121,8 @@ class OnlineDoctorConsultation extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
                               ),
-                              overflow:
-                                  TextOverflow
-                                      .ellipsis, 
-                              maxLines: 1, 
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                             ),
                             Text(
                               doctorField,
@@ -132,10 +130,8 @@ class OnlineDoctorConsultation extends StatelessWidget {
                                 fontSize: textScaler.scale(12),
                                 color: Colors.black54,
                               ),
-                              overflow:
-                                  TextOverflow
-                                      .ellipsis,
-                              maxLines: 1, 
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                             ),
                           ],
                         ),

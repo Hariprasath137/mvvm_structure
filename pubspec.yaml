@@ -82,6 +82,7 @@ flutter:
     - assets/waterdrop.png
     - assets/json/model.json
     - assets/json/blood_pressure_data.json
+    - assets/images/
 
   fonts:
     - family: Poppins

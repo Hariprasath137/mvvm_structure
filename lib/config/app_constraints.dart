@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_structure_reference/features/blood_pressure/view/blood_pressure_screen.dart';
+import 'package:mvvm_structure_reference/features/blood_pressure/view/minimum_bp_screen.dart';
+import 'package:mvvm_structure_reference/features/blood_pressure/view/peak_bp_screen.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/view/heart_rate_screen.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/view/peak_hr_screen.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/view/resting_hr_screen.dart';
 import 'package:mvvm_structure_reference/features/home_screen/view/home_screen.dart';
-import 'package:mvvm_structure_reference/shared/widgets/heart_rate_trends.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/heart_rate_trends.dart';
 import 'package:mvvm_structure_reference/features/home_screen/view/ring_detected_screen.dart';
 import 'package:mvvm_structure_reference/features/home_screen/view/log_activity_screen.dart';
 import 'package:mvvm_structure_reference/features/home_screen/view/first_time_user_screen.dart';
@@ -19,7 +21,8 @@ class AppRoutes {
   static const String logActivity = '/logActivity';
   static const String ringDetected = '/ringDetected';
   static const String bp = '/blood_pressure';
-
+  static const String maximumBp = '/maximum_bp';
+  static const String peakBp = '/peak_bp';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -45,12 +48,16 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => LogActivity());
 
       case ringDetected:
-        return MaterialPageRoute(
-          builder: (context) => RingDetectedScreen(),
-        );
+        return MaterialPageRoute(builder: (context) => RingDetectedScreen());
 
       case bp:
         return MaterialPageRoute(builder: (context) => BloodPressureScreen());
+
+      case maximumBp:
+        return MaterialPageRoute(builder: (context) => MaximumBp());
+
+      case peakBp:
+        return MaterialPageRoute(builder: (context) => PeakBp());
 
       default:
         return MaterialPageRoute(

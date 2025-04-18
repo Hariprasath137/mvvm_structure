@@ -3,13 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/data/model/heart_rate_model.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/data/repository/heart_rate_repository.dart';
-import 'package:mvvm_structure_reference/shared/widgets/card/avg_resting_card.dart';
-import 'package:mvvm_structure_reference/shared/widgets/close_slider_item_widget.dart'
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/avg_resting_card.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/close_slider_item_widget.dart'
     as swipableCard;
-import 'package:mvvm_structure_reference/shared/widgets/close_slider_item_widget.dart';
-import 'package:mvvm_structure_reference/shared/widgets/graph/heart_rate_graph.dart';
-import 'package:mvvm_structure_reference/shared/widgets/heart_rate_range.dart';
-import 'package:mvvm_structure_reference/shared/widgets/improvement_suggestion.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/close_slider_item_widget.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/graph/heart_rate_graph.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/heart_rate_range.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/improvement_suggestion.dart';
 
 class RestingHr extends StatefulWidget {
   const RestingHr({super.key});
@@ -122,12 +122,37 @@ class _RestingHrState extends State<RestingHr> {
 
                 ConstrainedBox(
                   constraints: BoxConstraints(minHeight: 300),
-                  child: HeartRateTable(title: "Resting heart rate range"),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: HeartRateTable(),
+                  ),
                 ),
 
                 ConstrainedBox(
                   constraints: BoxConstraints(minHeight: 300),
-                  child: ImprovementSuggestions(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ImprovementSuggestions(
+                      suggestions: [
+                        {
+                          "title": "Aerobic Exercises",
+                          "description":
+                              "Regular aerobic exercise (e.g., walking, cycling).",
+                        },
+                        {
+                          "title": "Sleep Well",
+                          "description":
+                              "Ensure 7-9 hours of quality sleep every night.",
+                        },
+                        {
+                          "title": "Manage Stress",
+                          "description":
+                              "Practice relaxation techniques such as meditation and deep breathing.",
+                        },
+                      ],
+                      title: 'Suggestions for Improvement',
+                    ),
+                  ),
                 ),
               ],
             ),

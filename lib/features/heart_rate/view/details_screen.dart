@@ -1,8 +1,8 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:mvvm_structure_reference/features/heart_rate/data/model/heart_rate_entry_model.dart';
-import 'package:mvvm_structure_reference/shared/widgets/graph/heart_details_graph.dart';
+import 'package:mvvm_structure_reference/features/heart_rate/data/model/heart_rate_model.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/graph/heart_details_graph.dart';
 
 class DetailsScreen extends StatelessWidget {
   final HeartRateEntry entry;
@@ -154,7 +154,7 @@ class DetailsScreen extends StatelessWidget {
                   SizedBox(height: 350, child: const HeartDetailsGraph()),
 
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(24.0),
                     child: Card(
                       color: Color(0XFFE0EEF8),
                       child: Column(
@@ -204,7 +204,7 @@ class DetailsScreen extends StatelessWidget {
 
                   // Recommendations
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(24.0),
                     child: Card(
                       color: Color(0XFFFFFFFF),
                       child: Column(

@@ -3,7 +3,13 @@
 import 'package:flutter/material.dart';
 
 class ImprovementSuggestions extends StatelessWidget {
-  const ImprovementSuggestions({super.key});
+  final List<Map<String, String>> suggestions; 
+  final String title; 
+  const ImprovementSuggestions({
+    super.key,
+    required this.suggestions,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +20,11 @@ class ImprovementSuggestions extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(bottom: 24.0),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 24.0),
                 child: Text(
-                  "Suggestions for Improvement",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  title,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
@@ -37,25 +43,17 @@ class ImprovementSuggestions extends StatelessWidget {
                   ],
                 ),
                 child: Column(
-                  children: [
-                    _buildCustomExpansionTile(
-                      title: "Aerobic Exercises",
-                      description:
-                          "Regular aerobic exercise (e.g., walking, cycling).",
-                      isFirst: true,
-                    ),
-                    _buildCustomExpansionTile(
-                      title: "Sleep Well",
-                      description:
-                          "Ensure 7-9 hours of quality sleep every night.",
-                    ),
-                    _buildCustomExpansionTile(
-                      title: "Manage Stress",
-                      description:
-                          "Practice relaxation techniques such as meditation and deep breathing.",
-                      isLast: true,
-                    ),
-                  ],
+                  children: suggestions.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final suggestion = entry.value;
+
+                    return _buildCustomExpansionTile(
+                      title: suggestion['title']!,
+                      description: suggestion['description']!,
+                      isFirst: index == 0,
+                      isLast: index == suggestions.length - 1,
+                    );
+                  }).toList(),
                 ),
               ),
             ],
@@ -86,7 +84,6 @@ class ImprovementSuggestions extends StatelessWidget {
     );
   }
 }
-
 class CustomExpansionTile extends StatefulWidget {
   final String title;
   final String description;

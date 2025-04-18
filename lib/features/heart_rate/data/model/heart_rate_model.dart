@@ -1,3 +1,5 @@
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/heart_rate_range.dart';
+
 class HeartRateSummary {
   final List<Insight> insights;
   final int restingBpm;
@@ -138,5 +140,69 @@ class HeartRateEcg {
       status: json['status'],
       message: json['message'],
     );
+  }
+}
+
+class RestingHr {
+  final String title;
+  final String value;
+
+  RestingHr({required this.title, required this.value});
+
+  factory RestingHr.fromJson(Map<String, dynamic> json) {
+    return RestingHr(title: json['title'], value: json['value']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'title': title, 'value': value};
+  }
+}
+
+class HeartRateEntry {
+  final String bpm;
+  final String status;
+  final String activity;
+  final String timestamp;
+
+  HeartRateEntry({
+    required this.bpm,
+    required this.status,
+    required this.activity,
+    required this.timestamp,
+  });
+
+  factory HeartRateEntry.fromJson(Map<String, dynamic> json) {
+    return HeartRateEntry(
+      bpm: json['bpm'],
+      status: json['status'],
+      activity: json['activity'],
+      timestamp: json['timestamp'],
+    );
+  }
+}
+
+class HeartRateTableModel {
+  final String age;
+  final String range;
+
+  HeartRateTableModel({required this.age, required this.range});
+
+  factory HeartRateTableModel.fromJson(Map<String, dynamic> json) {
+    return HeartRateTableModel(age: json['age'], range: json['range']);
+  }
+}
+
+class HeartTableModel {
+  final String title;
+  final List<HeartRateTableModel> data;
+
+  HeartTableModel({required this.title, required this.data});
+
+  factory HeartTableModel.fromJson(Map<String, dynamic> json) {
+    final list =
+        (json['data'] as List)
+            .map((e) => HeartRateTableModel.fromJson(e))
+            .toList();
+    return HeartTableModel(title: json['title'], data: list);
   }
 }

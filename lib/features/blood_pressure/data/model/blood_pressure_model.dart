@@ -104,3 +104,72 @@ class BpChartData {
     );
   }
 }
+
+class BpTableMod {
+  final String age;
+  final String range;
+
+  BpTableMod({required this.age, required this.range});
+
+  factory BpTableMod.fromJson(Map<String, dynamic> json) {
+    return BpTableMod(age: json['age'], range: json['range']);
+  }
+}
+
+class BpTableModel {
+  final String title;
+  final List<BpTableMod> data;
+
+  BpTableModel({required this.title, required this.data});
+
+  factory BpTableModel.fromJson(Map<String, dynamic> json) {
+    final value =
+        (json['data'] as List).map((e) => BpTableMod.fromJson(e)).toList();
+    return BpTableModel(title: json['title'] ?? "", data: value);
+  }
+}
+
+class MinimumBp {
+  final String title;
+  final String value;
+
+  MinimumBp({required this.title, required this.value});
+
+  factory MinimumBp.fromJson(Map<String, dynamic> json) {
+    return MinimumBp(title: json['title'], value: json['value']);
+  }
+}
+
+class PeakBp {
+  final String title;
+  final String value;
+
+  PeakBp({required this.title, required this.value});
+
+  factory PeakBp.fromJson(Map<String, dynamic> json) {
+    return PeakBp(title: json['title'], value: json['value']);
+  }
+}
+
+class BpTrendsModel {
+  final String bpm;
+  final String status;
+  final String activity;
+  final String timestamp;
+
+  BpTrendsModel({
+    required this.bpm,
+    required this.status,
+    required this.activity,
+    required this.timestamp,
+  });
+
+  factory BpTrendsModel.fromJson(Map<String, dynamic> json) {
+    return BpTrendsModel(
+      bpm: json['bpm'],
+      status: json['status'],
+      activity: json['activity'],
+      timestamp: json['timestamp'],
+    );
+  }
+}

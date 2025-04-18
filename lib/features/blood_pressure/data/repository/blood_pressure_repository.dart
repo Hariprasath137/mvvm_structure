@@ -13,7 +13,9 @@ class BloodPressureRepository {
   }
 
   Future<VO2Model> loadVo2Data() async {
-    final jsonString = await rootBundle.loadString('assets/json/model.json');
+    final jsonString = await rootBundle.loadString(
+      'assets/json/heart_screen_data.json',
+    );
     final data = json.decode(jsonString);
     return VO2Model.fromJson(data['vo2']);
   }
@@ -26,13 +28,47 @@ class BloodPressureRepository {
     return BloodPressureCardModel.fromJson(data['card']);
   }
 
-  Future<List<BpChartData>> loadChartData() async {
-    await Future.delayed(const Duration(seconds: 2));
+  static Future<List<BpChartData>> loadChartData() async {
+    // await Future.delayed(const Duration(seconds: 3));
     final jsonString = await rootBundle.loadString(
       'assets/json/blood_pressure_data.json',
     );
     final Map<String, dynamic> jsonData = jsonDecode(jsonString);
     final List<dynamic> chartDataJson = jsonData['bp']['chartData'];
     return chartDataJson.map((data) => BpChartData.fromJson(data)).toList();
+  }
+
+  static Future<BpTableModel> loadBpTable() async {
+    final jsonString = await rootBundle.loadString(
+      'assets/json/blood_pressure_data.json',
+    );
+    final data = json.decode(jsonString);
+
+    return BpTableModel.fromJson(data['bpTable']);
+  }
+
+  static Future<MinimumBp> loadMinimum() async {
+    final jsonString = await rootBundle.loadString(
+      'assets/json/blood_pressure_data.json',
+    );
+    final data = json.decode(jsonString);
+    return MinimumBp.fromJson(data['minimum']);
+  }
+
+  static Future<PeakBp> loadPeak() async {
+    final jsonString = await rootBundle.loadString(
+      'assets/json/blood_pressure_data.json',
+    );
+    final data = json.decode(jsonString);
+    return PeakBp.fromJson(data['peak']);
+  }
+
+  static Future<List<BpTrendsModel>> loadBpEntries() async {
+    final String response = await rootBundle.loadString(
+      'assets/json/blood_pressure_data.json',
+    );
+    final data = json.decode(response);
+    final List<dynamic> entriesList = data['entries'];
+    return entriesList.map((item) => BpTrendsModel.fromJson(item)).toList();
   }
 }

@@ -80,7 +80,7 @@ flutter:
     - assets/tvamev.png
     - assets/Vector.png
     - assets/waterdrop.png
-    - assets/json/model.json
+    - assets/json/heart_screen_data.json
     - assets/json/blood_pressure_data.json
 
   fonts:

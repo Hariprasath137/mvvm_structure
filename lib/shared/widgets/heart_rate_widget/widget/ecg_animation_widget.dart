@@ -1,11 +1,8 @@
 // ignore_for_file: deprecated_member_use
-
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/data/model/heart_rate_model.dart';
+import 'package:mvvm_structure_reference/features/heart_rate/data/repository/heart_rate_repository.dart';
 
 class ECGMonitor extends StatefulWidget {
   const ECGMonitor({super.key});
@@ -23,29 +20,10 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
   String? statusText;
   String? messageText;
 
-  Future<void> loadJsonData() async {
-    final String jsonString = await rootBundle.loadString(
-      'assets/json/model.json',
-    );
-    final jsonData = jsonDecode(jsonString);
+  void fetchEcgData() async {
+    final data = await HeartRateRepository.loadHeartRateEcg();
     setState(() {
-      heartRate = jsonData['ecg']['heartRate'];
-      statusText = jsonData['ecg']['status'];
-      messageText = jsonData['ecg']['message'];
-    });
-  }
-
-  Future<void> loadHeartRateData() async {
-    await Future.delayed(const Duration(seconds: 2));
-
-    final json = {
-      "heartRate": 75,
-      "status": "Good",
-      "message": "Your average heart rate is 5 bpm better than yesterday's.",
-    };
-
-    setState(() {
-      heartRateEcg = HeartRateEcg.fromJson(json);
+      heartRateEcg = data;
     });
   }
 
@@ -62,17 +40,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
       lowerBound: 1.0,
       upperBound: 1.2,
     );
-    loadJsonData().then((_) {
-      if (heartRate != null && statusText != null && messageText != null) {
-        setState(() {
-          heartRateEcg = HeartRateEcg(
-            heartRate: heartRate!,
-            status: statusText!,
-            message: messageText!,
-          );
-        });
-      }
-    });
+    fetchEcgData();
   }
 
   @override
@@ -261,7 +229,7 @@ class _ECGMonitorState extends State<ECGMonitor> with TickerProviderStateMixin {
 
                         if (isTesting) {
                           startHeartAnimation();
-                          await loadJsonData();
+                          fetchEcgData();
                         } else {
                           stopHeartAnimation();
                         }

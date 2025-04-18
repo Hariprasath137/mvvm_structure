@@ -2,12 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/data/model/heart_rate_model.dart';
-import 'package:mvvm_structure_reference/shared/widgets/card/vo2_card.dart';
-import 'package:mvvm_structure_reference/shared/widgets/v02_curosal_widget.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/vo2_card.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/v02_curosal_widget.dart';
 
 class Vo2MaxAnalysis extends StatefulWidget {
-  
-  const Vo2MaxAnalysis({super.key, });
+  const Vo2MaxAnalysis({super.key});
 
   @override
   State<Vo2MaxAnalysis> createState() => _Vo2MaxAnalysisState();
@@ -24,7 +23,7 @@ class _Vo2MaxAnalysisState extends State<Vo2MaxAnalysis> {
 
   Future<void> loadVo2Data() async {
     final String response = await rootBundle.loadString(
-      'assets/json/model.json',
+      'assets/json/heart_screen_data.json',
     );
     final data = json.decode(response);
     setState(() {

@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mvvm_structure_reference/features/heart_rate/viewmodel/heart_rate_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:mvvm_structure_reference/config/app_constraints.dart';
-import 'package:mvvm_structure_reference/shared/widgets/card/peak_card.dart';
-import 'package:mvvm_structure_reference/shared/widgets/card/resting_card.dart';
-import 'package:mvvm_structure_reference/shared/widgets/close_slider_item_widget.dart'
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/peak_card.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/resting_card.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/close_slider_item_widget.dart'
     // ignore: library_prefixes
     as swipableCard;
-import 'package:mvvm_structure_reference/shared/widgets/daily_summary_widget.dart.dart';
-import 'package:mvvm_structure_reference/shared/widgets/date_drop_down_widget.dart';
-import 'package:mvvm_structure_reference/shared/widgets/ecg_animation_widget.dart';
-import 'package:mvvm_structure_reference/shared/widgets/factors_heart_rate.dart';
-import 'package:mvvm_structure_reference/shared/widgets/graph/heart_rate_graph.dart';
-import 'package:mvvm_structure_reference/shared/widgets/graph/vo2_chart_widget.dart';
-import 'package:mvvm_structure_reference/shared/widgets/graph/v02_max_analysis.dart';
-import 'package:mvvm_structure_reference/shared/widgets/heart_rate_trends.dart';
-import 'package:mvvm_structure_reference/shared/widgets/online_doctor_consultation.dart';
-import 'package:mvvm_structure_reference/shared/widgets/swipable_card_widget.dart';
-import 'package:mvvm_structure_reference/shared/widgets/talk_to_tvamev.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/daily_summary_widget.dart.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/date_drop_down_widget.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/ecg_animation_widget.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/factors_heart_rate.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/graph/heart_rate_graph.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/graph/vo2_chart_widget.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/v02_max_analysis.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/heart_rate_trends.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/online_doctor_consultation.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/swipable_card_widget.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/talk_to_tvamev.dart';
 
 class HeartRateScreen extends StatelessWidget {
   const HeartRateScreen({super.key});
@@ -31,9 +32,11 @@ class HeartRateScreen extends StatelessWidget {
         builder: (context, viewModel, child) {
           if (viewModel.isLoading) {
             return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
+              body: Center(
+                child: SpinKitThreeBounce(size: 50, color: Colors.blueGrey),
+              ),
             );
-          }
+          } 
 
           if (viewModel.error != null) {
             return Scaffold(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_structure_reference/config/app_constraints.dart';
-import 'package:mvvm_structure_reference/shared/widgets/graph/bp_chart.dart';
+import 'package:mvvm_structure_reference/di/providers.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,18 +12,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return MultiProvider(
+      providers: appProviders,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
 
-      onGenerateRoute: AppRoutes.generateRoute,
+        onGenerateRoute: AppRoutes.generateRoute,
 
-      initialRoute: AppRoutes.heartrate,
-      
+        // initialRoute: AppRoutes.heartrate,
+        initialRoute: AppRoutes.bp,
 
-      initialRoute: AppRoutes.home,
-
-      // home: Scaffold(body: HeartRateTrends()),
- main
+        // home: Scaffold(body: HeartRateTrends()),
+      ),
     );
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mvvm_structure_reference/shared/widgets/profile_setup_card.dart';
-import 'package:mvvm_structure_reference/shared/widgets/first_time_carousel.dart';
-import 'package:mvvm_structure_reference/shared/widgets/health_info_card.dart';
-import 'package:mvvm_structure_reference/shared/widgets/health_info_tracker.dart';
-import 'package:mvvm_structure_reference/shared/widgets/greetings_card.dart';
+import 'package:mvvm_structure_reference/shared/widgets/home_screen_widget/widget/profile_setup_card.dart';
+import 'package:mvvm_structure_reference/shared/widgets/home_screen_widget/widget/first_time_carousel.dart';
+import 'package:mvvm_structure_reference/shared/widgets/home_screen_widget/widget/health_info_card.dart';
+import 'package:mvvm_structure_reference/shared/widgets/home_screen_widget/widget/health_info_tracker.dart';
+import 'package:mvvm_structure_reference/shared/widgets/home_screen_widget/widget/greetings_card.dart';
 import 'package:mvvm_structure_reference/features/home_screen/data/home_screen_model.dart';
 import 'package:mvvm_structure_reference/features/home_screen/viewmodel/home_screen_viewmodel.dart';
 

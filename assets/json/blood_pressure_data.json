@@ -39,6 +39,90 @@
           {"timeLabels": "6\npm", "value": 77, "value2": 120},
           {"timeLabels": "12\nam ", "value": 79, "value2": 123}
         ]
+      },
+    "minimum":
+      {
+        "title" : "Min.Blood Pressure",
+        "value" : "110/70"
+      },
+      "peak":{
+        "title" : "Peak.Blood Pressure",
+        "value" : "130/80"
+      },
+      "bpTable" :
+    {
+      "title": "Normal Heart Rate by Age",
+      "data": [
+        { "age": "Under 1", "range": "80/45-90/55" },
+        { "age": "1-1", "range": "90/55-100/65" },
+        { "age": "2-3", "range": "95/60-105/70" },
+        { "age": "4-5", "range": "100/65-110/75" },
+        { "age": "6-8", "range": "105/70-115/80" },
+        { "age": "9-11", "range": "110/75-120/85" },
+        { "age": "12-15", "range": "115/80-125/90" },
+        { "age": "16-19", "range": "120/85-130/95" },
+        { "age": "20-39", "range": "125/90-135/100" },
+        { "age": "40-59", "range": "130/95-140/105" },
+        { "age": "60-79", "range": "135/100-145/110" },
+        { "age": "80 or over", "range": "140/105-150/115" }
+      ]
+    },
+    "entries": [
+      {
+        "bpm": "120/73",
+        "status": "Normal",
+        "activity": "Exercise",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "120/73",
+        "status": "Normal",
+        "activity": "Running",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "120/73",
+        "status": "Normal",
+        "activity": "Swimming",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "120/73",
+        "status": "Normal",
+        "activity": "Exercise",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "120/73",
+        "status": "Normal",
+        "activity": "Running",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "120/73",
+        "status": "Normal",
+        "activity": "Swimming",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "120/73",
+        "status": "Normal",
+        "activity": "Exercise",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "120/73",
+        "status": "Normal",
+        "activity": "Running",
+        "timestamp": "11th Dec 2024, 10:54 AM"
+      },
+      {
+        "bpm": "120/73",
+        "status": "Normal",
+        "activity": "Swimming",
+        "timestamp": "11th Dec 2024, 10:54 AM"
       }
+    ]    
+      
     
 }

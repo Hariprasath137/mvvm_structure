@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mvvm_structure_reference/features/blood_pressure/data/repository/blood_pressure_repository.dart';
+import 'package:mvvm_structure_reference/config/app_constraints.dart';
 import 'package:mvvm_structure_reference/features/blood_pressure/viewmodel/blood_pressure_viewmodel.dart';
-import 'package:mvvm_structure_reference/shared/widgets/card/bp_measure_card.dart';
-import 'package:mvvm_structure_reference/shared/widgets/card/datecard.dart';
-import 'package:mvvm_structure_reference/shared/widgets/card/peak_card.dart';
-import 'package:mvvm_structure_reference/shared/widgets/card/resting_card.dart';
-import 'package:mvvm_structure_reference/shared/widgets/close_slider_item_widget.dart'
+import 'package:mvvm_structure_reference/shared/widgets/blood_pressure_widget/widget/bp_measure_card.dart';
+import 'package:mvvm_structure_reference/shared/widgets/blood_pressure_widget/widget/bp_trends_history.dart';
+import 'package:mvvm_structure_reference/shared/widgets/blood_pressure_widget/widget/datecard.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/peak_card.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/resting_card.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/close_slider_item_widget.dart'
     // ignore: library_prefixes
     as swipableCard;
-import 'package:mvvm_structure_reference/shared/widgets/daily_summary_widget.dart.dart';
-import 'package:mvvm_structure_reference/shared/widgets/factors_heart_rate.dart';
-import 'package:mvvm_structure_reference/shared/widgets/graph/bp_chart.dart';
-import 'package:mvvm_structure_reference/shared/widgets/graph/v02_max_analysis.dart';
-import 'package:mvvm_structure_reference/shared/widgets/graph/vo2_chart_widget.dart';
-import 'package:mvvm_structure_reference/shared/widgets/heart_rate_trends.dart';
-import 'package:mvvm_structure_reference/shared/widgets/online_doctor_consultation.dart';
-import 'package:mvvm_structure_reference/shared/widgets/swipable_card_widget.dart';
-import 'package:mvvm_structure_reference/shared/widgets/talk_to_tvamev.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/daily_summary_widget.dart.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/factors_heart_rate.dart';
+import 'package:mvvm_structure_reference/shared/widgets/blood_pressure_widget/graph/bp_chart.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/v02_max_analysis.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/graph/vo2_chart_widget.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/online_doctor_consultation.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/swipable_card_widget.dart';
+import 'package:mvvm_structure_reference/shared/widgets/heart_rate_widget/widget/talk_to_tvamev.dart';
 import 'package:provider/provider.dart';
 
 class BloodPressureScreen extends StatelessWidget {
@@ -26,10 +27,7 @@ class BloodPressureScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create:
-          (_) => BloodPressureViewModel(BloodPressureRepository())..loadData(),
-      child: Scaffold(
+    return  Scaffold(
         appBar: AppBar(
           leading: BackButton(),
           title: const Text("Blood Pressure"),
@@ -49,11 +47,7 @@ class BloodPressureScreen extends StatelessWidget {
           builder: (context, viewModel, child) {
             if (viewModel.isLoading) {
               return Center(
-                child: SpinKitDualRing(
-                  size: 80, 
-                  color: Colors.blue, // Customize the color of the ring
-                  lineWidth: 8, // Customize the thickness of the ring
-                ),
+                child: SpinKitThreeBounce(size: 50, color: Colors.blueGrey),
               );
             }
 
@@ -130,7 +124,7 @@ class BloodPressureScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                HeartRateTrends(),
+                BloodPressureTrends(),
                 const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.all(12.0),
@@ -179,7 +173,32 @@ class BloodPressureScreen extends StatelessWidget {
             );
           },
         ),
-      ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: SpeedDial(
+          animatedIcon: AnimatedIcons.menu_close,
+          backgroundColor: Colors.grey,
+          overlayColor: Colors.black,
+          overlayOpacity: 0.5,
+          spacing: 10,
+          spaceBetweenChildren: 8,
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.blur_on_sharp),
+              label: 'Maximum BP Screen',
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.maximumBp);
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Icons.blur_off_outlined),
+              label: 'Peak BP Screen',
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.peakBp);
+              },
+            ),
+          ],
+        ),
+      
     );
   }
 }

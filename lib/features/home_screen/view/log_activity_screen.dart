@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_structure_reference/features/home_screen/viewmodel/home_screen_viewmodel.dart';
-import 'package:mvvm_structure_reference/shared/widgets/duration_input.dart';
-import 'package:mvvm_structure_reference/shared/widgets/gridview_cards.dart';
+import 'package:mvvm_structure_reference/shared/widgets/home_screen_widget/widget/duration_input.dart';
+import 'package:mvvm_structure_reference/shared/widgets/home_screen_widget/widget/gridview_cards.dart';
 
 void main() {
   runApp(MyApp());

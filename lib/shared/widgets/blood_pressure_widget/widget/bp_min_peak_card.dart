@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
-class AvgRestingCard extends StatelessWidget {
-  const AvgRestingCard({super.key});
+class BpMinPeakCard extends StatelessWidget {
+  final String title;
+  final String value;
+
+  const BpMinPeakCard({super.key, required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
-    final TextScaler textScaler = MediaQuery.textScalerOf(context);
-
     return FractionallySizedBox(
-      widthFactor: 0.75, 
+      widthFactor: 0.75,
       child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: 200, 
-        ),
+        constraints: const BoxConstraints(maxWidth: 200),
         child: Card(
           color: const Color(0XFFEDEDED),
           shape: RoundedRectangleBorder(
@@ -22,13 +21,13 @@ class AvgRestingCard extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min, 
+              mainAxisSize: MainAxisSize.min,
               children: [
                 FittedBox(
                   child: Text(
-                    "Avg. Resting HR",
-                    style: TextStyle(
-                      fontSize: textScaler.scale(16),
+                    title,
+                    style: const TextStyle(
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.black54,
                     ),
@@ -37,9 +36,9 @@ class AvgRestingCard extends StatelessWidget {
                 const SizedBox(height: 8),
                 FittedBox(
                   child: Text(
-                    "70 bpm",
-                    style: TextStyle(
-                      fontSize: textScaler.scale(18),
+                    value,
+                    style: const TextStyle(
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
